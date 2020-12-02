@@ -142,7 +142,7 @@
                 layer.open({
                     type: 2,
                     title: '忘记密码',
-                    content: "user-lostpassword",
+                    content: "login/user-lostpassword",
                     area: ['600px', '400px'],
                     shadeClose: false,               //开启遮罩关闭
                 });
@@ -151,7 +151,7 @@
                 layer.open({
                     type: 2,
                     title: '注册账号',
-                    content: "member-add",
+                    content: "login/member-add",
                     area: ['600px', '650px'],
                     shadeClose: false,               //开启遮罩关闭
                 });
@@ -168,7 +168,7 @@
                     dataType: "json",
                     success: function (state) {
                         if (state == "1") {
-                            window.location.href = "index";
+                            window.location.href = "admin/index";
                         } else if (state == "2") {
                             layer.msg("验证码错误");
                             var e = document.createEvent("MouseEvents");
