@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.physical.movement.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.physical.movement.entity.Comment">
+        <result column="Cid" jdbcType="INTEGER" property="cid"/>
+        <result column="Comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="Cnid" jdbcType="INTEGER" property="cnid"/>
+        <result column="Cuid" jdbcType="INTEGER" property="cuid"/>
+        <result column="Capply" jdbcType="VARCHAR" property="capply"/>
+        <result column="Ctime" jdbcType="TIMESTAMP" property="ctime"/>
+        <result column="Cflag" jdbcType="INTEGER" property="cflag"/>
+        <result column="Caboy" jdbcType="VARCHAR" property="caboy"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.physical.movement.entity.Comment">
+    insert into comment (Cid, Comment, Cnid, 
+      Cuid, Capply, Ctime, 
+      Cflag, Caboy)
+    values (#{cid,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{cnid,jdbcType=INTEGER}, 
+      #{cuid,jdbcType=INTEGER}, #{capply,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{cflag,jdbcType=INTEGER}, #{caboy,jdbcType=VARCHAR})
+    </insert>
+    <sql id="Base_Column_List">
+    id, comment, advisoryid, uid, apply, flag, aboy, gmt_create, gmt_modified
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from comment
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insertSelective" parameterType="com.physical.movement.entity.Comment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="advisoryid != null">
+                advisoryid,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="apply != null">
+                apply,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="aboy != null">
+                aboy,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="advisoryid != null">
+                #{advisoryid,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="apply != null">
+                #{apply,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="aboy != null">
+                #{aboy,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Comment">
+        update comment
+        <set>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="advisoryid != null">
+                advisoryid = #{advisoryid,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="apply != null">
+                apply = #{apply,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="aboy != null">
+                aboy = #{aboy,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Comment">
+    update comment
+    set comment = #{comment,jdbcType=VARCHAR},
+      advisoryid = #{advisoryid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      apply = #{apply,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      aboy = #{aboy,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

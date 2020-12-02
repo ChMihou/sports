@@ -7,7 +7,7 @@ import java.util.List;
 public interface BaseMapper<T extends Id> {
 
     //插入
-    public Integer insert(T t);
+    public Boolean insert(T t);
 
     //更新
     public Boolean update(T t);

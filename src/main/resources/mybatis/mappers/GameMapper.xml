@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.physical.movement.mapper.GameMapper">
+    <resultMap id="BaseResultMap" type="com.physical.movement.entity.Game">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="challenger" jdbcType="VARCHAR" property="challenger"/>
+        <result column="challengerid" jdbcType="INTEGER" property="challengerid"/>
+        <result column="enemy" jdbcType="VARCHAR" property="enemy"/>
+        <result column="enemyid" jdbcType="INTEGER" property="enemyid"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="result" jdbcType="LONGVARCHAR" property="result"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified,
+    result
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from game
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.physical.movement.entity.Game">
+    insert into game (id, type, challenger, 
+      challengerid, enemy, enemyid, 
+      gmt_create, gmt_modified, result
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR}, 
+      #{challengerid,jdbcType=INTEGER}, #{enemy,jdbcType=VARCHAR}, #{enemyid,jdbcType=INTEGER}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{result,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.physical.movement.entity.Game">
+        insert into game
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="challenger != null">
+                challenger,
+            </if>
+            <if test="challengerid != null">
+                challengerid,
+            </if>
+            <if test="enemy != null">
+                enemy,
+            </if>
+            <if test="enemyid != null">
+                enemyid,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="challenger != null">
+                #{challenger,jdbcType=VARCHAR},
+            </if>
+            <if test="challengerid != null">
+                #{challengerid,jdbcType=INTEGER},
+            </if>
+            <if test="enemy != null">
+                #{enemy,jdbcType=VARCHAR},
+            </if>
+            <if test="enemyid != null">
+                #{enemyid,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Game">
+        update game
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="challenger != null">
+                challenger = #{challenger,jdbcType=VARCHAR},
+            </if>
+            <if test="challengerid != null">
+                challengerid = #{challengerid,jdbcType=INTEGER},
+            </if>
+            <if test="enemy != null">
+                enemy = #{enemy,jdbcType=VARCHAR},
+            </if>
+            <if test="enemyid != null">
+                enemyid = #{enemyid,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="result != null">
+                result = #{result,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Game">
+    update game
+    set type = #{type,jdbcType=INTEGER},
+      challenger = #{challenger,jdbcType=VARCHAR},
+      challengerid = #{challengerid,jdbcType=INTEGER},
+      enemy = #{enemy,jdbcType=VARCHAR},
+      enemyid = #{enemyid,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Game">
+    update game
+    set type = #{type,jdbcType=INTEGER},
+      challenger = #{challenger,jdbcType=VARCHAR},
+      challengerid = #{challengerid,jdbcType=INTEGER},
+      enemy = #{enemy,jdbcType=VARCHAR},
+      enemyid = #{enemyid,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

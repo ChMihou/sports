@@ -38,7 +38,9 @@ public class CustomSessionListener implements SessionListener {
 
     @Override
     public void onExpiration(Session session) {
-
+        if(logger.isDebugEnabled()){
+            logger.debug("onExpiration:{}", session.getId());
+        }
     }
 
 }

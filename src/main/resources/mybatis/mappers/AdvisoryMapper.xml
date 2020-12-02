@@ -16,16 +16,12 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, checkboy, flag, author, Nselect, Nimage, gmt_create, gmt_modified
-  </sql>
-    <sql id="Blob_Column_List">
+    id, title, checkboy, flag, author, Nselect, Nimage, gmt_create, gmt_modified,
     article, Ncause, intro
-  </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from advisory
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -33,7 +29,7 @@
     delete from advisory
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.physical.movement.entity.AdvisoryWithBLOBs">
+    <insert id="insert" parameterType="com.physical.movement.entity.Advisory">
     insert into advisory (id, title, checkboy, 
       flag, author, Nselect, 
       Nimage, gmt_create, gmt_modified, 
@@ -45,7 +41,7 @@
       #{article,jdbcType=LONGVARCHAR}, #{ncause,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.physical.movement.entity.AdvisoryWithBLOBs">
+    <insert id="insertSelective" parameterType="com.physical.movement.entity.Advisory">
         insert into advisory
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -124,7 +120,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.AdvisoryWithBLOBs">
+    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Advisory">
         update advisory
         <set>
             <if test="title != null">
@@ -163,7 +159,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.AdvisoryWithBLOBs">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Advisory">
     update advisory
     set title = #{title,jdbcType=VARCHAR},
       checkboy = #{checkboy,jdbcType=VARCHAR},

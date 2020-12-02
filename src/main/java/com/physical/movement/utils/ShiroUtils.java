@@ -17,10 +17,8 @@ public class ShiroUtils {
      * @Parm password：用户密码
      * @Parm salt: 加密盐值
      */
-    public static String shiroEncryption(String password,String salt) {
+    public static String shiroEncryption(String password, String salt) {
 
-        // shiro 自带的工具类生成salt
-//        String salt = new SecureRandomNumberGenerator().nextBytes().toString();
         // 加密次数
         int times = 2;
         // 算法名称

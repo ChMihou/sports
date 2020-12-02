@@ -1,7 +1,9 @@
 package com.physical.movement.mapper;
 
 import com.physical.movement.entity.UserTeamRef;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface UserTeamRefMapper extends BaseMapper<UserTeamRef> {
     int deleteByPrimaryKey(Integer id);
 

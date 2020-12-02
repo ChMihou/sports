@@ -1,5 +1,6 @@
 package com.physical.movement.config;
 
+import com.physical.movement.common.LoginContext;
 import com.physical.movement.common.shiro.AdminFormAuthenticationFilter;
 import com.physical.movement.common.shiro.CustomSessionListener;
 import com.physical.movement.common.shiro.CustomerLogoutFilter;
@@ -238,6 +239,7 @@ public class ShiroConfiguration {
     public CustomerLogoutFilter shiroLogoutFilter() {
         CustomerLogoutFilter shiroLogoutFilter = new CustomerLogoutFilter();
         //配置登出后重定向的地址，等出后配置跳转到登录接口
+        LoginContext.clear();
         shiroLogoutFilter.setRedirectUrl("/login/logout");
         return shiroLogoutFilter;
     }

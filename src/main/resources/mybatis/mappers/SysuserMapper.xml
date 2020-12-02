@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.physical.movement.mapper.SysuserMapper">
-    <resultMap id="BaseResultMap" type="com.physical.movement.entity.Sysuser">
+    <resultMap id="BaseResultMap" type="com.physical.movement.entity.SysUser">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -10,6 +10,8 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
@@ -26,17 +28,16 @@
     delete from sysuser
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.physical.movement.entity.Sysuser">
+    <insert id="insert" parameterType="com.physical.movement.entity.SysUser">
     insert into sysuser (id, username, password, 
       salt, usertype, phone, 
-      status, sex, gmt_create, 
+      status, sex,image,email, gmt_create,
       gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{usertype,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{sex,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
+      #{status,jdbcType=TINYINT}, #{sex,jdbcType=VARCHAR},#{image},#{email},now(),now())
   </insert>
-    <insert id="insertSelective" parameterType="com.physical.movement.entity.Sysuser">
+    <insert id="insertSelective" parameterType="com.physical.movement.entity.SysUser">
         insert into sysuser
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -62,6 +63,12 @@
             </if>
             <if test="sex != null">
                 sex,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="email != null">
+                email,
             </if>
             <if test="gmtCreate != null">
                 gmt_create,
@@ -95,12 +102,14 @@
             <if test="sex != null">
                 #{sex,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
             </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
             </if>
+            now(),
+            now()
         </trim>
     </insert>
 
@@ -120,7 +129,7 @@
         </where>
     </sql>
 
-    <select id="select" parameterType="SysUser" resultMap="BaseResultMap">
+    <select id="select" parameterType="com.physical.movement.entity.SysUser" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sysuser
@@ -128,7 +137,7 @@
         order by id desc
     </select>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Sysuser">
+    <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.SysUser">
         update sysuser
         <set>
             <if test="username != null">
@@ -152,16 +161,17 @@
             <if test="sex != null">
                 sex = #{sex,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
             </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
             </if>
+            gmt_modified = now()
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Sysuser">
+    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.SysUser">
     update sysuser
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -170,8 +180,9 @@
       phone = #{phone,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       sex = #{sex,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      image = #{image,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

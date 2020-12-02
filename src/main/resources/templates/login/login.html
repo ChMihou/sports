@@ -163,21 +163,21 @@
                 var checks = $("#checks").val();
                 $.ajax({
                     type: "POST",
-                    url: "loginchecks",
+                    url: "login/loginchecks",
                     data: $('#form').serialize(),
                     dataType: "json",
                     success: function (state) {
-                        if (state == "1") {
+                        if (state.success) {
                             window.location.href = "admin/index";
-                        } else if (state == "2") {
-                            layer.msg("验证码错误");
-                            var e = document.createEvent("MouseEvents");
-                            e.initEvent("click", true, true);
-                            document.getElementById("verify").dispatchEvent(e);
-                        } else if (state == "3") {
-                            layer.msg("用户名或密码错误");
                         } else {
-                            window.location.href = "compel";
+                            if (state.msg === "验证码错误") {
+                                layer.msg("验证码错误");
+                                var e = document.createEvent("MouseEvents");
+                                e.initEvent("click", true, true);
+                                document.getElementById("verify").dispatchEvent(e);
+                            } else {
+                                layer.msg(state.msg);
+                            }
                         }
                     },
                 });

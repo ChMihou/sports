@@ -20,7 +20,11 @@ public class SysUser extends Id {
 
     private Byte status;
 
+    private String image;
+
     private String sex;
+
+    private String email;
 
     private Date gmtCreate;
 
@@ -80,6 +84,22 @@ public class SysUser extends Id {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getSex() {

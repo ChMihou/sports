@@ -1,7 +1,9 @@
 package com.physical.movement.mapper;
 
 import com.physical.movement.entity.Message;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface MessageMapper extends BaseMapper<Message> {
     int deleteByPrimaryKey(Integer id);
 
