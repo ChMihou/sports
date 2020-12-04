@@ -52,7 +52,6 @@ public class WebsocketController {
      */
     @RequestMapping("websocket")
     public String webSocket(Model model, HttpSession session) {
-
         //定义随机时间戳名称
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         InetAddress inetAddress = null;
@@ -65,7 +64,7 @@ public class WebsocketController {
         String localhost = StringUtils.substringAfterLast(ip, "/");
         //websock链接地址+游客名-->  项目中请定义在配置文件 -->或直接读取服务器，ip 端口
         String path = "ws://" + localhost + ":9999/websocket/";
-        logger.info(path);
+        logger.info(path + sysUser.getUsername());
         model.addAttribute("path", path);
         model.addAttribute("username", sysUser.getUsername());
         return "/chat/chatroom";
@@ -240,6 +239,18 @@ public class WebsocketController {
 
 /**
  * 广播推送
+ * <p>
+ * 点对点推送
+ * <p>
+ * 异常信息推送
+ * <p>
+ * 点对点推送
+ * <p>
+ * 异常信息推送
+ * <p>
+ * 点对点推送
+ * <p>
+ * 异常信息推送
  * <p>
  * 点对点推送
  * <p>
