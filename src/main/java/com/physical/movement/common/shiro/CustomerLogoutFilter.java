@@ -37,7 +37,9 @@ public class CustomerLogoutFilter extends LogoutFilter {
             RealmSecurityManager securityManager =
                     (RealmSecurityManager) SecurityUtils.getSecurityManager();
             ShiroRealm adminRealm = (ShiroRealm) securityManager.getRealms().iterator().next();
-            adminRealm.clearCachedAuthorizationInfo(principals);
+            if (principals != null) {
+                adminRealm.clearCachedAuthorizationInfo(principals);
+            }
             subject.logout();
         } catch (SessionException ise) {
             if (logger.isDebugEnabled()) {

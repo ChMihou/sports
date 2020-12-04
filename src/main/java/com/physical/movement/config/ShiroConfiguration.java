@@ -1,6 +1,5 @@
 package com.physical.movement.config;
 
-import com.physical.movement.common.LoginContext;
 import com.physical.movement.common.shiro.AdminFormAuthenticationFilter;
 import com.physical.movement.common.shiro.CustomSessionListener;
 import com.physical.movement.common.shiro.CustomerLogoutFilter;
@@ -197,7 +196,6 @@ public class ShiroConfiguration {
         Map<String, Filter> filters = new HashMap<>(5);
         filters.put("admin", new AdminFormAuthenticationFilter());
         CustomerLogoutFilter logoutFilter = new CustomerLogoutFilter();
-        logoutFilter.setRedirectUrl("/login/logout");
         filters.put("logout", logoutFilter);
         shiroFilterFactoryBean.setFilters(filters);
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
@@ -220,7 +218,7 @@ public class ShiroConfiguration {
 
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/login/logout", "logout");
         filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/news/**", "anon");
         //配置记住我或认证通过可以访问的地址
@@ -239,8 +237,7 @@ public class ShiroConfiguration {
     public CustomerLogoutFilter shiroLogoutFilter() {
         CustomerLogoutFilter shiroLogoutFilter = new CustomerLogoutFilter();
         //配置登出后重定向的地址，等出后配置跳转到登录接口
-        LoginContext.clear();
-        shiroLogoutFilter.setRedirectUrl("/login/logout");
+        shiroLogoutFilter.setRedirectUrl("/login/login");
         return shiroLogoutFilter;
     }
 

@@ -1,6 +1,5 @@
 package com.physical.movement.controller;
 
-import com.physical.movement.common.LoginContext;
 import com.physical.movement.common.shiro.CustomerAuthenticationToken;
 import com.physical.movement.entity.SysUser;
 import com.physical.movement.model.ResultJson;
@@ -15,7 +14,6 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +38,11 @@ public class LoginController {
     @Autowired
     SysUserService sysUserService;
 
+    @RequestMapping("/login")
+    public String index() {
+        return "/login/login";
+    }
+
     @RequestMapping(value = "/getVerify")
     public void getVerify(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
@@ -54,64 +57,59 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("loginchecks")
+    @RequestMapping("/loginchecks")
     @ResponseBody
     public ResultJson logincheck(String Username, String Upassword, String checks, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-
-        SysUser sysUser = new SysUser();
-
-        sysUser.setPassword(Upassword);
-
-        sysUser.setUsername(Username);
-
         // 从session中获取随机数
         String random = (String) session.getAttribute("RANDOMVALIDATECODEKEY");
-
-        SysUser user = sysUserService.select(sysUser);
-        if (!random.equalsIgnoreCase(checks)) {
-            return ResultJson.error("验证码错误");
-        } else if (user != null && random.equalsIgnoreCase(checks)) {
-
-            CustomerAuthenticationToken customerAuthenticationToken = new CustomerAuthenticationToken(Username, Upassword, false);
-            Subject subject = SecurityUtils.getSubject();
-            try {
-                subject.login(customerAuthenticationToken);
-            } catch (UnknownAccountException uae) {
-                logger.info("对用户[" + Username + "]进行登录验证..验证未通过,未知账户");
-                return ResultJson.error("未知账户");
-            } catch (IncorrectCredentialsException ice) {
-                logger.info("对用户[" + Username + "]进行登录验证..验证未通过,错误的凭证");
-                return ResultJson.error("密码不正确");
-            } catch (ExcessiveAttemptsException eae) {
-                logger.info("对用户[" + Username + "]进行登录验证..验证未通过,错误次数过多");
-                return ResultJson.error("用户名或密码错误次数过多");
-            } catch (AuthenticationException ae) {
-                //通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
-                logger.info("对用户[" + Username + "]进行登录验证..验证未通过,堆栈轨迹如下");
-                ae.printStackTrace();
-                return ResultJson.error("用户名或密码不正确");
-            }
-            //验证是否登录成功
-            if (subject.isAuthenticated()) {
-                Session session1 = SecurityUtils.getSubject().getSession();
-                System.out.println(session1.getTimeout());
-                if (user.getStatus() == 0) {
-                    return ResultJson.error("您的账户已停用，具体请首页留言联系管理员！");
+        if (random != null) {
+            if (!random.equalsIgnoreCase(checks)) {
+                return ResultJson.error("验证码错误");
+            } else {
+                CustomerAuthenticationToken customerAuthenticationToken = new CustomerAuthenticationToken(Username, Upassword, false);
+                Subject subject = SecurityUtils.getSubject();
+                try {
+                    subject.login(customerAuthenticationToken);
+                } catch (UnknownAccountException uae) {
+                    logger.info("对用户[" + Username + "]进行登录验证..验证未通过,未知账户");
+                    return ResultJson.error("未知账户或账户未注册");
+                } catch (IncorrectCredentialsException ice) {
+                    logger.info("对用户[" + Username + "]进行登录验证..验证未通过,错误的凭证");
+                    return ResultJson.error("密码不正确");
+                } catch (ExcessiveAttemptsException eae) {
+                    logger.info("对用户[" + Username + "]进行登录验证..验证未通过,错误次数过多");
+                    return ResultJson.error("用户名或密码错误次数过多");
+                } catch (AuthenticationException ae) {
+                    //通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
+                    logger.info("对用户[" + Username + "]进行登录验证..验证未通过,堆栈轨迹如下");
+                    ae.printStackTrace();
+                    return ResultJson.error("用户名或密码不正确");
                 }
-                LoginContext.doLogin(user, session);
-                logger.info("用户[" + Username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+                //验证是否登录成功
+                if (subject.isAuthenticated()) {
+                    SysUser sysUser = new SysUser();
+                    sysUser.setUsername(Username);
+                    SysUser user = sysUserService.select(sysUser);
+                    session.setAttribute("sysUser",user);
+                    session.setAttribute("uid",user.getId());
+                    if (user.getStatus() == 0) {
+                        return ResultJson.error("您的账户已停用，具体请首页留言联系管理员！");
+                    }
+                    logger.info("用户[" + Username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+                }
                 //登陆成功
                 return ResultJson.success("登陆成功");
             }
         }
-        return ResultJson.error("登陆失败");  //登陆成功
+        return ResultJson.error("验证码错误");
     }
 
+
     //处理注册用户
-    @RequestMapping("adduser")
+    @RequestMapping("/adduser")
     @ResponseBody
     public ResultJson adduser(String username, String pass, String Usex,
-                              String email, String mobile) throws IOException {
+                              String email, String mobile,String truename,String studentid) throws IOException {
         SysUser sysUser = new SysUser();
         sysUser.setUsername(username);
         if (sysUserService.select(sysUser) != null) {
@@ -131,7 +129,9 @@ public class LoginController {
             String salt = new SecureRandomNumberGenerator().nextBytes().toString();
             String password = ShiroUtils.shiroEncryption(pass, salt);
             user.setSalt(salt);
-            user.setImage("/static/images/noimage.jpg");
+            user.setTruename(truename);
+            user.setStudentid(studentid);
+            user.setImage("/images/noimage.jpg");
             user.setUsername(username);
             user.setPassword(password);
             user.setStatus((byte) 1);
@@ -150,7 +150,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "sendme", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendme", method = RequestMethod.POST)
     @ResponseBody
     public ResultJson sendme(String username, String mobile, HttpServletRequest request) throws HttpException, IOException {
         SysUser user = new SysUser();
@@ -174,7 +174,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "comparecode", method = RequestMethod.POST)
+    @RequestMapping(value = "/comparecode", method = RequestMethod.POST)
     @ResponseBody
     public String comparecode(String username, String mobile, String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -191,7 +191,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "updatepassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
     @ResponseBody
     public ResultJson updatepassword(String newpassword, String repassword, HttpServletRequest request) throws IOException {
         if (newpassword.equals(repassword)) {
@@ -218,25 +218,14 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("logout")
-    public ModelAndView Logout(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
-        // 清除Session
-        HttpSession session = request.getSession();
-        LoginContext.clear();
-        session.invalidate();
-        mv.setViewName("login");
-        return mv;
-    }
-
-    @RequestMapping("member-add")
+    @RequestMapping("/member-add")
     public ModelAndView memberAdd(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login/member-add");
         return mv;
     }
 
-    @RequestMapping("user-lostpassword")
+    @RequestMapping("/user-lostpassword")
     public ModelAndView lostPassword(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login/user-lostpassword");

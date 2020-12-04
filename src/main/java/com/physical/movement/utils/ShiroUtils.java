@@ -2,7 +2,6 @@ package com.physical.movement.utils;
 
 import com.physical.movement.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;

@@ -12,11 +12,13 @@
         <result column="sex" jdbcType="VARCHAR" property="sex"/>
         <result column="image" jdbcType="VARCHAR" property="image"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="truename" jdbcType="VARCHAR" property="truename"/>
+        <result column="studentid" jdbcType="VARCHAR" property="studentid"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, username, password, salt, usertype, phone, status, sex, gmt_create, gmt_modified
+    id, username, password, salt,email,image, usertype, phone, status, sex, gmt_create, gmt_modified,truename,studentid
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -31,11 +33,11 @@
     <insert id="insert" parameterType="com.physical.movement.entity.SysUser">
     insert into sysuser (id, username, password, 
       salt, usertype, phone, 
-      status, sex,image,email, gmt_create,
+      status, sex,image,email,truename,studentid gmt_create,
       gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{usertype,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{sex,jdbcType=VARCHAR},#{image},#{email},now(),now())
+      #{status,jdbcType=TINYINT}, #{sex,jdbcType=VARCHAR},#{image},#{email},#{truename},#{studentid},now(),now())
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.SysUser">
         insert into sysuser
@@ -69,6 +71,12 @@
             </if>
             <if test="email != null">
                 email,
+            </if>
+            <if test="truename != null">
+                truename,
+            </if>
+            <if test="studentid != null">
+                studentid,
             </if>
             <if test="gmtCreate != null">
                 gmt_create,
@@ -108,6 +116,12 @@
             <if test="email != null">
                 #{email,jdbcType=VARCHAR},
             </if>
+            <if test="truename != null">
+                #{truename,jdbcType=VARCHAR},
+            </if>
+            <if test="studentid != null">
+                #{studentid,jdbcType=VARCHAR},
+            </if>
             now(),
             now()
         </trim>
@@ -126,6 +140,30 @@
             <if test="password!=null">
                 and password = #{password}
             </if>
+            <if test="email!=null">
+                and email = #{email}
+            </if>
+            <if test="phone!=null">
+                and phone = #{phone}
+            </if>
+            <if test="truename!=null">
+                and truename = #{truename}
+            </if>
+            <if test="studentid!=null">
+                and studentid = #{studentid}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="WHERE_SELECTALL_CONDIYION">
+        <where>
+            1=1
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="username!=null">
+                and username like concat("%",#{username},"%") or truename like concat("%",#{truename},"%")
+            </if>
         </where>
     </sql>
 
@@ -134,6 +172,14 @@
         <include refid="Base_Column_List"/>
         from sysuser
         <include refid="WHERE_SELECT_CONDIYION"/>
+        order by id desc
+    </select>
+
+    <select id="selectAll" parameterType="com.physical.movement.entity.SysUser" resultType="SysUser">
+        select
+        <include refid="Base_Column_List"/>
+        from sysuser
+        <include refid="WHERE_SELECTALL_CONDIYION"/>
         order by id desc
     </select>
 
@@ -167,7 +213,13 @@
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
             </if>
-            gmt_modified = now()
+            <if test="truename != null">
+                truename = #{truename,jdbcType=VARCHAR},
+            </if>
+            <if test="studentid != null">
+                studentid = #{studentid,jdbcType=VARCHAR},
+            </if>
+            gmt_modified = now(),
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -182,6 +234,8 @@
       sex = #{sex,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      truename = #{truename,jdbcType=VARCHAR},
+      studentid = #{studentid,jdbcType=VARCHAR},
       gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>

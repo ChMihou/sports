@@ -2,7 +2,6 @@ package com.physical.movement.common.shiro;
 
 import com.physical.movement.entity.SysUser;
 import com.physical.movement.service.SysUserService;
-import com.physical.movement.utils.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -38,20 +37,12 @@ public class ShiroRealm extends AuthorizingRealm {
         SysUser sysUser = new SysUser();
 
         sysUser.setUsername(username);
+
         SysUser user = sysUserService.select(sysUser);
 
-        if (user != null) {
+        if (user == null) {
             throw new UnknownAccountException();
         }
-
-        String oringnPassword = new String((char[]) token.getCredentials());
-
-        System.out.println("传入的用户名和密码：" + username + "  " + oringnPassword);
-
-        String encodedPassword = ShiroUtils.shiroEncryption(oringnPassword, user.getSalt());
-
-        System.out.println("加密后的用户名和密码：" + username + "  " + encodedPassword);
-
         return new SimpleAuthenticationInfo(
                 //用户名
                 user,

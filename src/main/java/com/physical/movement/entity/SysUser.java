@@ -26,9 +26,29 @@ public class SysUser extends Id {
 
     private String email;
 
+    private String truename;
+
+    private String studentid;
+
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public String getTruename() {
+        return truename;
+    }
+
+    public void setTruename(String truename) {
+        this.truename = truename;
+    }
+
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
+    }
 
     public Integer getId() {
         return id;
@@ -124,5 +144,25 @@ public class SysUser extends Id {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", usertype=" + usertype +
+                ", phone='" + phone + '\'' +
+                ", status=" + status +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", email='" + email + '\'' +
+                ", truename='" + truename + '\'' +
+                ", studentid='" + studentid + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                '}';
     }
 }
