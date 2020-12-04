@@ -1,6 +1,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html class="x-admin-sm">
-    
+
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-X-admin2.2</title>
@@ -35,13 +35,14 @@
                                 <input type="text" name="search" th:value="${search}"  placeholder="请输入用户名字关键字查询" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
+                                <input type="text" name="search" th:value="${studentid}" placeholder="请输入用户学号查询" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="search" th:value="${studentid}" placeholder="请输入用户学号查询" autocomplete="off" class="layui-input">
+                                <button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
                             </div>
                         </form>
                     </div>
+                    <th:block th:if="${ulist!=null}">
                     <div class="layui-card-body layui-table-body layui-table-main">
                         <table class="layui-table layui-form">
                             <thead>
@@ -62,9 +63,21 @@
                                     <td th:text="${user.username}"></td>
                                     <td th:text="${user.studentid}"></td>
                                     <td th:text="${user.usertype==1?'管理员':'普通用户'}"></td>
-                                    <td>
-                                        <a onclick="member_stop(this,'10001')" href="javascript:;" th:title="${user.status==1?'启动':'停用'}">
-                                            <i class="layui-icon">&#xe601;</i>
+                                    <td class="td-status">
+                                        <th:block th:if="${user.status==1}">
+                                            <span class="layui-btn layui-btn-normal layui-btn-mini ">已启用</span>
+                                        </th:block>
+                                        <th:block th:if="${user.status==0}">
+                                            <span class="layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled">已停用</span>
+                                        </th:block>
+                                        <a th:onclick="member_stop(this,'[[${user.id}]]')" href="javascript:;"
+                                           th:title="${user.status==1?'停用':'启用'}">
+                                            <th:block th:if="${user.status==1}">
+                                                <i class="layui-icon">&#xe601;</i>
+                                            </th:block>
+                                            <th:block th:if="${user.status==0}">
+                                                <i class="layui-icon">&#xe62f;</i>
+                                            </th:block>
                                         </a>
                                     </td>
                                     <td>
@@ -93,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -163,11 +177,11 @@
                 //发异步删除数据
                 $.ajax({
                     type : "POST",
-                    url : "/deleteuser",
+                    url : "/member/deleteUser",
                     data : { "id" : id},
                     dataType : "json",
                     success : function(state){
-                        if (state == "1") {
+                        if (state) {
                             $(obj).parents("tr").remove();
                             layer.msg('已删除!',{icon:1,time:1000});
                             xadmin.father_reload();

@@ -49,7 +49,7 @@
         <Logger name="errorLog" level="info" additivity="false">
             <appender-ref ref="error_appender" level="info"/>
         </Logger>
-        <Logger name="com.charity.dao" level="DEBUG" additivity="false">
+        <Logger name="com.physical.movement.mapper" level="DEBUG" additivity="false">
             <appender-ref ref="sql_appender" level="DEBUG"/>
         </Logger>
         <!--  <logger name="jdbc.connection" level="OFF"/>

@@ -26,6 +26,12 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">学生姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="truename" name="truename" th:value="${sysUser.truename}" required="" lay-verify="required" autocomplete="off" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">用户身份</label>
                     <div class="layui-input-inline">
                         <input type="text" name="duty" th:value="${sysUser.usertype==0?'普通用户':'管理员'}" required="" lay-verify="required"  autocomplete="off" class="layui-input" disabled>

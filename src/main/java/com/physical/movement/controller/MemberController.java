@@ -5,8 +5,9 @@ import com.physical.movement.entity.SysUser;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.model.ResultJson;
 import com.physical.movement.service.SysUserService;
-import com.physical.movement.utils.ShiroUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,8 @@ import java.util.List;
 @Controller
 @RequestMapping("member")
 public class MemberController {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     SysUserService sysUserService;
 

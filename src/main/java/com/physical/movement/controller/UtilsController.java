@@ -7,6 +7,8 @@ import com.physical.movement.service.SysUserService;
 import com.physical.movement.utils.FileUtils;
 import com.physical.movement.utils.RandomUtil;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import java.util.UUID;
 
 @Controller
 public class UtilsController {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     SysUserService sysUserService;
