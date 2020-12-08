@@ -7,12 +7,17 @@
     <result column="teamtype" jdbcType="INTEGER" property="teamtype" />
     <result column="teamleader" jdbcType="INTEGER" property="teamleader" />
     <result column="teamleaderid" jdbcType="INTEGER" property="teamleaderid" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="flag" jdbcType="TINYINT" property="flag" />
+    <result column="reason" jdbcType="LONGVARCHAR" property="reason" />
+    <result column="cause" jdbcType="LONGVARCHAR" property="cause" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, teamname, teamtype, teamleader, teamleaderid
+    id, teamname, teamtype, teamleader, teamleaderid, gmt_create, gmt_modified, flag ,reason, cause
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from team
     where id = #{id,jdbcType=INTEGER}
@@ -23,9 +28,13 @@
   </delete>
   <insert id="insert" parameterType="com.physical.movement.entity.Team">
     insert into team (id, teamname, teamtype, 
-      teamleader, teamleaderid)
+      teamleader, teamleaderid, gmt_create, 
+      gmt_modified, flag, reason, 
+      cause)
     values (#{id,jdbcType=INTEGER}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER}, 
-      #{teamleader,jdbcType=INTEGER}, #{teamleaderid,jdbcType=INTEGER})
+      #{teamleader,jdbcType=INTEGER}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, 
+      #{cause,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.physical.movement.entity.Team">
     insert into team
@@ -45,6 +54,21 @@
       <if test="teamleaderid != null">
         teamleaderid,
       </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="cause != null">
+        cause,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,6 +85,21 @@
       </if>
       <if test="teamleaderid != null">
         #{teamleaderid,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cause != null">
+        #{cause,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,7 +118,35 @@
       <if test="teamleaderid != null">
         teamleaderid = #{teamleaderid,jdbcType=INTEGER},
       </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cause != null">
+        cause = #{cause,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Team">
+    update team
+    set teamname = #{teamname,jdbcType=VARCHAR},
+      teamtype = #{teamtype,jdbcType=INTEGER},
+      teamleader = #{teamleader,jdbcType=INTEGER},
+      teamleaderid = #{teamleaderid,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=TINYINT},
+      reason = #{reason,jdbcType=LONGVARCHAR},
+      cause = #{cause,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Team">
@@ -87,7 +154,10 @@
     set teamname = #{teamname,jdbcType=VARCHAR},
       teamtype = #{teamtype,jdbcType=INTEGER},
       teamleader = #{teamleader,jdbcType=INTEGER},
-      teamleaderid = #{teamleaderid,jdbcType=INTEGER}
+      teamleaderid = #{teamleaderid,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

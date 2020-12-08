@@ -1,9 +1,7 @@
 package com.physical.movement.mapper;
 
 import com.physical.movement.entity.Team;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface TeamMapper extends BaseMapper<Team> {
     int deleteByPrimaryKey(Integer id);
 

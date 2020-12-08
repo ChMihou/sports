@@ -10,11 +10,11 @@
         <result column="enemyid" jdbcType="INTEGER" property="enemyid"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="flag" jdbcType="TINYINT" property="flag"/>
         <result column="result" jdbcType="LONGVARCHAR" property="result"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified,
-    result
+    id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified, flag, result
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -29,12 +29,12 @@
     <insert id="insert" parameterType="com.physical.movement.entity.Game">
     insert into game (id, type, challenger, 
       challengerid, enemy, enemyid, 
-      gmt_create, gmt_modified, result
-      )
+      gmt_create, gmt_modified, flag, 
+      result)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR}, 
       #{challengerid,jdbcType=INTEGER}, #{enemy,jdbcType=VARCHAR}, #{enemyid,jdbcType=INTEGER}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{result,jdbcType=LONGVARCHAR}
-      )
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, 
+      #{result,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Game">
         insert into game
@@ -62,6 +62,9 @@
             </if>
             <if test="gmtModified != null">
                 gmt_modified,
+            </if>
+            <if test="flag != null">
+                flag,
             </if>
             <if test="result != null">
                 result,
@@ -92,6 +95,9 @@
             <if test="gmtModified != null">
                 #{gmtModified,jdbcType=TIMESTAMP},
             </if>
+            <if test="flag != null">
+                #{flag,jdbcType=TINYINT},
+            </if>
             <if test="result != null">
                 #{result,jdbcType=LONGVARCHAR},
             </if>
@@ -121,6 +127,9 @@
             <if test="gmtModified != null">
                 gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
             </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=TINYINT},
+            </if>
             <if test="result != null">
                 result = #{result,jdbcType=LONGVARCHAR},
             </if>
@@ -136,6 +145,7 @@
       enemyid = #{enemyid,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=TINYINT},
       result = #{result,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -147,7 +157,8 @@
       enemy = #{enemy,jdbcType=VARCHAR},
       enemyid = #{enemyid,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

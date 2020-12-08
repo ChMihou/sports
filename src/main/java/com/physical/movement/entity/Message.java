@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class Message extends Id {
     private static final long serialVersionUID = 4588167538928127368L;
-    private Integer id;
 
     private String name;
 
@@ -20,10 +19,6 @@ public class Message extends Id {
     private String mess;
 
     private String apply;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Integer getId() {
         return id;

@@ -3,8 +3,6 @@ package com.physical.movement.entity;
 import com.physical.movement.entity.common.Id;
 
 public class Team extends Id {
-    private static final long serialVersionUID = -6723021836710260446L;
-    private Integer id;
 
     private String teamname;
 
@@ -14,13 +12,12 @@ public class Team extends Id {
 
     private Integer teamleaderid;
 
-    public Integer getId() {
-        return id;
-    }
+    private Byte flag;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String reason;
+
+    private String cause;
+
 
     public String getTeamname() {
         return teamname;
@@ -52,5 +49,29 @@ public class Team extends Id {
 
     public void setTeamleaderid(Integer teamleaderid) {
         this.teamleaderid = teamleaderid;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public Byte getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Byte flag) {
+        this.flag = flag;
     }
 }

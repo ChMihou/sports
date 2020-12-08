@@ -6,17 +6,12 @@ import java.util.Date;
 
 public class Announcement extends Id {
     private static final long serialVersionUID = -1678337599015161298L;
-    private Integer id;
 
     private String author;
 
     private String title;
 
     private Integer uid;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Integer getId() {
         return id;

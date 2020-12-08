@@ -6,8 +6,6 @@ import java.util.Date;
 
 public class SysUser extends Id {
     private static final long serialVersionUID = 9188347979626319041L;
-    private Integer id;
-
     private String username;
 
     private String password;
@@ -29,10 +27,6 @@ public class SysUser extends Id {
     private String truename;
 
     private String studentid;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public String getTruename() {
         return truename;

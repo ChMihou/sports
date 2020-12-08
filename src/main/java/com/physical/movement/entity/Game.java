@@ -2,11 +2,7 @@ package com.physical.movement.entity;
 
 import com.physical.movement.entity.common.Id;
 
-import java.util.Date;
-
 public class Game extends Id {
-    private static final long serialVersionUID = 4722605863454621240L;
-    private Integer id;
 
     private Integer type;
 
@@ -18,19 +14,9 @@ public class Game extends Id {
 
     private Integer enemyid;
 
-    private Date gmtCreate;
-
-    private Date gmtModified;
+    private Byte flag;
 
     private String result;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getType() {
         return type;
@@ -72,20 +58,12 @@ public class Game extends Id {
         this.enemyid = enemyid;
     }
 
-    public Date getGmtCreate() {
-        return gmtCreate;
+    public Byte getFlag() {
+        return flag;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
+    public void setFlag(Byte flag) {
+        this.flag = flag;
     }
 
     public String getResult() {

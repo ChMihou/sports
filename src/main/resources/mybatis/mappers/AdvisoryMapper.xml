@@ -5,8 +5,8 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="author" jdbcType="VARCHAR" property="author"/>
-        <result column="Nselect" jdbcType="INTEGER" property="nselect"/>
-        <result column="Nimage" jdbcType="VARCHAR" property="nimage"/>
+        <result column="nselect" jdbcType="INTEGER" property="nselect"/>
+        <result column="nimage" jdbcType="VARCHAR" property="nimage"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="article" jdbcType="LONGVARCHAR" property="article"/>
@@ -14,8 +14,7 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title,author, Nselect, Nimage, gmt_create, gmt_modified,
-    article, Ncause, intro
+    id, title,author, nselect, nimage, gmt_create, gmt_modified, article, Ncause, intro
     </sql>
     <sql id="WHERE_SELECT_CONDIYION">
         <where>
@@ -29,22 +28,22 @@
             <if test="author!=null">
                 and author = #{author}
             </if>
-            <if test="Nselect!=null">
-                and Nselect = #{Nselect}
+            <if test="nselect!=null">
+                and nselect = #{nselect}
             </if>
         </where>
     </sql>
     <select id="selectAll" parameterType="com.physical.movement.entity.Advisory" resultType="Advisory">
         select
         <include refid="Base_Column_List"/>
-        from sysuser
+        from advisory
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc
     </select>
     <select id="select" parameterType="com.physical.movement.entity.Advisory" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sysuser
+        from advisory
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc
     </select>
@@ -71,8 +70,8 @@
     </delete>
 
     <insert id="insert" parameterType="com.physical.movement.entity.Advisory">
-    insert into advisory (id, title, author, Nselect,
-      Nimage, gmt_create, gmt_modified, 
+    insert into advisory (id, title, author, nselect,
+      nimage, gmt_create, gmt_modified, 
       article, Ncause, intro
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
@@ -93,10 +92,10 @@
                 author,
             </if>
             <if test="nselect != null">
-                Nselect,
+                nselect,
             </if>
             <if test="nimage != null">
-                Nimage,
+                nimage,
             </if>
             <if test="gmtCreate != null">
                 gmt_create,
@@ -157,10 +156,10 @@
                 author = #{author,jdbcType=VARCHAR},
             </if>
             <if test="nselect != null">
-                Nselect = #{nselect,jdbcType=INTEGER},
+                nselect = #{nselect,jdbcType=INTEGER},
             </if>
             <if test="nimage != null">
-                Nimage = #{nimage,jdbcType=VARCHAR},
+                nimage = #{nimage,jdbcType=VARCHAR},
             </if>
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -184,8 +183,8 @@
     update advisory
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
-      Nselect = #{nselect,jdbcType=INTEGER},
-      Nimage = #{nimage,jdbcType=VARCHAR},
+      nselect = #{nselect,jdbcType=INTEGER},
+      nimage = #{nimage,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       article = #{article,jdbcType=LONGVARCHAR},
@@ -197,8 +196,8 @@
     update advisory
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
-      Nselect = #{nselect,jdbcType=INTEGER},
-      Nimage = #{nimage,jdbcType=VARCHAR},
+      nselect = #{nselect,jdbcType=INTEGER},
+      nimage = #{nimage,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

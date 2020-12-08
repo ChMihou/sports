@@ -6,15 +6,10 @@ import java.util.Date;
 
 public class UserTeamRef extends Id {
     private static final long serialVersionUID = 8725866490767392925L;
-    private Integer id;
 
     private Integer userid;
 
     private Integer teamid;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Integer getId() {
         return id;

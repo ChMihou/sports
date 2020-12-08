@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class Advisory extends Id {
     private static final long serialVersionUID = -1506031664527103014L;
-    private Integer id;
 
     private String title;
 
@@ -21,10 +20,6 @@ public class Advisory extends Id {
     private String intro;
 
     private String nimage;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Integer getId() {
         return id;
@@ -105,4 +100,5 @@ public class Advisory extends Id {
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
     }
+
 }

@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class Court extends Id {
     private static final long serialVersionUID = -238160128400550657L;
-    private Integer id;
 
     private String address;
 
@@ -15,10 +14,6 @@ public class Court extends Id {
     private Integer cost;
 
     private String type;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Integer getId() {
         return id;
