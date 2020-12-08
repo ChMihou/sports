@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2020-12-04 18:08:19
+Date: 2020-12-08 13:58:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,13 +22,10 @@ DROP TABLE IF EXISTS `advisory`;
 CREATE TABLE `advisory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `checkboy` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `article` text CHARACTER SET utf8,
-  `flag` int(11) DEFAULT NULL,
   `author` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `Ncause` text CHARACTER SET utf8,
-  `Nselect` int(11) DEFAULT NULL,
-  `Nimage` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `nselect` int(11) DEFAULT NULL,
+  `nimage` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `intro` text CHARACTER SET utf8,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -48,8 +45,10 @@ CREATE TABLE `announcement` (
   `author` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(20) DEFAULT NULL,
+  `article` text CHARACTER SET utf8,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -111,6 +110,7 @@ CREATE TABLE `game` (
   `result` text CHARACTER SET utf8 COMMENT '结果',
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(4) DEFAULT NULL COMMENT '是否应战',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -177,6 +177,11 @@ CREATE TABLE `team` (
   `teamtype` int(20) DEFAULT NULL,
   `teamleader` int(20) DEFAULT NULL,
   `teamleaderid` int(20) DEFAULT NULL,
+  `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
+  `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `flag` tinyint(4) DEFAULT NULL COMMENT '申请建立球队',
+  `reason` text CHARACTER SET utf8,
+  `cause` text CHARACTER SET utf8,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
