@@ -4,8 +4,6 @@
     <resultMap id="BaseResultMap" type="com.physical.movement.entity.Advisory">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="checkboy" jdbcType="VARCHAR" property="checkboy"/>
-        <result column="flag" jdbcType="INTEGER" property="flag"/>
         <result column="author" jdbcType="VARCHAR" property="author"/>
         <result column="Nselect" jdbcType="INTEGER" property="nselect"/>
         <result column="Nimage" jdbcType="VARCHAR" property="nimage"/>
@@ -16,27 +14,68 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title, checkboy, flag, author, Nselect, Nimage, gmt_create, gmt_modified,
+    id, title,author, Nselect, Nimage, gmt_create, gmt_modified,
     article, Ncause, intro
     </sql>
+    <sql id="WHERE_SELECT_CONDIYION">
+        <where>
+            1=1
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="title!=null">
+                and title like like concat("%",#{title},"%")
+            </if>
+            <if test="author!=null">
+                and author = #{author}
+            </if>
+            <if test="Nselect!=null">
+                and Nselect = #{Nselect}
+            </if>
+        </where>
+    </sql>
+    <select id="selectAll" parameterType="com.physical.movement.entity.Advisory" resultType="Advisory">
+        select
+        <include refid="Base_Column_List"/>
+        from sysuser
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc
+    </select>
+    <select id="select" parameterType="com.physical.movement.entity.Advisory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sysuser
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from advisory
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from advisory
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+    <delete id="deleteListId" parameterType="int[]">
+        <!-- forEach : 用来循环 collection : 用来指定循环的数据的类型 可以填的值有：array,list,map item
+            : 循环中为每个循环的数据指定一个别名 index : 循环中循环的下标 open : 开始 close : 结束 separator : 数组中元素之间的分隔符 -->
+        delete from advisory where id in
+        <foreach collection="ids" item="id" index="no" open="("
+                 separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
     <insert id="insert" parameterType="com.physical.movement.entity.Advisory">
-    insert into advisory (id, title, checkboy, 
-      flag, author, Nselect, 
+    insert into advisory (id, title, author, Nselect,
       Nimage, gmt_create, gmt_modified, 
       article, Ncause, intro
       )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{checkboy,jdbcType=VARCHAR}, 
-      #{flag,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
       #{nimage,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{article,jdbcType=LONGVARCHAR}, #{ncause,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
       )
@@ -49,12 +88,6 @@
             </if>
             <if test="title != null">
                 title,
-            </if>
-            <if test="checkboy != null">
-                checkboy,
-            </if>
-            <if test="flag != null">
-                flag,
             </if>
             <if test="author != null">
                 author,
@@ -88,12 +121,6 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="checkboy != null">
-                #{checkboy,jdbcType=VARCHAR},
-            </if>
-            <if test="flag != null">
-                #{flag,jdbcType=INTEGER},
-            </if>
             <if test="author != null">
                 #{author,jdbcType=VARCHAR},
             </if>
@@ -126,12 +153,6 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="checkboy != null">
-                checkboy = #{checkboy,jdbcType=VARCHAR},
-            </if>
-            <if test="flag != null">
-                flag = #{flag,jdbcType=INTEGER},
-            </if>
             <if test="author != null">
                 author = #{author,jdbcType=VARCHAR},
             </if>
@@ -162,8 +183,6 @@
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Advisory">
     update advisory
     set title = #{title,jdbcType=VARCHAR},
-      checkboy = #{checkboy,jdbcType=VARCHAR},
-      flag = #{flag,jdbcType=INTEGER},
       author = #{author,jdbcType=VARCHAR},
       Nselect = #{nselect,jdbcType=INTEGER},
       Nimage = #{nimage,jdbcType=VARCHAR},
@@ -177,8 +196,6 @@
     <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Advisory">
     update advisory
     set title = #{title,jdbcType=VARCHAR},
-      checkboy = #{checkboy,jdbcType=VARCHAR},
-      flag = #{flag,jdbcType=INTEGER},
       author = #{author,jdbcType=VARCHAR},
       Nselect = #{nselect,jdbcType=INTEGER},
       Nimage = #{nimage,jdbcType=VARCHAR},

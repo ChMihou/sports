@@ -90,8 +90,9 @@ public class LoginController {
                     SysUser sysUser = new SysUser();
                     sysUser.setUsername(Username);
                     SysUser user = sysUserService.select(sysUser);
-                    session.setAttribute("sysUser",user);
-                    session.setAttribute("uid",user.getId());
+                    session.setAttribute("sysUser", user);
+                    session.setAttribute("uid", user.getId());
+                    session.setAttribute("username", user.getUsername());
                     if (user.getStatus() == 0) {
                         return ResultJson.error("您的账户已停用，具体请首页留言联系管理员！");
                     }
@@ -109,7 +110,7 @@ public class LoginController {
     @RequestMapping("/adduser")
     @ResponseBody
     public ResultJson adduser(String username, String pass, String Usex,
-                              String email, String mobile,String truename,String studentid) throws IOException {
+                              String email, String mobile, String truename, String studentid) throws IOException {
         SysUser sysUser = new SysUser();
         sysUser.setUsername(username);
         if (sysUserService.select(sysUser) != null) {

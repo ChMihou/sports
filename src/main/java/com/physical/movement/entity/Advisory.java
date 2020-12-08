@@ -10,10 +10,6 @@ public class Advisory extends Id {
 
     private String title;
 
-    private String checkboy;
-
-    private Integer flag;
-
     private String author;
 
     private Integer nselect;
@@ -44,22 +40,6 @@ public class Advisory extends Id {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
-    }
-
-    public String getCheckboy() {
-        return checkboy;
-    }
-
-    public void setCheckboy(String checkboy) {
-        this.checkboy = checkboy == null ? null : checkboy.trim();
-    }
-
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
     }
 
     public String getArticle() {
