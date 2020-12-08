@@ -114,7 +114,7 @@ public class AdvisoryController {
 
     @RequestMapping("deleteAdvisory")
     @ResponseBody
-    public ResultJson deleteOneNotice(Integer id) {
+    public ResultJson deleteAdvisory(Integer id) {
         int i = advisoryService.deleteByPrimaryKey(id);
         if (i > 0) {
             return ResultJson.success("删除成功");
@@ -124,7 +124,7 @@ public class AdvisoryController {
 
     @RequestMapping("deleteListAdvisory")
     @ResponseBody
-    public ResultJson deleteListNotice(String ids) {
+    public ResultJson deleteListAdvisory(String ids) {
         String[] id = ids.split(",");
         int[] ints = new int[id.length];
         for (int i = 0; i < id.length; i++) {
@@ -138,7 +138,7 @@ public class AdvisoryController {
     }
 
     @RequestMapping("articleAdd")
-    public ModelAndView articleadd(HttpServletRequest request) {
+    public ModelAndView articleAdd(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         Integer nselect = Integer.valueOf(request.getParameter("nselect"));
         mv.addObject("nselect", nselect);
@@ -148,7 +148,7 @@ public class AdvisoryController {
 
     @RequestMapping("addArticle")
     @ResponseBody
-    public ResultJson addarticle(String n_title, String n_article, String n_author, Integer n_select, String images, String nintro) {
+    public ResultJson addArticle(String n_title, String n_article, String n_author, Integer n_select, String images, String nintro) {
         Advisory advisory = new Advisory();
         advisory.setTitle(n_title);
         advisory.setArticle(n_article);
@@ -178,7 +178,7 @@ public class AdvisoryController {
 
     @RequestMapping("updateArticle")
     @ResponseBody
-    public ResultJson updatearticle(Integer n_id, String n_title, String n_article, String n_author, String images, String ninro) {
+    public ResultJson updateArticle(Integer n_id, String n_title, String n_article, String n_author, String images, String ninro) {
         ModelAndView mv = new ModelAndView();
         Advisory advisory = new Advisory();
         advisory.setId(n_id);

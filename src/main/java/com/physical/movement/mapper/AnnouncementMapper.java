@@ -14,4 +14,6 @@ public interface AnnouncementMapper extends BaseMapper<Announcement> {
     int updateByPrimaryKeySelective(Announcement record);
 
     int updateByPrimaryKey(Announcement record);
+
+    int deleteListId(int[] ids);
 }

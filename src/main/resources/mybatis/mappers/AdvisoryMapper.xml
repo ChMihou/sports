@@ -22,7 +22,7 @@
             <if test="id!=null">
                 and id = #{id}
             </if>
-            <if test="title!=null">
+            <if test="title!=null and title!=''">
                 and title like like concat("%",#{title},"%")
             </if>
             <if test="author!=null">

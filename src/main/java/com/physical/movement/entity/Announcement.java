@@ -11,6 +11,10 @@ public class Announcement extends Id {
 
     private String title;
 
+    private String article;
+
+    private String image;
+
     private Integer uid;
 
     public Integer getId() {
@@ -43,6 +47,22 @@ public class Announcement extends Id {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public Date getGmtCreate() {
