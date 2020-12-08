@@ -10,11 +10,10 @@
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="article" jdbcType="LONGVARCHAR" property="article"/>
-        <result column="Ncause" jdbcType="LONGVARCHAR" property="ncause"/>
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title,author, nselect, nimage, gmt_create, gmt_modified, article, Ncause, intro
+    id, title,author, nselect, nimage, gmt_create, gmt_modified, article, intro
     </sql>
     <sql id="WHERE_SELECT_CONDIYION">
         <where>
@@ -23,7 +22,7 @@
                 and id = #{id}
             </if>
             <if test="title!=null and title!=''">
-                and title like like concat("%",#{title},"%")
+                and title like concat("%",#{title},"%")
             </if>
             <if test="author!=null">
                 and author = #{author}
@@ -72,11 +71,11 @@
     <insert id="insert" parameterType="com.physical.movement.entity.Advisory">
     insert into advisory (id, title, author, nselect,
       nimage, gmt_create, gmt_modified, 
-      article, Ncause, intro
+      article, intro
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
       #{nimage,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{article,jdbcType=LONGVARCHAR}, #{ncause,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
+      #{article,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Advisory">
@@ -105,9 +104,6 @@
             </if>
             <if test="article != null">
                 article,
-            </if>
-            <if test="ncause != null">
-                Ncause,
             </if>
             <if test="intro != null">
                 intro,
@@ -138,9 +134,6 @@
             <if test="article != null">
                 #{article,jdbcType=LONGVARCHAR},
             </if>
-            <if test="ncause != null">
-                #{ncause,jdbcType=LONGVARCHAR},
-            </if>
             <if test="intro != null">
                 #{intro,jdbcType=LONGVARCHAR},
             </if>
@@ -170,9 +163,6 @@
             <if test="article != null">
                 article = #{article,jdbcType=LONGVARCHAR},
             </if>
-            <if test="ncause != null">
-                Ncause = #{ncause,jdbcType=LONGVARCHAR},
-            </if>
             <if test="intro != null">
                 intro = #{intro,jdbcType=LONGVARCHAR},
             </if>
@@ -188,7 +178,6 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       article = #{article,jdbcType=LONGVARCHAR},
-      Ncause = #{ncause,jdbcType=LONGVARCHAR},
       intro = #{intro,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -64,7 +64,7 @@
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"  th:onclick="xadmin.open('查看','/advisory/readArticle?id=[[${notice.id}]]')" ><i class="layui-icon">&#xe705;</i>查看</button>
 
-                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"  th:onclick="xadmin.open('编辑','/advisory/edit-article?id=[[${notice.id}]]')" ><i class="layui-icon">&#xe642;</i>编辑</button>
+                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"  th:onclick="xadmin.open('编辑','/advisory/editArticle?id=[[${notice.id}]]')" ><i class="layui-icon">&#xe642;</i>编辑</button>
 
                                 <button th:if="${session.sysUser.usertype==1}" class="layui-btn-danger layui-btn layui-btn-xs"  th:onclick="member_del(this,'[[${notice.id}]]')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
 

@@ -49,7 +49,7 @@ public class AdvisoryController {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
-        advisory.setNselect(2);
+        advisory.setNselect(5);
         List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
         PageInfo nlist = new PageInfo(advisories);
         List pagenums = new ArrayList();
@@ -66,7 +66,7 @@ public class AdvisoryController {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
-        advisory.setNselect(3);
+        advisory.setNselect(2);
         List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
         PageInfo nlist = new PageInfo(advisories);
         List pagenums = new ArrayList();
@@ -83,7 +83,7 @@ public class AdvisoryController {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
-        advisory.setNselect(4);
+        advisory.setNselect(3);
         List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
         PageInfo nlist = new PageInfo(advisories);
         List pagenums = new ArrayList();
@@ -100,7 +100,7 @@ public class AdvisoryController {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
-        advisory.setNselect(5);
+        advisory.setNselect(4);
         List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
         PageInfo nlist = new PageInfo(advisories);
         List pagenums = new ArrayList();
