@@ -3,6 +3,7 @@
 <mapper namespace="com.physical.movement.mapper.MessageMapper">
     <resultMap id="BaseResultMap" type="com.physical.movement.entity.Message">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="uid" jdbcType="INTEGER" property="uid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="flag" jdbcType="INTEGER" property="flag"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
@@ -13,7 +14,7 @@
         <result column="apply" jdbcType="LONGVARCHAR" property="apply"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, flag, title, checkboy, gmt_create, gmt_modified,mess, apply
+    id,uid, name, flag, title, checkboy, gmt_create, gmt_modified,mess, apply
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -21,16 +22,47 @@
         from message
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <sql id="WHERE_SELECT_CONDIYION">
+        <where>
+            1=1
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="uid!=null">
+                and uid = #{uid}
+            </if>
+            <if test="title!=null and title!=''">
+                and title like like concat("%",#{title},"%")
+            </if>
+            <if test="flag!=null and flag!=''">
+                and author = #{author}
+            </if>
+        </where>
+    </sql>
+    <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultType="Announcement">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc,id desc
+    </select>
+    <select id="select" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from message
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.physical.movement.entity.Message">
-    insert into message (id, name, flag, 
+    insert into message (id,uid, name, flag,
       title, checkboy, gmt_create, 
       gmt_modified, mess, apply
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER},#{uid}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER},
       #{title,jdbcType=VARCHAR}, #{checkboy,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP}, #{mess,jdbcType=LONGVARCHAR}, #{apply,jdbcType=LONGVARCHAR}
       )
@@ -40,6 +72,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
+            </if>
+            <if test="uid != null">
+                uid,
             </if>
             <if test="name != null">
                 name,
@@ -70,6 +105,9 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
@@ -99,6 +137,9 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Message">
         update message
         <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
@@ -126,22 +167,11 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Message">
-    update message
-    set name = #{name,jdbcType=VARCHAR},
-      flag = #{flag,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      checkboy = #{checkboy,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      mess = #{mess,jdbcType=LONGVARCHAR},
-      apply = #{apply,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-    </update>
     <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Message">
     update message
     set name = #{name,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       checkboy = #{checkboy,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},

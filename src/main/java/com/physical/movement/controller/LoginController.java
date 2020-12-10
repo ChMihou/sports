@@ -132,7 +132,7 @@ public class LoginController {
             user.setSalt(salt);
             user.setTruename(truename);
             user.setStudentid(studentid);
-            user.setImage("/images/noimage.jpg");
+            user.setImage("/images/now-logo.jpg");
             user.setUsername(username);
             user.setPassword(password);
             user.setStatus((byte) 1);

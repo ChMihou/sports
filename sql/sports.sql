@@ -164,8 +164,8 @@ CREATE TABLE `sysuser` (
 -- ----------------------------
 -- Records of sysuser
 -- ----------------------------
-INSERT INTO `sysuser` VALUES ('2', 'cmh', '4c41c8ee9e59e72c0463f87ffb7d356f', 'mj0x89ImC/rRoC4yK7bZGg==', '1', '15362478021', '1', '/images/noimage.jpg', '男', '106358@qq.com', '2020-12-04 11:45:34', '2020-12-04 17:55:12', '201653684', '陈明浩');
-INSERT INTO `sysuser` VALUES ('3', 'rzh', '6373b90b4be5aa7ddcb0843265bc57a9', 'RwgAOcVSZF/TiZifb5UJgw==', '0', '15236984723', '1', '/images/noimage.jpg', '男', '1536982@qq.com', '2020-12-04 18:07:00', '2020-12-04 18:07:00', '201758964', '容志恒');
+INSERT INTO `sysuser` VALUES ('2', 'cmh', '4c41c8ee9e59e72c0463f87ffb7d356f', 'mj0x89ImC/rRoC4yK7bZGg==', '1', '15362478021', '1', '/images/now-logo.jpg', '男', '106358@qq.com', '2020-12-04 11:45:34', '2020-12-04 17:55:12', '201653684', '陈明浩');
+INSERT INTO `sysuser` VALUES ('3', 'rzh', '6373b90b4be5aa7ddcb0843265bc57a9', 'RwgAOcVSZF/TiZifb5UJgw==', '0', '15236984723', '1', '/images/now-logo.jpg', '男', '1536982@qq.com', '2020-12-04 18:07:00', '2020-12-04 18:07:00', '201758964', '容志恒');
 
 -- ----------------------------
 -- Table structure for team

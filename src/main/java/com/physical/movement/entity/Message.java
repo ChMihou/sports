@@ -15,6 +15,7 @@ public class Message extends Id {
 
     private String checkboy;
 
+    private Integer uid;
 
     private String mess;
 
@@ -90,5 +91,13 @@ public class Message extends Id {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 }

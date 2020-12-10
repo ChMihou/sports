@@ -28,6 +28,31 @@
         from comment
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <sql id="WHERE_SELECT_CONDIYION">
+        <where>
+            1=1
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="uid!=null">
+                and uid = #{uid}
+            </if>
+        </where>
+    </sql>
+    <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultType="Announcement">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc,id desc
+    </select>
+    <select id="select" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
     where id = #{id,jdbcType=INTEGER}

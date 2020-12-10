@@ -13,8 +13,6 @@ public interface AdvisoryMapper extends BaseMapper<Advisory> {
 
     int updateByPrimaryKeySelective(Advisory record);
 
-    int updateByPrimaryKeyWithBLOBs(Advisory record);
-
     int updateByPrimaryKey(Advisory record);
 
     int deleteListId(int[] ids);
