@@ -1,5 +1,6 @@
 package com.physical.movement.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.physical.movement.entity.UserTeamRef;
 import com.physical.movement.entity.vo.UserTeamVo;
 import com.physical.movement.mapper.UserTeamRefMapper;
@@ -41,7 +42,8 @@ public class UserTeamRefServiceImpl implements UserTeamRefService {
     }
 
     @Override
-    public List<UserTeamVo> selectUserTeam(UserTeamVo userTeamVo) {
-        return userTeamRefMapper.selectUserTeam(userTeamVo);
+    public List<UserTeamVo> selectUserTeam(UserTeamRef userTeamRef, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return userTeamRefMapper.selectUserTeam(userTeamRef);
     }
 }

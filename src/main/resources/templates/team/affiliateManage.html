@@ -30,100 +30,88 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="team" method="post">
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
-                                   th:value="${key}"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <select name="check">
-                                <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}" th:text="${sports.key==check?'selected':''}">
-                                        <th:block th:text="${sports.value.name}"></th:block>
-                                    </option>
-                            </select>
-                        </div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">
-                                <i class="layui-icon">&#xe615;</i></button>
-                        </div>
-                    </form>
-                </div>
-                <div class="layui-card-body ">
-                    <table class="layui-table layui-form">
-                        <thead>
-                        <tr>
-                            <th>
-                                <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                            </th>
-                            <th>队长</th>
-                            <th>队伍类型</th>
-                            <th>联系方式</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                        <tr th:each="team:${tlist.list}">
-                            <td>
-                                <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
-                            </td>
-                            <td th:text="${team.teamname}"></td>
-                            <th:block th:each="sports:${SportsType}">
-                                <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
-                            </th:block>
-                            <td th:text="${team.teamemail}"></td>
-                            <td th:text="${team.gmtCreate}"></td>
-                            <td>
-                                <a title="查看"
-                                   th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe705;</i>
-                                </a>
-                                <a title="简介"
-                                   th:onclick="xadmin.open('简介修改','/team/apply-team?id=[[${team.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe642;</i>
-                                </a>
-                                <a title="删除" th:onclick="member_del(this,'[[${team.id}]]')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="layui-card-body ">
-                    <div class="page">
-                        <div>
-                            <a aria-label="Previous" id="firstpage"
-                               th:href="@{/team/teamManage(pageNum=1,key=${key},check=${check},flag=${flag})}">首页</a>
-                            <a th:if="${tlist.pageNum} > '1'" id="previouspage"
-                               th:href="@{/team/teamManage(pageNum=${tlist.prePage},key=${key},check=${check},flag=${flag})}"
-                               aria-label="Previous">
-                                &lt;&lt;</a>
-                            <!--   当前页数 ，方便js调用 display:none;隐藏        -->
-                            <span style="display:none;" id="pagenums">[[${tlist.pageNum}]]</span>
-                            <th:block class="pagination" th:each="pagenum:${pagenums}">
-                                <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <a class="num layui-btn layui-btn-warm" th:if="${tlist.pageNum==pagenum}"
-                                   th:href="@{/team/teamManage(pageNum=${pagenum},key=${key},check=${check},flag=${flag})}">[[${pagenum}]]</a>
+                <form class="layui-form layui-col-space5" action="team" method="post">
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
+                               th:value="${key}"></div>
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">
+                            <i class="layui-icon">&#xe615;</i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-card-header">
+                <button class="layui-btn" onclick="xadmin.open('申请球队','/team/add-userteam',800,600)"><i
+                        class="layui-icon"></i>添加队员
+                </button>
+            </div>
+            <div class="layui-card-body ">
+                <table class="layui-table layui-form">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
+                        </th>
+                        <th>队员</th>
+                        <th>队伍类型</th>
+                        <th>队伍名字</th>
+                        <th>联系方式</th>
+                        <th>入队时间</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="userteam:${utlist.list}">
+                        <td>
+                            <input type="checkbox" name="id" th:value="${userteam.id}" lay-skin="primary">
+                        </td>
+                        <td th:text="${userteam.teamname}"></td>
+                        <th:block th:each="sports:${SportsType}">
+                            <td th:if="${userteam.teamtype==sports.key}" th:text="${sports.value.name}"></td>
+                        </th:block>
+                        <td th:text="${userteam.teamname}"></td>
+                        <td th:text="${userteam.email}"></td>
+                        <td th:text="${userteam.gmtCreate}"></td>
+                        <td>
+                            <a title="删除" th:onclick="member_del(this,'[[${userteam.id}]]')" href="javascript:;">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="layui-card-body ">
+                <div class="page">
+                    <div>
+                        <a aria-label="Previous" id="firstpage"
+                           th:href="@{/team/affiliateManage(pageNum=1,key=${key})}">首页</a>
+                        <a th:if="${utlist.pageNum} > '1'" id="previouspage"
+                           th:href="@{/team/affiliateManage(pageNum=${utlist.prePage},key=${key})}"
+                           aria-label="Previous">
+                            &lt;&lt;</a>
+                        <!--   当前页数 ，方便js调用 display:none;隐藏        -->
+                        <span style="display:none;" id="pagenums">[[${utlist.pageNum}]]</span>
+                        <th:block class="pagination" th:each="pagenum:${pagenums}">
+                            <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
+                            <a class="num layui-btn layui-btn-warm" th:if="${utlist.pageNum==pagenum}"
+                               th:href="@{/team/affiliateManage(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${tlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
-                                   th:href="@{/team/teamManage(pageNum=${pagenum},key=${key},check=${check},flag=${flag})}">[[${pagenum}]]</a>
-                            </th:block>
-                            <a class="next" th:if="${tlist.pageNum} < ${tlist.pages}" id="nextpage"
-                               th:href="@{/team/teamManage(pageNum=${tlist.nextPage},key=${key},check=${check},flag=${flag})}"
-                               aria-label="Next">
-                                &gt;&gt;</a>
-                            <a id="endpage"
-                               th:href="@{/team/teamManage(pageNum=${tlist.pages},key=${key},check=${check},flag=${flag})}">末页</a>
-                            <span aria-label="Next">相关留言记录[[${tlist.total}]]条，共[[${tlist.pages}]]页。</span>
-                        </div>
+                            <a class="num" th:if="${utlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
+                               th:href="@{/team/affiliateManage(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
+                        </th:block>
+                        <a class="next" th:if="${utlist.pageNum} < ${utlist.pages}" id="nextpage"
+                           th:href="@{/team/affiliateManage(pageNum=${utlist.nextPage},key=${key})}"
+                           aria-label="Next">
+                            &gt;&gt;</a>
+                        <a id="endpage"
+                           th:href="@{/team/affiliateManage(pageNum=${utlist.pages},key=${key})}">末页</a>
+                        <span aria-label="Next">相关留言记录[[${utlist.total}]]条，共[[${utlist.pages}]]页。</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 <script>
@@ -147,7 +135,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax(
                 {
-                    url: "/team/deleteOneTeam",
+                    url: "/team/deleteOneUserTeam",
                     type: "POST",
                     data: {"id": id},
                     dataType: "json",

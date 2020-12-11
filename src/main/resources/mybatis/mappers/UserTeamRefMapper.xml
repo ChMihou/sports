@@ -13,12 +13,9 @@
     </sql>
     <select id="selectUserTeam" parameterType="UserTeamRef" resultType="com.physical.movement.entity.vo.UserTeamVo">
         select a.* ,b.*,c.* from sysuser a,team b,userteamref.*
-        where
-        <if test="teamid!=null">
-            c.teamid = #{teamid} and c.userid = b.id and b.id = #{teamid}
-        </if>
+        where c.teamid = #{teamid} and c.userid = b.id and b.id = #{teamid}
         <if test="userid!=null">
-            c.userid = #{userid} and c.teamid = b.id and a.id = #{userid}
+            and c.userid = #{userid} and c.teamid = b.id and a.id = #{userid}
         </if>
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -3,9 +3,13 @@ package com.physical.movement.controller;
 import com.github.pagehelper.PageInfo;
 import com.physical.movement.entity.SysUser;
 import com.physical.movement.entity.Team;
+import com.physical.movement.entity.UserTeamRef;
+import com.physical.movement.entity.vo.UserTeamVo;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.model.ResultJson;
+import com.physical.movement.service.SysUserService;
 import com.physical.movement.service.TeamService;
+import com.physical.movement.service.UserTeamRefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +30,12 @@ public class TeamController {
 
     @Autowired
     TeamService teamService;
+
+    @Autowired
+    UserTeamRefService userTeamRefService;
+
+    @Autowired
+    SysUserService sysUserService;
 
     @RequestMapping("/teamManage")
     public ModelAndView teamManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
@@ -200,28 +210,39 @@ public class TeamController {
     @RequestMapping("/affiliateManage")
     public ModelAndView affiliateManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
-        String check = request.getParameter("check");
-        mv.addObject("check", check);
-        String key = request.getParameter("key");
+        String key = (String) request.getAttribute("key");
+        UserTeamRef userTeamRef = new UserTeamRef();
         mv.addObject("key", key);
-        int uid = (int) session.getAttribute("uid");
+        SysUser user = new SysUser();
+        user.setUsername(key);
+        user = sysUserService.select(user);
+        if (user != null) {
+            userTeamRef.setUserid(user.getId());
+        }
         Team team = new Team();
-        if (!check.equals("0")) {
-            team.setTeamtype(Integer.parseInt(check));
+        team.setUid(sysUser.getId());
+        team = teamService.select(team);
+        if (team != null) {
+            userTeamRef.setTeamid(team.getId());
         }
-        if (sysUser.getUsertype() == 0) {
-            team.setUid(uid);
-        }
-        team.setTeamname(key);
         team.setFlag((byte) 0);
-        List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
-        PageInfo tlist = new PageInfo(teamList);
+        List<UserTeamVo> userTeamVoList = userTeamRefService.selectUserTeam(userTeamRef, pageNum, pageSize);
+        PageInfo utlist = new PageInfo(userTeamVoList);
         List pagenums = new ArrayList();
-        Paginator.page(pagenums, tlist, pageNum, pageSize);
+        Paginator.page(pagenums, utlist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
-        mv.addObject("tlist", tlist);
-        mv.addObject("SportsType", STATUS_MAP);
-        mv.setViewName("/team/teamBuild");
+        mv.addObject("utlist", utlist);
+        mv.setViewName("/team/affiliateManage");
         return mv;
+    }
+
+    @RequestMapping("deleteOneUserTeam")
+    @ResponseBody
+    public ResultJson deleteOneUserTeam(Integer id) {
+        int i = userTeamRefService.deleteByPrimaryKey(id);
+        if (i > 0) {
+            return ResultJson.success("删除成功");
+        }
+        return ResultJson.error("删除失败");
     }
 }

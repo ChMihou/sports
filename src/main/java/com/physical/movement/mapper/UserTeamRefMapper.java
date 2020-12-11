@@ -14,7 +14,7 @@ public interface UserTeamRefMapper extends BaseMapper<UserTeamRef> {
 
     UserTeamVo selectByPrimaryKey(Integer id);
 
-    List<UserTeamVo> selectUserTeam(UserTeamVo userTeamVo);
+    List<UserTeamVo> selectUserTeam(UserTeamRef userTeamRef);
 
     int updateByPrimaryKeySelective(UserTeamRef record);
 
