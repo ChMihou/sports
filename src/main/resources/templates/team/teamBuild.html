@@ -20,7 +20,7 @@
 <body>
 <div class="x-nav">
           <span class="layui-breadcrumb">
-            <a href="">留言板</a>
+            <a href="">队伍中心</a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
@@ -31,15 +31,16 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="message" method="post">
+                    <form class="layui-form layui-col-space5" action="team" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" class="layui-input" placeholder="请输入留言主题关键字查询" name="key" id="key"
+                            <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <select name="check">
-                                <option value="">回复状态</option>
-                                <option value="1">已回复</option>
-                                <option value="0">未回复</option>
+                                <tr th:each="sports:${SportsType}">
+                                    <option th:value="${sports.key}" th:text="${sports.key==check?'selected':''}">
+                                        <th:block th:text="${sports.value.name}"></th:block>
+                                    </option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
@@ -48,8 +49,10 @@
                         </div>
                     </form>
                 </div>
+
                 <div class="layui-card-header">
-                    <button class="layui-btn" onclick="xadmin.open('添加留言','/message/add-message',800,600)"><i class="layui-icon"></i>添加
+                    <button class="layui-btn" onclick="xadmin.open('申请球队','/team/add-team',800,600)"><i
+                            class="layui-icon"></i>申请球队
                     </button>
                 </div>
                 <div class="layui-card-body ">
@@ -59,32 +62,28 @@
                             <th>
                                 <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                             </th>
-                            <th>留言人</th>
-                            <th>留言主题</th>
-                            <th>留言时间</th>
-                            <th>回复与否</th>
+                            <th>队长</th>
+                            <th>队伍类型</th>
+                            <th>创建时间</th>
                             <th>操作</th>
                         </thead>
                         <tbody>
-                        <tr th:each="message:${mlist.list}">
+                        <tr th:each="team:${tlist.list}">
                             <td>
-                                <input type="checkbox" name="id" th:value="${message.id}" lay-skin="primary">
+                                <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
                             </td>
-                            <td th:text="${message.name}"></td>
-                            <td th:text="${message.title}"></td>
-                            <td th:text="${message.gmtCreate}"></td>
-                            <td th:if="${message.mflag==0}">否</td>
-                            <td th:if="${message.mflag==1}">是</td>
+                            <td th:text="${team.teamname}"></td>
+                            <th:block th:each="sports:${SportsType}">
+                                <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
+                            </th:block>
+                            <td th:text="${team.gmtCreate}"></td>
                             <td>
-                                <a title="查看" th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe705;</i>
-                                </a>
-                                <a title="回复" th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
+                                <a title="审核"
+                                   th:onclick="xadmin.open('审核','/team/apply-team?id=[[${team.id}]]')"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
-                                <a title="删除" th:onclick="member_del(this,'[[${message.id}]]')" href="javascript:;">
+                                <a title="删除" th:onclick="member_del(this,'[[${team.id}]]')" href="javascript:;">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
                             </td>
@@ -96,28 +95,28 @@
                     <div class="page">
                         <div>
                             <a aria-label="Previous" id="firstpage"
-                               th:href="@{/message/message(pageNum=1,key=${key},check=${check})}">首页</a>
-                            <a th:if="${mlist.pageNum} > '1'" id="previouspage"
-                               th:href="@{/message/message(pageNum=${mlist.prePage},key=${key},check=${check})}"
+                               th:href="@{/team/teamBuild(pageNum=1,key=${key},check=${check})}">首页</a>
+                            <a th:if="${tlist.pageNum} > '1'" id="previouspage"
+                               th:href="@{/team/teamBuild(pageNum=${tlist.prePage},key=${key},check=${check})}"
                                aria-label="Previous">
                                 &lt;&lt;</a>
                             <!--   当前页数 ，方便js调用 display:none;隐藏        -->
-                            <span style="display:none;" id="pagenums">[[${mlist.pageNum}]]</span>
+                            <span style="display:none;" id="pagenums">[[${tlist.pageNum}]]</span>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
                                 <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <a class="num layui-btn layui-btn-warm" th:if="${mlist.pageNum==pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num layui-btn layui-btn-warm" th:if="${tlist.pageNum==pagenum}"
+                                   th:href="@{/team/teamBuild(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${mlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num" th:if="${tlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
+                                   th:href="@{/team/teamBuild(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
                             </th:block>
-                            <a class="next" th:if="${mlist.pageNum} < ${mlist.pages}" id="nextpage"
-                               th:href="@{/message/message(pageNum=${mlist.nextPage},key=${key},check=${check})}"
+                            <a class="next" th:if="${tlist.pageNum} < ${tlist.pages}" id="nextpage"
+                               th:href="@{/team/teamBuild(pageNum=${tlist.nextPage},key=${key},check=${check})}"
                                aria-label="Next">
                                 &gt;&gt;</a>
                             <a id="endpage"
-                               th:href="@{/message/message(pageNum=${mlist.pages},key=${key},check=${check})}">末页</a>
-                            <span aria-label="Next">相关留言记录[[${mlist.total}]]条，共[[${mlist.pages}]]页。</span>
+                               th:href="@{/team/teamBuild(pageNum=${tlist.pages},key=${key},check=${check})}">末页</a>
+                            <span aria-label="Next">相关留言记录[[${tlist.total}]]条，共[[${tlist.pages}]]页。</span>
                         </div>
                     </div>
                 </div>
@@ -147,7 +146,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax(
                 {
-                    url: "deleteOneMessage",
+                    url: "/team/deleteOneTeam",
                     type: "POST",
                     data: {"id": id},
                     dataType: "json",

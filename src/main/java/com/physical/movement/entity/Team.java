@@ -4,6 +4,8 @@ import com.physical.movement.entity.common.Id;
 
 public class Team extends Id {
 
+    private int uid;
+
     private String teamname;
 
     private Integer teamtype;
@@ -18,6 +20,23 @@ public class Team extends Id {
 
     private String cause;
 
+    private String intro;
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 
     public String getTeamname() {
         return teamname;

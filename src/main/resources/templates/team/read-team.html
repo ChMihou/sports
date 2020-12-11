@@ -22,17 +22,15 @@
                         <div class="form-box">
                             <div  class="article-cont">
                                 <div class="title">
-                                    <h1>留言主题：<b><th:block th:text="${message.title}"></th:block></b></h1><br><br>
+                                    <h1>队伍名称：<b><th:block th:text="${team.teamname}"></th:block></b></h1><br><br>
                                     <p class="cont-info">
-                                        <span class="data">留言时间：<span th:text="${message.gmtCreate}"></span></span>
-                                        <span >留言人：<span th:text="${message.name}" ></span></span>
+                                        <span class="data">创建时间：<span th:text="${team.gmtCreate}"></span></span>
+                                        <span >队长：<span th:text="${team.teamleader}" ></span></span>
                                     </p>
                                 </div><br><br><br>
-                                <h3><p th:utext="${message.mess}"></p></h3>
+                                <h3><p th:utext="${team.intro}"></p></h3>
                             </div>
                         </div>
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                        <span th:if="${message.flag ==1}"><div>回复:<b><span th:text="${message.apply}"></span></b></div></span>
                     </div>
                 </div>
             </div>

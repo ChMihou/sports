@@ -32,21 +32,21 @@
                 and uid = #{uid}
             </if>
             <if test="title!=null and title!=''">
-                and title like like concat("%",#{title},"%")
+                and title like concat("%",#{title},"%")
             </if>
             <if test="flag!=null and flag!=''">
                 and author = #{author}
             </if>
         </where>
     </sql>
-    <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultType="Announcement">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Message" resultType="Message">
         select
         <include refid="Base_Column_List"/>
         from message
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc,id desc
     </select>
-    <select id="select" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
+    <select id="select" parameterType="com.physical.movement.entity.Message" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from message

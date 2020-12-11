@@ -1,11 +1,13 @@
 package com.physical.movement.entity.vo;
 
+import com.physical.movement.entity.common.Id;
+
 import java.io.Serializable;
 
-public class UserTeamVo implements Serializable {
+public class UserTeamVo extends Id implements Serializable {
 
     private static final long serialVersionUID = -3606834060095467144L;
-    private Integer uid;
+    private Integer userid;
 
     private String username;
 
@@ -21,7 +23,7 @@ public class UserTeamVo implements Serializable {
 
     private String sex;
 
-    private Integer id;
+    private Integer teamid;
 
     private String teamname;
 
@@ -30,14 +32,6 @@ public class UserTeamVo implements Serializable {
     private Integer teamleader;
 
     private Integer teamleaderid;
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
     public String getUsername() {
         return username;
@@ -95,12 +89,20 @@ public class UserTeamVo implements Serializable {
         this.sex = sex;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public Integer getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Integer teamid) {
+        this.teamid = teamid;
     }
 
     public String getTeamname() {

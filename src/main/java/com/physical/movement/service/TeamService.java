@@ -14,4 +14,5 @@ public interface TeamService {
     int updateByPrimaryKeySelective(Team team);
 
     int deleteByPrimaryKey(Integer id);
+
 }

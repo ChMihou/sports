@@ -19,14 +19,25 @@
     <div class="layui-row">
         <form class="layui-form" action="" id="add">
             <div class="layui-form-item">
-                <label class="layui-form-label">留言主题</label>
+                <label class="layui-form-label">队伍名字</label>
                 <div class="layui-input-block">
-                    <input type="text" name="n_title" id="n_title" lay-verify="required" placeholder="请输入题目"
+                    <input type="text" name="n_title" id="n_title" lay-verify="required" placeholder="请输入队伍名字"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">留言内容：</label>
+                <label class="layui-form-label">队伍类型</label>
+                <div class="layui-input-inline layui-show-xs-block">
+                    <select name="check">
+                        <tr th:each="sports:${SportsType}">
+                            <option th:value="${sports.key}">
+                                <th:block th:text="${sports.value.name}"></th:block>
+                            </option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请理由：</label>
             </div>
             <div class="layui-form-item layui-form-text">
                 <div id="editor">
@@ -64,17 +75,20 @@
         //监听提交
         form.on('submit(formDemo)', function (data) {
             var n_title = $("#n_title").val();
+            var check = $("#check").val();
             var n_article = editor.txt.html();
             $.ajax(
                 {
-                    url: "/message/addMessage",
+                    url: "/team/addTeam",
                     type: "POST",
-                    data: {n_title: n_title, n_article: n_article},
+                    data: {n_title: n_title, check: check, n_article: n_article},
                     success: function (data) {
-                        if (data) {
-                            confirm("添加成功");
+                        if (data.success) {
+                            confirm(data.msg);
                             window.parent.layer.closeAll();
                             window.parent.location.reload();
+                        } else {
+                            confirm(data.msg);
                         }
                     }
 

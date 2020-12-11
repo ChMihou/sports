@@ -1,8 +1,10 @@
 package com.physical.movement.mapper;
 
 import com.physical.movement.entity.Game;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface GameMapper extends BaseMapper<Game>{
+@Mapper
+public interface GameMapper extends BaseMapper<Game> {
     int deleteByPrimaryKey(Integer id);
 
     int insertSelective(Game record);
