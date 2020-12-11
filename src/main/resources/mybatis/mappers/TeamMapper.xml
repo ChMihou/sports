@@ -5,8 +5,9 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <id column="uid" jdbcType="INTEGER" property="uid"/>
         <result column="teamname" jdbcType="VARCHAR" property="teamname"/>
+        <result column="teamemail" jdbcType="VARCHAR" property="teamemail"/>
         <result column="teamtype" jdbcType="INTEGER" property="teamtype"/>
-        <result column="teamleader" jdbcType="INTEGER" property="teamleader"/>
+        <result column="teamleader" jdbcType="VARCHAR" property="teamleader"/>
         <result column="teamleaderid" jdbcType="INTEGER" property="teamleaderid"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
@@ -16,7 +17,7 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id,uid, teamname, teamtype, teamleader, teamleaderid, gmt_create, gmt_modified, flag ,reason, cause,intro
+    id,uid, teamname,teamemail, teamtype, teamleader, teamleaderid, gmt_create, gmt_modified, flag ,reason, cause,intro
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -42,6 +43,9 @@
             <if test="teamname!=null and teamname!=''">
                 and teamname like concat("%",#{teamname},"%")
             </if>
+            <if test="teamleaderid!=null">
+                and teamleaderid = teamleaderid
+            </if>
         </where>
     </sql>
     <select id="selectAll" parameterType="com.physical.movement.entity.Team" resultType="team">
@@ -63,12 +67,12 @@
     where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.physical.movement.entity.Team">
-    insert into team (id,uid, teamname, teamtype,
+    insert into team (id,uid,teamemail, teamname, teamtype,
       teamleader, teamleaderid, gmt_create, 
       gmt_modified, flag, reason, intro,
       cause)
-    values (#{id,jdbcType=INTEGER},#{uid}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
-      #{teamleader,jdbcType=INTEGER}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER},#{uid},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
+      #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
       #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro}
       #{cause,jdbcType=LONGVARCHAR})
   </insert>
@@ -92,6 +96,9 @@
             </if>
             <if test="teamleader != null">
                 teamleader,
+            </if>
+            <if test="teameamil != null">
+                teameamil,
             </if>
             <if test="teamleaderid != null">
                 teamleaderid,
@@ -129,7 +136,10 @@
                 #{intro,jdbcType=LONGVARCHAR},
             </if>
             <if test="teamleader != null">
-                #{teamleader,jdbcType=INTEGER},
+                #{teamleader,jdbcType=VARCHAR},
+            </if>
+            <if test="teamemail != null">
+                #{teamemail,jdbcType=VARCHAR},
             </if>
             <if test="teamleaderid != null">
                 #{teamleaderid,jdbcType=INTEGER},
@@ -164,7 +174,10 @@
                 teamtype = #{teamtype,jdbcType=INTEGER},
             </if>
             <if test="teamleader != null">
-                teamleader = #{teamleader,jdbcType=INTEGER},
+                teamleader = #{teamleader,jdbcType=VARCHAR},
+            </if>
+            <if test="teamemail != null">
+                teamemail = #{teamemail,jdbcType=VARCHAR},
             </if>
             <if test="teamleaderid != null">
                 teamleaderid = #{teamleaderid,jdbcType=INTEGER},
@@ -195,7 +208,8 @@
     set teamname = #{teamname,jdbcType=VARCHAR},
       teamtype = #{teamtype,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},
-      teamleader = #{teamleader,jdbcType=INTEGER},
+      teamleader = #{teamleader,jdbcType=VARCHAR},
+      teamemail = #{teamemail,jdbcType=VARCHAR},
       teamleaderid = #{teamleaderid,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

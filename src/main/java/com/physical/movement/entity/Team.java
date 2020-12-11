@@ -4,13 +4,14 @@ import com.physical.movement.entity.common.Id;
 
 public class Team extends Id {
 
+    private static final long serialVersionUID = -152366404030727918L;
     private int uid;
 
     private String teamname;
 
     private Integer teamtype;
 
-    private Integer teamleader;
+    private String teamleader;
 
     private Integer teamleaderid;
 
@@ -21,6 +22,16 @@ public class Team extends Id {
     private String cause;
 
     private String intro;
+
+    private String teamemail;
+
+    public String getTeamemail() {
+        return teamemail;
+    }
+
+    public void setTeamemail(String teamemail) {
+        this.teamemail = teamemail;
+    }
 
     public String getIntro() {
         return intro;
@@ -54,11 +65,11 @@ public class Team extends Id {
         this.teamtype = teamtype;
     }
 
-    public Integer getTeamleader() {
+    public String getTeamleader() {
         return teamleader;
     }
 
-    public void setTeamleader(Integer teamleader) {
+    public void setTeamleader(String teamleader) {
         this.teamleader = teamleader;
     }
 

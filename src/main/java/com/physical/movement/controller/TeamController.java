@@ -152,7 +152,8 @@ public class TeamController {
         team.setUid(sysUser.getId());
         team.setFlag((byte) 0);
         team.setCause(n_article);
-        team.setTeamname(sysUser.getUsername());
+        team.setTeamleader(sysUser.getUsername());
+        team.setTeamemail(sysUser.getEmail());
         if (!check.equals("0")) {
             Integer ch = Integer.parseInt(check);
             team.setTeamtype(ch);
@@ -196,4 +197,31 @@ public class TeamController {
         }
     }
 
+    @RequestMapping("/affiliateManage")
+    public ModelAndView affiliateManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
+        String check = request.getParameter("check");
+        mv.addObject("check", check);
+        String key = request.getParameter("key");
+        mv.addObject("key", key);
+        int uid = (int) session.getAttribute("uid");
+        Team team = new Team();
+        if (!check.equals("0")) {
+            team.setTeamtype(Integer.parseInt(check));
+        }
+        if (sysUser.getUsertype() == 0) {
+            team.setUid(uid);
+        }
+        team.setTeamname(key);
+        team.setFlag((byte) 0);
+        List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
+        PageInfo tlist = new PageInfo(teamList);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, tlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("tlist", tlist);
+        mv.addObject("SportsType", STATUS_MAP);
+        mv.setViewName("/team/teamBuild");
+        return mv;
+    }
 }

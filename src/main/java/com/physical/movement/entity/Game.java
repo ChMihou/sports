@@ -4,6 +4,7 @@ import com.physical.movement.entity.common.Id;
 
 public class Game extends Id {
 
+    private static final long serialVersionUID = -8331637732864573070L;
     private Integer type;
 
     private String challenger;
