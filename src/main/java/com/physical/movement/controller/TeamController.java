@@ -47,10 +47,10 @@ public class TeamController {
         mv.addObject("key", key);
         int uid = (int) session.getAttribute("uid");
         Team team = new Team();
-        if (!check.equals("0")) {
+        if (check != null && !check.equals("0")) {
             team.setTeamtype(Integer.parseInt(check));
         }
-        if (!flag.equals("0")) {
+        if (flag != null && !flag.equals("0")) {
             team.setUid(uid);
         }
         team.setTeamname(key);
@@ -75,7 +75,7 @@ public class TeamController {
         mv.addObject("key", key);
         int uid = (int) session.getAttribute("uid");
         Team team = new Team();
-        if (!check.equals("0")) {
+        if (check != null && !check.equals("0")) {
             team.setTeamtype(Integer.parseInt(check));
         }
         if (sysUser.getUsertype() == 0) {
@@ -164,7 +164,7 @@ public class TeamController {
         team.setCause(n_article);
         team.setTeamleader(sysUser.getUsername());
         team.setTeamemail(sysUser.getEmail());
-        if (!check.equals("0")) {
+        if (check != null && !check.equals("0")) {
             Integer ch = Integer.parseInt(check);
             team.setTeamtype(ch);
         } else {
