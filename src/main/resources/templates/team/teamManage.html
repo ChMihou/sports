@@ -31,7 +31,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="team" method="post">
+                    <form class="layui-form layui-col-space5" action="/team/teamManage" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
@@ -43,14 +43,11 @@
                                     </option>
                             </select>
                         </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">单选框</label>
-                            <div class="layui-input-block" for="flag">
-                                <input type="radio" name="flag" value="0" title="全部队伍"
-                                       th:text="${flag==0?'checked':''}">
-                                <input type="radio" name="flag" value="1" title="我的队伍"
-                                       th:text="${flag==1?'checked':''}">
-                            </div>
+                        <div class="layui-input-inline layui-show-xs-block">
+                            <input type="radio" name="flag" value="0" title="全部队伍"
+                                   th:text="${flag==0?'checked':''}">
+                            <input type="radio" name="flag" value="1" title="我的队伍"
+                                   th:text="${flag==1?'checked':''}">
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">

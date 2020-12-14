@@ -12,11 +12,16 @@
     id, userid, teamid, gmt_create, gmt_modified
     </sql>
     <select id="selectUserTeam" parameterType="UserTeamRef" resultType="com.physical.movement.entity.vo.UserTeamVo">
-        select a.* ,b.*,c.* from sysuser a,team b,userteamref.*
-        where c.teamid = #{teamid} and c.userid = b.id and b.id = #{teamid}
-        <if test="userid!=null">
-            and c.userid = #{userid} and c.teamid = b.id and a.id = #{userid}
-        </if>
+        select a.* ,b.*,c.* from sysuser a,team b,user_team_ref c
+        <where>
+            1>2
+            <if test="teamid!=null">
+                or c.teamid = #{teamid} and c.userid = b.id and b.id = #{teamid}
+            </if>
+            <if test="userid!=null">
+                or c.userid = #{userid} and c.teamid = b.id and a.id = #{userid}
+            </if>
+        </where>
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -32,7 +37,7 @@
     insert into user_team_ref (id, userid, teamid, 
       gmt_create, gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.UserTeamRef">
         insert into user_team_ref
@@ -83,9 +88,7 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            gmt_modified = now()
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -93,8 +96,7 @@
     update user_team_ref
     set userid = #{userid,jdbcType=INTEGER},
       teamid = #{teamid,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

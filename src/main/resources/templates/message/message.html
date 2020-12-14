@@ -31,7 +31,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="message" method="post">
+                    <form class="layui-form layui-col-space5" action="/message/message" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入留言主题关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
@@ -49,7 +49,8 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn" onclick="xadmin.open('添加留言','/message/add-message',800,600)"><i class="layui-icon"></i>添加
+                    <button class="layui-btn" onclick="xadmin.open('添加留言','/message/add-message',800,600)"><i
+                            class="layui-icon"></i>添加
                     </button>
                 </div>
                 <div class="layui-card-body ">
@@ -76,11 +77,13 @@
                             <td th:if="${message.mflag==0}">否</td>
                             <td th:if="${message.mflag==1}">是</td>
                             <td>
-                                <a title="查看" th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')"
+                                <a title="查看"
+                                   th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe705;</i>
                                 </a>
-                                <a title="回复" th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
+                                <a title="回复"
+                                   th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>

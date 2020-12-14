@@ -51,7 +51,7 @@ public class TeamController {
             team.setTeamtype(Integer.parseInt(check));
         }
         if (flag != null && !flag.equals("0")) {
-            team.setUid(uid);
+            team.setTeamleaderid(uid);
         }
         team.setTeamname(key);
         team.setFlag((byte) 1);
@@ -79,7 +79,7 @@ public class TeamController {
             team.setTeamtype(Integer.parseInt(check));
         }
         if (sysUser.getUsertype() == 0) {
-            team.setUid(uid);
+            team.setTeamleaderid(uid);
         }
         team.setTeamname(key);
         team.setFlag((byte) 0);
@@ -109,7 +109,7 @@ public class TeamController {
         ModelAndView mv = new ModelAndView();
         Integer mid = Integer.valueOf(request.getParameter("id"));
         Team team = new Team();
-        team.setUid(mid);
+        team.setTeamleaderid(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
         mv.setViewName("/team/read-team");
@@ -155,11 +155,17 @@ public class TeamController {
         HttpSession session = request.getSession();
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         Team team = new Team();
+        Team flagTeam = new Team();
+        flagTeam.setTeamleaderid(sysUser.getId());
+        flagTeam = teamService.select(team);
+        if (flagTeam != null) {
+            return ResultJson.error("一个人只能拥有一支队伍或者您申请的队伍正在审核中，请勿重复申请");
+        }
         team.setTeamname(n_title);
         if (teamService.select(team) != null) {
             return ResultJson.error("队伍名称已存在");
         }
-        team.setUid(sysUser.getId());
+        team.setTeamleaderid(sysUser.getId());
         team.setFlag((byte) 0);
         team.setCause(n_article);
         team.setTeamleader(sysUser.getUsername());
@@ -190,7 +196,12 @@ public class TeamController {
 
     @RequestMapping("/submitCheck")
     @ResponseBody
-    public ResultJson submitCheck(int nid, int n_flag, String n_cause) {
+    public ResultJson submitCheck(int nid, int n_flag, String n_cause, HttpSession session) {
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
+        UserTeamRef userTeamRef = new UserTeamRef();
+        userTeamRef.setUserid(sysUser.getId());
+        userTeamRef.setTeamid(nid);
+        userTeamRefService.insert(userTeamRef);
         Team team = new Team();
         team.setId(nid);
         if (n_flag == 1) {
@@ -210,22 +221,15 @@ public class TeamController {
     @RequestMapping("/affiliateManage")
     public ModelAndView affiliateManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
-        String key = (String) request.getAttribute("key");
         UserTeamRef userTeamRef = new UserTeamRef();
-        mv.addObject("key", key);
-        SysUser user = new SysUser();
-        user.setUsername(key);
-        user = sysUserService.select(user);
-        if (user != null) {
-            userTeamRef.setUserid(user.getId());
-        }
         Team team = new Team();
-        team.setUid(sysUser.getId());
+        team.setTeamleaderid(sysUser.getId());
+        team.setFlag((byte) 0);
         team = teamService.select(team);
         if (team != null) {
             userTeamRef.setTeamid(team.getId());
         }
-        team.setFlag((byte) 0);
+        userTeamRef.setUserid(sysUser.getId());
         List<UserTeamVo> userTeamVoList = userTeamRefService.selectUserTeam(userTeamRef, pageNum, pageSize);
         PageInfo utlist = new PageInfo(userTeamVoList);
         List pagenums = new ArrayList();
@@ -236,7 +240,13 @@ public class TeamController {
         return mv;
     }
 
-    @RequestMapping("deleteOneUserTeam")
+    @RequestMapping("/add-userTeam")
+    public ModelAndView addUserTeam(ModelAndView mv) {
+        mv.setViewName("/team/add-userteam");
+        return mv;
+    }
+
+    @RequestMapping("/deleteOneUserTeam")
     @ResponseBody
     public ResultJson deleteOneUserTeam(Integer id) {
         int i = userTeamRefService.deleteByPrimaryKey(id);
@@ -244,5 +254,31 @@ public class TeamController {
             return ResultJson.success("删除成功");
         }
         return ResultJson.error("删除失败");
+    }
+
+    @RequestMapping("/addTeammate")
+    @ResponseBody
+    public ResultJson addTeammate(String n_title, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
+        SysUser user = new SysUser();
+        user.setUsername(n_title);
+        Team team = new Team();
+        team.setTeamleaderid(sysUser.getId());
+        team = teamService.select(team);
+        user = sysUserService.select(user);
+        if (team == null) {
+            return ResultJson.error("您还没有队伍，请申请一支队伍吧");
+        } else if (user == null) {
+            return ResultJson.error("系统查无此人");
+        }
+        UserTeamRef userTeamRef = new UserTeamRef();
+        userTeamRef.setTeamid(team.getId());
+        userTeamRef.setUserid(sysUser.getId());
+        Boolean i = userTeamRefService.insert(userTeamRef);
+        if (i)
+            return ResultJson.success("添加成功");
+        else
+            return ResultJson.error("添加失败");
     }
 }

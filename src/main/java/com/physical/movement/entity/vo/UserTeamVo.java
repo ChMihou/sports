@@ -17,6 +17,8 @@ public class UserTeamVo extends Id implements Serializable {
 
     private Byte usertype;
 
+    private String truename;
+
     private String phone;
 
     private Byte status;
@@ -32,6 +34,14 @@ public class UserTeamVo extends Id implements Serializable {
     private Integer teamleader;
 
     private Integer teamleaderid;
+
+    public String getTruename() {
+        return truename;
+    }
+
+    public void setTruename(String truename) {
+        this.truename = truename;
+    }
 
     public String getUsername() {
         return username;

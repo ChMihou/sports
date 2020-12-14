@@ -5,7 +5,6 @@ import com.physical.movement.entity.common.Id;
 public class Team extends Id {
 
     private static final long serialVersionUID = -152366404030727918L;
-    private int uid;
 
     private String teamname;
 
@@ -39,14 +38,6 @@ public class Team extends Id {
 
     public void setIntro(String intro) {
         this.intro = intro;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 
     public String getTeamname() {

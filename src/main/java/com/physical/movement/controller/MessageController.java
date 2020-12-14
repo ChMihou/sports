@@ -54,7 +54,7 @@ public class MessageController {
         Paginator.page(pagenums, mlist, pageNum, pageSize);
         model.addObject("pagenums", pagenums);
         model.addObject("mlist", mlist);
-        model.setViewName("message");
+        model.setViewName("/message/message");
         return model;
     }
 

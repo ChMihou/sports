@@ -74,7 +74,7 @@
       article, intro
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
-      #{nimage,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{nimage,jdbcType=VARCHAR}, now(), now(),
       #{article,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -125,12 +125,8 @@
             <if test="nimage != null">
                 #{nimage,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            now(),
+            now(),
             <if test="article != null">
                 #{article,jdbcType=LONGVARCHAR},
             </if>
@@ -157,9 +153,7 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            now(),
             <if test="article != null">
                 article = #{article,jdbcType=LONGVARCHAR},
             </if>
@@ -169,26 +163,13 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Advisory">
-    update advisory
-    set title = #{title,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      nselect = #{nselect,jdbcType=INTEGER},
-      nimage = #{nimage,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      article = #{article,jdbcType=LONGVARCHAR},
-      intro = #{intro,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
     <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Advisory">
     update advisory
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       nselect = #{nselect,jdbcType=INTEGER},
       nimage = #{nimage,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

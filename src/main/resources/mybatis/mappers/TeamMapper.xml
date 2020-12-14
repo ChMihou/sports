@@ -3,7 +3,6 @@
 <mapper namespace="com.physical.movement.mapper.TeamMapper">
     <resultMap id="BaseResultMap" type="com.physical.movement.entity.Team">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <id column="uid" jdbcType="INTEGER" property="uid"/>
         <result column="teamname" jdbcType="VARCHAR" property="teamname"/>
         <result column="teamemail" jdbcType="VARCHAR" property="teamemail"/>
         <result column="teamtype" jdbcType="INTEGER" property="teamtype"/>
@@ -17,7 +16,7 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id,uid, teamname,teamemail, teamtype, teamleader, teamleaderid, gmt_create, gmt_modified, flag ,reason, cause,intro
+    id, teamname,teamemail, teamtype, teamleader, teamleaderid, gmt_create, gmt_modified, flag ,reason, cause,intro
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -28,11 +27,11 @@
     <sql id="WHERE_SELECT_CONDIYION">
         <where>
             1=1
-            <if test="uid!=null">
-                and uid = #{uid}
+            <if test="teamleaderid!=null">
+                and teamleaderid = #{teamleaderid}
             </if>
             <if test="id!=null">
-                and id = #{uid}
+                and id = #{id}
             </if>
             <if test="teamtype!=null">
                 and teamtype = #{teamtype}
@@ -67,11 +66,11 @@
     where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.physical.movement.entity.Team">
-    insert into team (id,uid,teamemail, teamname, teamtype,
+    insert into team (id,teamemail, teamname, teamtype,
       teamleader, teamleaderid, gmt_create, 
       gmt_modified, flag, reason, intro,
       cause)
-    values (#{id,jdbcType=INTEGER},#{uid},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
       #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
       #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro}
       #{cause,jdbcType=LONGVARCHAR})
@@ -81,9 +80,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
-            </if>
-            <if test="uid != null">
-                uid,
             </if>
             <if test="teamname != null">
                 teamname,
@@ -122,9 +118,6 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
-            </if>
-            <if test="uid != null">
-                #{uid,jdbcType=INTEGER},
             </if>
             <if test="teamname != null">
                 #{teamname,jdbcType=VARCHAR},
@@ -167,9 +160,6 @@
             <if test="teamname != null">
                 teamname = #{teamname,jdbcType=VARCHAR},
             </if>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=INTEGER},
-            </if>
             <if test="teamtype != null">
                 teamtype = #{teamtype,jdbcType=INTEGER},
             </if>
@@ -207,7 +197,6 @@
     update team
     set teamname = #{teamname,jdbcType=VARCHAR},
       teamtype = #{teamtype,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=INTEGER},
       teamleader = #{teamleader,jdbcType=VARCHAR},
       teamemail = #{teamemail,jdbcType=VARCHAR},
       teamleaderid = #{teamleaderid,jdbcType=INTEGER},

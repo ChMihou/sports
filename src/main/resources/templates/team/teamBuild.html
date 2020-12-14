@@ -20,7 +20,7 @@
 <body>
 <div class="x-nav">
           <span class="layui-breadcrumb">
-            <a href="">队伍中心</a>
+            <a href="">成立球队</a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
@@ -31,7 +31,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="team" method="post">
+                    <form class="layui-form layui-col-space5" action="/team/teamBuild" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
@@ -49,7 +49,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="layui-card-header">
                     <button class="layui-btn" onclick="xadmin.open('申请球队','/team/add-team',800,600)"><i
                             class="layui-icon"></i>申请球队
