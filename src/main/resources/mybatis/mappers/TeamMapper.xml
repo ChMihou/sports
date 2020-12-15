@@ -72,7 +72,7 @@
       cause)
     values (#{id,jdbcType=INTEGER},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
       #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
-      #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro}
+      #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro},
       #{cause,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Team">

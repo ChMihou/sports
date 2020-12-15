@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>后台登录-X-admin2.2</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+        <link rel="stylesheet" href="/css/font.css">
+        <link rel="stylesheet" href="/css/xadmin.css">
+        <script type="text/javascript" src="/js/wangEditor.min.js"></script>
+        
+    </head>
+    <body>
+    <div class="content whisper-content leacots-content details-content">
+        <div class="cont w1000">
+            <div class="whisper-list">
+                <div class="item-box">
+                    <div class="review-version">
+                        <div class="form-box">
+                            <div  class="article-cont">
+                                <div class="title">
+                                    <h1>队伍名称：<b><th:block th:text="${team.teamname}"></th:block></b></h1><br><br>
+                                    <p class="cont-info">
+                                        <span class="data">创建时间：<span th:text="${team.gmtCreate}"></span></span>
+                                        <span >队长：<span th:text="${team.teamleader}" ></span></span>
+                                    </p>
+                                </div><br><br><br>
+                                <h3><p th:utext="${team.intro}"></p></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</html>

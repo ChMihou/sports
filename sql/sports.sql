@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2020-12-10 15:51:42
+Date: 2020-12-15 16:06:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,9 +115,10 @@ CREATE TABLE `game` (
   `enemy` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '应战方名字',
   `enemyid` int(20) DEFAULT NULL COMMENT '应战方ID',
   `result` text CHARACTER SET utf8 COMMENT '结果',
+  `statement` text CHARACTER SET utf8,
+  `flag` tinyint(4) DEFAULT NULL COMMENT '是否应战',
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `flag` tinyint(4) DEFAULT NULL COMMENT '是否应战',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -183,13 +184,15 @@ CREATE TABLE `team` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `teamname` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
   `teamtype` int(20) DEFAULT NULL,
-  `teamleader` int(20) DEFAULT NULL,
+  `teamleader` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `teamleaderid` int(20) DEFAULT NULL,
+  `reason` text CHARACTER SET utf8,
+  `flag` tinyint(4) DEFAULT NULL COMMENT '申请建立球队',
+  `cause` text CHARACTER SET utf8,
+  `intro` text CHARACTER SET utf8,
+  `teamemail` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `flag` tinyint(4) DEFAULT NULL COMMENT '申请建立球队',
-  `reason` text CHARACTER SET utf8,
-  `cause` text CHARACTER SET utf8,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

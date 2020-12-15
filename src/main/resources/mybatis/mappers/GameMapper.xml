@@ -12,9 +12,10 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="flag" jdbcType="TINYINT" property="flag"/>
         <result column="result" jdbcType="LONGVARCHAR" property="result"/>
+        <result column="statement" jdbcType="LONGVARCHAR" property="statement"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified, flag, result
+    id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified, flag, result,statement
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -30,11 +31,11 @@
     insert into game (id, type, challenger, 
       challengerid, enemy, enemyid, 
       gmt_create, gmt_modified, flag, 
-      result)
+      result,statement)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR}, 
       #{challengerid,jdbcType=INTEGER}, #{enemy,jdbcType=VARCHAR}, #{enemyid,jdbcType=INTEGER}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, 
-      #{result,jdbcType=LONGVARCHAR})
+      #{result,jdbcType=LONGVARCHAR},#{statement})
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Game">
         insert into game
@@ -69,6 +70,9 @@
             <if test="result != null">
                 result,
             </if>
+            <if test="statement != null">
+                statement,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -100,6 +104,9 @@
             </if>
             <if test="result != null">
                 #{result,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="statement != null">
+                #{statement,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -133,22 +140,12 @@
             <if test="result != null">
                 result = #{result,jdbcType=LONGVARCHAR},
             </if>
+            <if test="statement != null">
+                statement = #{statement,jdbcType=LONGVARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.physical.movement.entity.Game">
-    update game
-    set type = #{type,jdbcType=INTEGER},
-      challenger = #{challenger,jdbcType=VARCHAR},
-      challengerid = #{challengerid,jdbcType=INTEGER},
-      enemy = #{enemy,jdbcType=VARCHAR},
-      enemyid = #{enemyid,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=TINYINT},
-      result = #{result,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
     <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Game">
     update game
     set type = #{type,jdbcType=INTEGER},
@@ -158,7 +155,9 @@
       enemyid = #{enemyid,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=TINYINT}
+      flag = #{flag,jdbcType=TINYINT}.
+      result = #{result},
+      statement = #{statement}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

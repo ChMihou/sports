@@ -1,5 +1,6 @@
 package com.physical.movement.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.physical.movement.entity.Game;
 import com.physical.movement.mapper.GameMapper;
 import com.physical.movement.service.GameService;
@@ -16,6 +17,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> selectAll(Game game, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         return gameMapper.selectAll(game);
     }
 

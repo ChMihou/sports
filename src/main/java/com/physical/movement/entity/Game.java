@@ -11,6 +11,8 @@ public class Game extends Id {
 
     private Integer challengerid;
 
+    private String statement;
+
     private String enemy;
 
     private Integer enemyid;
@@ -73,5 +75,13 @@ public class Game extends Id {
 
     public void setResult(String result) {
         this.result = result == null ? null : result.trim();
+    }
+
+    public String getStatement() {
+        return statement;
+    }
+
+    public void setStatement(String statement) {
+        this.statement = statement;
     }
 }

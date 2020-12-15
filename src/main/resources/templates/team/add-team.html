@@ -31,7 +31,7 @@
                     <select name="check">
                         <tr th:each="sports:${SportsType}">
                             <option th:value="${sports.key}">
-                                <th:block th:text="${sports.value.name}"></th:block>
+                                <th:block th:text="${sports.value.name}"/>
                             </option>
                     </select>
                 </div>

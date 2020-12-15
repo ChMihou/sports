@@ -1,5 +1,6 @@
 package com.physical.movement.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.physical.movement.entity.Team;
 import com.physical.movement.mapper.TeamMapper;
 import com.physical.movement.service.TeamService;
@@ -16,6 +17,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> selectAll(Team team, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         return teamMapper.selectAll(team);
     }
 

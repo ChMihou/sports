@@ -18,6 +18,7 @@ public class UserTeamRefServiceImpl implements UserTeamRefService {
 
     @Override
     public List<UserTeamRef> selectAll(UserTeamRef UserTeamRef, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         return userTeamRefMapper.selectAll(UserTeamRef);
     }
 
