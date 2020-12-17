@@ -20,7 +20,7 @@
 <body>
 <div class="x-nav">
           <span class="layui-breadcrumb">
-            <a href="">留言板</a>
+            <a href="">比赛议程</a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
@@ -31,15 +31,15 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="message" method="post">
+                    <form class="layui-form layui-col-space5" action="/game/gameResult" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" class="layui-input" placeholder="请输入留言主题关键字查询" name="key" id="key"
+                            <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <select name="check">
                                 <option value="">回复状态</option>
-                                <option value="1">已回复</option>
-                                <option value="0">未回复</option>
+                                <option value="1">已答复</option>
+                                <option value="0">未答复</option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
@@ -48,10 +48,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="layui-card-header">
-                    <button class="layui-btn" onclick="xadmin.open('添加留言','/message/add-message',800,600)"><i class="layui-icon"></i>添加
-                    </button>
-                </div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
                         <thead>
@@ -59,34 +55,34 @@
                             <th>
                                 <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                             </th>
-                            <th>留言人</th>
-                            <th>留言主题</th>
-                            <th>留言时间</th>
-                            <th>回复与否</th>
+                            <th>挑战队伍</th>
+                            <th>迎战队伍</th>
+                            <th>比赛结果</th>
+                            <th>比赛时间</th>
+                            <th>预约结果</th>
                             <th>操作</th>
                         </thead>
                         <tbody>
-                        <tr th:each="message:${mlist.list}">
+                        <tr th:each="game:${glist.list}">
                             <td>
-                                <input type="checkbox" name="id" th:value="${message.id}" lay-skin="primary">
+                                <input type="checkbox" name="id" th:value="${game.id}" lay-skin="primary">
                             </td>
-                            <td th:text="${message.name}"></td>
-                            <td th:text="${message.title}"></td>
-                            <td th:text="${message.gmtCreate}"></td>
-                            <td th:if="${message.mflag==0}">否</td>
-                            <td th:if="${message.mflag==1}">是</td>
+                            <td th:text="${game.chanllenger}"></td>
+                            <td th:text="${game.enemy}"></td>
+                            <td th:text="${game.result}"></td>
+                            <td th:text="${game.gmtCreate}"></td>
                             <td>
-                                <a title="查看" th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe705;</i>
-                                </a>
-                                <a title="回复" th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe642;</i>
-                                </a>
-                                <a title="删除" th:onclick="member_del(this,'[[${message.id}]]')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i>
-                                </a>
+                                <button class="layui-btn layui-btn-warm layui-btn-xs" title="查看"
+                                        th:onclick="xadmin.open('查看','/game/read-game?id=[[${game.id}]]')"><i
+                                        class="layui-icon">&#xe705;</i>查看
+                                </button>
+                                <button class="layui-btn layui-btn-warm layui-btn-xs" title="回复"
+                                        th:onclick="xadmin.open('回复','/game/apply-game?id=[[${game.id}]]')">回复
+                                </button>
+                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"
+                                        th:onclick="xadmin.open('编辑','/game/game-result?id=[[${game.id}]]')">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -96,28 +92,28 @@
                     <div class="page">
                         <div>
                             <a aria-label="Previous" id="firstpage"
-                               th:href="@{/message/message(pageNum=1,key=${key},check=${check})}">首页</a>
-                            <a th:if="${mlist.pageNum} > '1'" id="previouspage"
-                               th:href="@{/message/message(pageNum=${mlist.prePage},key=${key},check=${check})}"
+                               th:href="@{/game/gameResult(pageNum=1,key=${key},check=${check})}">首页</a>
+                            <a th:if="${glist.pageNum} > '1'" id="previouspage"
+                               th:href="@{/game/gameResult(pageNum=${glist.prePage},key=${key},check=${check})}"
                                aria-label="Previous">
                                 &lt;&lt;</a>
                             <!--   当前页数 ，方便js调用 display:none;隐藏        -->
-                            <span style="display:none;" id="pagenums">[[${mlist.pageNum}]]</span>
+                            <span style="display:none;" id="pagenums">[[${glist.pageNum}]]</span>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
                                 <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <a class="num layui-btn layui-btn-warm" th:if="${mlist.pageNum==pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num layui-btn layui-btn-warm" th:if="${glist.pageNum==pagenum}"
+                                   th:href="@{/game/gameResult(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${mlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num" th:if="${glist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
+                                   th:href="@{/game/gameResult(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
                             </th:block>
-                            <a class="next" th:if="${mlist.pageNum} < ${mlist.pages}" id="nextpage"
-                               th:href="@{/message/message(pageNum=${mlist.nextPage},key=${key},check=${check})}"
+                            <a class="next" th:if="${glist.pageNum} < ${glist.pages}" id="nextpage"
+                               th:href="@{/game/gameResult(pageNum=${glist.nextPage},key=${key},check=${check})}"
                                aria-label="Next">
                                 &gt;&gt;</a>
                             <a id="endpage"
-                               th:href="@{/message/message(pageNum=${mlist.pages},key=${key},check=${check})}">末页</a>
-                            <span aria-label="Next">相关留言记录[[${mlist.total}]]条，共[[${mlist.pages}]]页。</span>
+                               th:href="@{/game/gameResult(pageNum=${glist.pages},key=${key},check=${check})}">末页</a>
+                            <span aria-label="Next">相关留言记录[[${glist.total}]]条，共[[${glist.pages}]]页。</span>
                         </div>
                     </div>
                 </div>

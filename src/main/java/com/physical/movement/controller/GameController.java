@@ -1,7 +1,6 @@
 package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.physical.movement.entity.Advisory;
 import com.physical.movement.entity.Game;
 import com.physical.movement.entity.SysUser;
 import com.physical.movement.entity.Team;
@@ -71,15 +70,72 @@ public class GameController {
         return mv;
     }
 
-    @RequestMapping("/read-team")
-    public ModelAndView readTeam(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
-        Integer mid = Integer.valueOf(request.getParameter("id"));
+    @RequestMapping("/gameResult")
+    public ModelAndView gameResult(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
+        String check = request.getParameter("check");
+        mv.addObject("check", check);
+        String flag = request.getParameter("flag");
+        mv.addObject("flag", flag);
+        String key = request.getParameter("key");
+        mv.addObject("key", key);
+        int uid = (int) session.getAttribute("uid");
         Team team = new Team();
-        team.setTeamleaderid(mid);
+        if (check != null && !check.equals("0")) {
+            team.setTeamtype(Integer.parseInt(check));
+        }
+        if (flag != null && !flag.equals("0")) {
+            team.setTeamleaderid(uid);
+        }
+        team.setTeamname(key);
+        team.setFlag((byte) 1);
+        List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
+        PageInfo tlist = new PageInfo(teamList);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, tlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("glist", tlist);
+        mv.addObject("SportsType", STATUS_MAP);
+        mv.setViewName("/game/gameResult");
+        return mv;
+    }
+
+    @RequestMapping("/read-game")
+    public ModelAndView readGame(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        Integer gid = Integer.valueOf(request.getParameter("id"));
+        Game game = new Game();
+        game.setId(gid);
+        game = gameService.select(game);
+        mv.addObject("game", game);
+        mv.setViewName("/game/read-game");
+        return mv;
+    }
+
+    @RequestMapping("/game-result")
+    public ModelAndView gameResult(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        Integer gid = Integer.valueOf(request.getParameter("id"));
+        Game game = new Game();
+        game.setId(gid);
+        game = gameService.select(game);
+        mv.addObject("game", game);
+        mv.setViewName("/game/game-result");
+        return mv;
+    }
+
+    @RequestMapping("/apply-game")
+    public ModelAndView applyGame(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        Integer gid = Integer.valueOf(request.getParameter("id"));
+        Game game = new Game();
+        game.setId(gid);
+        game = gameService.select(game);
+        Team team = new Team();
+        team.setId(game.getEnemyid());
         team = teamService.select(team);
         mv.addObject("team", team);
-        mv.setViewName("/game/read-team");
+        mv.addObject("game", game);
+        mv.setViewName("/game/applycontact");
         return mv;
     }
 
@@ -100,25 +156,60 @@ public class GameController {
 
     @RequestMapping("/sendGame")
     @ResponseBody
-    public ResultJson sendGame(String message, String name, String email, String subject, Integer id, Session session) {
+    public ResultJson sendGame(String message, String name, String email, String subject, Integer id, String time, Session session) {
         Game game = new Game();
-        boolean flag = mailService.sendWithHtml(email, subject, message);
-        SysUser sysUser = (SysUser)session.getAttribute("sysUser");
-        Team team = new Team();
-        team.setTeamleaderid(sysUser.getId());
-        team = teamService.select(team);
-        if (team==null){
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
+        Team challenger = new Team();
+        challenger.setTeamleaderid(sysUser.getId());
+        challenger = teamService.select(challenger);
+        if (challenger == null) {
             return ResultJson.error("您不是队长，不可以约赛");
         }
-        SysUser user = new SysUser();
-
-
+        Team enemy = new Team();
+        enemy.setId(id);
+        enemy = teamService.select(enemy);
+        boolean flag = mailService.sendWithHtml(email, subject, message);
         if (flag) {
-            game.getChallenger();
-            return ResultJson.success("添加成功");
+            game.setChallenger(challenger.getTeamname());
+            game.setChallengerid(challenger.getId());
+            game.setEnemy(enemy.getTeamname());
+            game.setEnemyid(enemy.getId());
+            game.setFlag((byte) 0);
+            game.setStatement(message);
+            gameService.insert(game);
+            return ResultJson.success("约赛成功");
         } else {
-            return ResultJson.error("添加失败");
+            return ResultJson.error("约赛失败");
         }
     }
 
+    @RequestMapping("/sendGameApply")
+    @ResponseBody
+    public ResultJson sendGameApply(String message, String email, String subject, Integer id, Byte n_flag, Session session) {
+        boolean flag = mailService.sendWithHtml(email, subject, message);
+        if (flag) {
+            Game game = new Game();
+            game.setId(id);
+            game.setStatement(message);
+            game.setFlag(n_flag);
+            gameService.updateByPrimaryKeySelective(game);
+            return ResultJson.success("回复成功");
+        } else {
+            return ResultJson.error("回复失败");
+        }
+    }
+
+    @RequestMapping("/submitResult")
+    @ResponseBody
+    public ResultJson submitApply(String mess, Integer gid, HttpSession session) {
+        Game game = new Game();
+        game.setId(gid);
+        game.setResult(mess);
+        int a = gameService.updateByPrimaryKeySelective(game);
+        if (a > 0) {
+            return ResultJson.success("修改成功");
+        } else {
+            return ResultJson.error("修改失败");
+        }
+    }
 }

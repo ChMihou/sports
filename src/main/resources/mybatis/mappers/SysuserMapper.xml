@@ -78,12 +78,8 @@
             <if test="studentid != null">
                 studentid,
             </if>
-            <if test="gmtCreate != null">
                 gmt_create,
-            </if>
-            <if test="gmtModified != null">
                 gmt_modified,
-            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">

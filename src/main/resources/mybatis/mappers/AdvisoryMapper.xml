@@ -96,12 +96,8 @@
             <if test="nimage != null">
                 nimage,
             </if>
-            <if test="gmtCreate != null">
-                gmt_create,
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified,
-            </if>
+            gmt_create,
+            gmt_modified,
             <if test="article != null">
                 article,
             </if>
@@ -153,7 +149,7 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            now(),
+            gmt_modified = now(),
             <if test="article != null">
                 article = #{article,jdbcType=LONGVARCHAR},
             </if>

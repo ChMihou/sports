@@ -28,8 +28,8 @@
       cost, type, gmt_create, 
       gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{costtime,jdbcType=INTEGER}, 
-      #{cost,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
+      #{cost,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, now(),
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.physical.movement.entity.Court">
     insert into court
@@ -95,12 +95,8 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now()
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -110,8 +106,7 @@
       costtime = #{costtime,jdbcType=INTEGER},
       cost = #{cost,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

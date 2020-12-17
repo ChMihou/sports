@@ -63,8 +63,8 @@
       gmt_modified, mess, apply
       )
     values (#{id,jdbcType=INTEGER},#{uid}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER},
-      #{title,jdbcType=VARCHAR}, #{checkboy,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{mess,jdbcType=LONGVARCHAR}, #{apply,jdbcType=LONGVARCHAR}
+      #{title,jdbcType=VARCHAR}, #{checkboy,jdbcType=VARCHAR}, now(),
+      now(), #{mess,jdbcType=LONGVARCHAR}, #{apply,jdbcType=LONGVARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Message">
@@ -88,12 +88,8 @@
             <if test="checkboy != null">
                 checkboy,
             </if>
-            <if test="gmtCreate != null">
-                gmt_create,
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified,
-            </if>
+            gmt_create,
+            gmt_modified,
             <if test="mess != null">
                 mess,
             </if>
@@ -120,12 +116,8 @@
             <if test="checkboy != null">
                 #{checkboy,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            now(),
+            now(),
             <if test="mess != null">
                 #{mess,jdbcType=LONGVARCHAR},
             </if>
@@ -152,12 +144,8 @@
             <if test="checkboy != null">
                 checkboy = #{checkboy,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+                gmt_create = now(),
+                gmt_modified = now(),
             <if test="mess != null">
                 mess = #{mess,jdbcType=LONGVARCHAR},
             </if>
@@ -174,8 +162,7 @@
       uid = #{uid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       checkboy = #{checkboy,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
     </update>
 

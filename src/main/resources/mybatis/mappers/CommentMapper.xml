@@ -10,14 +10,16 @@
         <result column="Ctime" jdbcType="TIMESTAMP" property="ctime"/>
         <result column="Cflag" jdbcType="INTEGER" property="cflag"/>
         <result column="Caboy" jdbcType="VARCHAR" property="caboy"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     </resultMap>
     <insert id="insert" parameterType="com.physical.movement.entity.Comment">
     insert into comment (Cid, Comment, Cnid, 
       Cuid, Capply, Ctime, 
-      Cflag, Caboy)
+      Cflag, Caboy,gmt_create,gmt_modified)
     values (#{cid,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{cnid,jdbcType=INTEGER}, 
-      #{cuid,jdbcType=INTEGER}, #{capply,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, 
-      #{cflag,jdbcType=INTEGER}, #{caboy,jdbcType=VARCHAR})
+      #{cuid,jdbcType=INTEGER}, #{capply,jdbcType=VARCHAR}, now(),
+      #{cflag,jdbcType=INTEGER}, #{caboy,jdbcType=VARCHAR}),now(),now())
     </insert>
     <sql id="Base_Column_List">
     id, comment, advisoryid, uid, apply, flag, aboy, gmt_create, gmt_modified
@@ -44,14 +46,14 @@
         <include refid="Base_Column_List"/>
         from message
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by gmt_modified desc,id desc
+        order by ctime desc,id desc
     </select>
     <select id="select" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from message
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by gmt_modified desc
+        order by ctime desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
@@ -81,12 +83,8 @@
             <if test="aboy != null">
                 aboy,
             </if>
-            <if test="gmtCreate != null">
                 gmt_create,
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified,
-            </if>
+                gmt_modified
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -110,12 +108,8 @@
             <if test="aboy != null">
                 #{aboy,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+                now(),
+                now(),
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Comment">
@@ -142,9 +136,7 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+                gmt_modified = now(),
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -156,8 +148,7 @@
       apply = #{apply,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=INTEGER},
       aboy = #{aboy,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -25,20 +25,16 @@
                         <div class="form-box">
                             <div class="article-cont">
                                 <div class="title">
-                                    <h1>留言主题：<b><th:block th:text="${message.title}"></th:block></b></h1><br><br>
-                                    <p class="cont-info">
-                                        <span class="data" >留言时间：<span th:text="${message.time}"></span></span>
-                                        <span>留言人：<span th:text="${message.name}" ></span></span>
-                                    </p>
+                                    <h1>挑战队伍：<b><th:block th:text="${game.enemy}"/></b></h1><br><br>
                                 </div>
                                 <br/><br>
-                                <h4><b th:utext="${message.mess}"></b></h4>
+                                <h4><b th:utext="${game.statement}"></b></h4>
                             </div>
                         </div><br/><br/><br/>
                         <form class="layui-form" id="check">
-                            <input type="hidden" id="mid" name="mid" th:value="${message.id}">
+                            <input type="hidden" id="gid" name="gid" th:value="${game.id}">
                             <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">回复：</label>
+                                <label class="layui-form-label">结果：</label>
                                 <div class="layui-input-block">
                                     <textarea id="mess" name="mess" placeholder="请输入内容" class="layui-textarea"></textarea>
                                 </div>
@@ -64,13 +60,13 @@
             //监听提交
             //监听提交
             form.on('submit(formDemo)', function (data) {
-                var mid =$("#mid").val();
+                var gid =$("#gid").val();
                 var mess = $("#mess").val();
                 $.ajax(
                     {
-                        url: "/message/submitApply",
+                        url: "/game/submitResult",
                         type: "POST",
-                        data: {mid:mid,mess:mess},
+                        data: {gid:gid,mess:mess},
                         success: function (data) {
                             if (data) {
                                 confirm("回复成功");

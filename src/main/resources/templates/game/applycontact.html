@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="/css/style.min.css">
     <link rel="stylesheet" href="/css/custom.css">
     <script type="text/javascript" src="/js/wangEditor.min.js"></script>
-    <link rel="stylesheet" href="/css/xadmin.css">
-    <link rel="stylesheet" href="/lib/layui/css/layui.css">
-    <script src="/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/js/xadmin.js"></script>
     <!--[if lt IE 9]>
     <script src="/js/vendor/html5shiv.min.js"></script>
     <script src="/js/vendor/respond.min.js"></script>
@@ -31,27 +27,33 @@
                 <form action="#" method="post" id="form" class="probootstrap-form">
                     <div class="form-group">
                         <label for="name">队伍名字</label>
-                        <input type="text" class="form-control" th:value="${team.teamname}" id="name" name="name"
+                        <input type="text" class="form-control" th:value="${game.enemy}" id="name" name="name"
                                readonly>
                     </div>
-                    <input type="hidden" name="teamtype" th:value="${team.teamtype}" id="teamtype">
                     <div class="form-group">
                         <label for="email">邮箱地址</label>
-                        <input type="email" th:value="${sysUser.email}" class="form-control" id="email" name="email"
+                        <input type="email" th:value="${team.teamemail}" class="form-control" id="email" name="email"
                                readonly>
                     </div>
                     <div class="form-group">
-                        <label for="subject">挑战主题</label>
-                        <input type="text" class="form-control" onblur="verfiy2()" id="subject" name="subject">
+                        <label for="subject">回应主题</label>
+                        <input type="text" class="form-control" onblur="" id="subject" name="subject" readonly>
                     </div>
                     <div class="form-group">
                         <label for="subject">比赛时间</label>
-                        <input type="text" class="form-control" id="time" name="time">
+                        <input type="text" class="form-control" id="time" th:value="${game.gmtModified}" name="time" readonly>
                     </div>
                     <div class="form-group">
                         <label id="message">内容</label>
                         <div id="editor">
-
+                            <th:block th:utext="${game.result}"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">答复</label>
+                        <div class="layui-input-block" for="n_flag">
+                            <input type="radio" name="n_flag" value="0" title="迎战" checked>
+                            <input type="radio" name="n_flag" value="1" title="拒绝">
                         </div>
                     </div>
                     <input type="hidden" th:value="${team.id}" name="id" id="id">
@@ -93,13 +95,19 @@
         let id = $("#id").val();
         let name = $("#name").val();
         let email = $("#email").val();
+        let radio = document.getElementsByName("n_flag");
         let time = $("#time").val();
         let subject = $("#subject").val();
+        for (i = 0; i < radio.length; i++) {
+            if (radio[i].checked) {
+                n_flag = radio[i].value;
+            }
+        }
         $.ajax({
             //几个参数需要注意一下
             type: "POST",//方法类型
-            url: "/game/sendGame",//url
-            data: {message: message, name: name, email: email, subject: subject, id: id, time: time},
+            url: "/game/sendGameApply",//url
+            data: {message: message, name: name, email: email, subject: subject, id: id, time: time, n_flag: n_flag},
             dataType: "json",
             success: function (data) {
                 console.log(data);//打印服务端返回的数据(调试用)

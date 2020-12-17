@@ -14,19 +14,54 @@
         <result column="result" jdbcType="LONGVARCHAR" property="result"/>
         <result column="statement" jdbcType="LONGVARCHAR" property="statement"/>
     </resultMap>
+
     <sql id="Base_Column_List">
     id, type, challenger, challengerid, enemy, enemyid, gmt_create, gmt_modified, flag, result,statement
     </sql>
+
+    <sql id="WHERE_SELECT_CONDIYION">
+        <where>
+            1=1
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="enemy!=null and enemy!=''">
+                and enemy like concat("%",#{enemy},"%") or challenger like concat("%",#{challenger},"%")
+            </if>
+            <if test="flag!=null">
+                and flag = #{flag}
+            </if>
+        </where>
+    </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from game
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAll" parameterType="com.physical.movement.entity.Game" resultType="Game">
+        select
+        <include refid="Base_Column_List"/>
+        from team
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc,id desc
+    </select>
+
+    <select id="select" parameterType="com.physical.movement.entity.Game" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from team
+        <include refid="WHERE_SELECT_CONDIYION"/>
+        order by gmt_modified desc,id desc
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from game
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
+
     <insert id="insert" parameterType="com.physical.movement.entity.Game">
     insert into game (id, type, challenger, 
       challengerid, enemy, enemyid, 
@@ -37,6 +72,7 @@
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, 
       #{result,jdbcType=LONGVARCHAR},#{statement})
   </insert>
+
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Game">
         insert into game
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -58,9 +94,7 @@
             <if test="enemyid != null">
                 enemyid,
             </if>
-            <if test="gmtCreate != null">
                 gmt_create,
-            </if>
             <if test="gmtModified != null">
                 gmt_modified,
             </if>
@@ -93,9 +127,7 @@
             <if test="enemyid != null">
                 #{enemyid,jdbcType=INTEGER},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
+            now(),
             <if test="gmtModified != null">
                 #{gmtModified,jdbcType=TIMESTAMP},
             </if>
@@ -110,6 +142,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Game">
         update game
         <set>
@@ -146,6 +179,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Game">
     update game
     set type = #{type,jdbcType=INTEGER},

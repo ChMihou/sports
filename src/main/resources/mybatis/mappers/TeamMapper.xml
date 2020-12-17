@@ -59,7 +59,7 @@
         <include refid="Base_Column_List"/>
         from team
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by gmt_modified desc
+        order by gmt_modified desc,id desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from team
@@ -71,8 +71,8 @@
       gmt_modified, flag, reason, intro,
       cause)
     values (#{id,jdbcType=INTEGER},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
-      #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
-      #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro},
+      #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, now(),
+      now(), #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro},
       #{cause,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Team">
@@ -99,12 +99,8 @@
             <if test="teamleaderid != null">
                 teamleaderid,
             </if>
-            <if test="gmtCreate != null">
-                gmt_create,
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified,
-            </if>
+            gmt_create,
+            gmt_modified,
             <if test="flag != null">
                 flag,
             </if>
@@ -137,12 +133,8 @@
             <if test="teamleaderid != null">
                 #{teamleaderid,jdbcType=INTEGER},
             </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            now(),
+            now(),
             <if test="flag != null">
                 #{flag,jdbcType=TINYINT},
             </if>
@@ -175,9 +167,7 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            gmt_modified = now(),
             <if test="flag != null">
                 flag = #{flag,jdbcType=TINYINT},
             </if>
@@ -200,8 +190,7 @@
       teamleader = #{teamleader,jdbcType=VARCHAR},
       teamemail = #{teamemail,jdbcType=VARCHAR},
       teamleaderid = #{teamleaderid,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      gmt_modified = now(),
       flag = #{flag,jdbcType=TINYINT},
       intro = #{intro,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}

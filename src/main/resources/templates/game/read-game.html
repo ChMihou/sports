@@ -1,0 +1,51 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin2.2</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/wangEditor.min.js"></script>
+
+</head>
+<body>
+<div class="content whisper-content leacots-content details-content">
+    <div class="cont w1000">
+        <div class="whisper-list">
+            <div class="item-box">
+                <div class="review-version">
+                    <div class="form-box">
+                        <div class="article-cont">
+                            <div class="title">
+                                <h1>比赛双方：<b>
+                                    <th:block th:text="${game.challenger}"/>
+                                    :
+                                    <th:block th:text="${game.enemy}"/>
+                                </b></h1>
+                                <br><br>
+                                <p class="cont-info">
+                                    <span class="data">比赛时间：<span th:text="${game.gmtModified}"></span></span>
+                                </p>
+                            </div>
+                            <br><br><br>
+                            比赛结果：
+                            <h3><p th:utext="${game.result}"></p></h3>
+                        </div>
+                    </div>
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <span th:if="${game.flag ==0}"><div>比赛宣言:<b><span
+                            th:text="${game.statement}"></span></b></div></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
