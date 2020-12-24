@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2020-12-15 16:06:12
+Date: 2020-12-24 18:22:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,16 +21,16 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `advisory`;
 CREATE TABLE `advisory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `article` text CHARACTER SET utf8,
-  `author` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `article` text,
+  `author` varchar(20) DEFAULT NULL,
   `nselect` int(11) DEFAULT NULL,
-  `nimage` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `intro` text CHARACTER SET utf8,
+  `nimage` varchar(100) DEFAULT NULL,
+  `intro` text,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of advisory
@@ -47,15 +47,15 @@ INSERT INTO `advisory` VALUES ('8', 'dsa', '<p><br></p>', 'dsa', '5', null, 'dsa
 DROP TABLE IF EXISTS `announcement`;
 CREATE TABLE `announcement` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `author` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `author` varchar(40) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `uid` int(20) DEFAULT NULL,
-  `article` text CHARACTER SET utf8,
+  `article` text,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of announcement
@@ -68,17 +68,17 @@ INSERT INTO `announcement` VALUES ('2', 'dasd', 'dsa', null, '<p>dsad</p>', '202
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
   `advisoryid` int(20) DEFAULT NULL,
   `uid` int(20) DEFAULT NULL,
-  `apply` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `apply` varchar(255) DEFAULT NULL,
   `flag` int(11) DEFAULT NULL,
-  `aboy` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `aboy` varchar(255) DEFAULT NULL,
   `cid` int(11) DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
@@ -90,14 +90,16 @@ CREATE TABLE `comment` (
 DROP TABLE IF EXISTS `court`;
 CREATE TABLE `court` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `address` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `address` varchar(30) DEFAULT NULL,
   `costtime` int(11) DEFAULT NULL COMMENT '租用时间',
   `cost` int(20) DEFAULT NULL COMMENT '订场金额',
-  `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '场地类型',
+  `type` varchar(255) DEFAULT NULL COMMENT '场地类型',
+  `tid` int(10) DEFAULT NULL COMMENT '订场球队',
+  `teamname` varchar(100) DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of court
@@ -110,17 +112,17 @@ DROP TABLE IF EXISTS `game`;
 CREATE TABLE `game` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `type` int(20) DEFAULT NULL,
-  `challenger` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '挑战者名字',
+  `challenger` varchar(30) DEFAULT NULL COMMENT '挑战者名字',
   `challengerid` int(20) DEFAULT NULL COMMENT '挑战方ID',
-  `enemy` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '应战方名字',
+  `enemy` varchar(30) DEFAULT NULL COMMENT '应战方名字',
   `enemyid` int(20) DEFAULT NULL COMMENT '应战方ID',
-  `result` text CHARACTER SET utf8 COMMENT '结果',
-  `statement` text CHARACTER SET utf8,
+  `result` text COMMENT '结果',
+  `statement` text,
   `flag` tinyint(4) DEFAULT NULL COMMENT '是否应战',
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of game
@@ -132,17 +134,17 @@ CREATE TABLE `game` (
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `mess` text CHARACTER SET utf8,
-  `apply` text CHARACTER SET utf8,
+  `name` varchar(20) DEFAULT NULL,
+  `mess` text,
+  `apply` text,
   `flag` int(11) DEFAULT NULL,
-  `title` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `checkboy` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `checkboy` varchar(20) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of message
@@ -154,21 +156,21 @@ CREATE TABLE `message` (
 DROP TABLE IF EXISTS `sysuser`;
 CREATE TABLE `sysuser` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `salt` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(255) NOT NULL,
   `usertype` tinyint(4) NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `status` tinyint(4) NOT NULL,
-  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `sex` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `sex` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `studentid` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `truename` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `studentid` varchar(100) DEFAULT NULL,
+  `truename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sysuser
@@ -182,19 +184,19 @@ INSERT INTO `sysuser` VALUES ('3', 'rzh', '6373b90b4be5aa7ddcb0843265bc57a9', 'R
 DROP TABLE IF EXISTS `team`;
 CREATE TABLE `team` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `teamname` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `teamname` varchar(30) DEFAULT NULL,
   `teamtype` int(20) DEFAULT NULL,
-  `teamleader` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `teamleader` varchar(20) DEFAULT NULL,
   `teamleaderid` int(20) DEFAULT NULL,
-  `reason` text CHARACTER SET utf8,
+  `reason` text,
   `flag` tinyint(4) DEFAULT NULL COMMENT '申请建立球队',
-  `cause` text CHARACTER SET utf8,
-  `intro` text CHARACTER SET utf8,
-  `teamemail` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `cause` text,
+  `intro` text,
+  `teamemail` varchar(100) DEFAULT NULL,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of team
@@ -211,7 +213,7 @@ CREATE TABLE `user_team_ref` (
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_team_ref

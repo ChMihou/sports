@@ -6,15 +6,17 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="costtime" jdbcType="INTEGER" property="costtime" />
     <result column="cost" jdbcType="INTEGER" property="cost" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="teamname" jdbcType="VARCHAR" property="teamname" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, address, costtime, cost, type, gmt_create, gmt_modified
+    id, address, costtime, cost, type, tid , teamname, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from court
     where id = #{id,jdbcType=INTEGER}
@@ -25,10 +27,10 @@
   </delete>
   <insert id="insert" parameterType="com.physical.movement.entity.Court">
     insert into court (id, address, costtime, 
-      cost, type, gmt_create, 
+      cost, type, tid, teamname, gmt_create,
       gmt_modified)
     values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{costtime,jdbcType=INTEGER}, 
-      #{cost,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, now(),
+      #{cost,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},#{tid},#{teamname} now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.physical.movement.entity.Court">
@@ -48,6 +50,12 @@
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="teamname != null">
+        teamname,
       </if>
       <if test="gmtCreate != null">
         gmt_create,
@@ -72,6 +80,12 @@
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
+      <if test="tid != null">
+        #{tid},
+      </if>
+      <if test="teamname != null">
+        #{teamname,jdbcType=VARCHAR},
+      </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -92,21 +106,18 @@
       <if test="cost != null">
         cost = #{cost,jdbcType=INTEGER},
       </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="teamname != null">
+        teamname = #{teamname,jdbcType=VARCHAR},
       </if>
       now(),
       now()
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Court">
-    update court
-    set address = #{address,jdbcType=VARCHAR},
-      costtime = #{costtime,jdbcType=INTEGER},
-      cost = #{cost,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR},
-      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

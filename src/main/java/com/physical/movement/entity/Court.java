@@ -15,6 +15,26 @@ public class Court extends Id {
 
     private String type;
 
+    private Integer tid;
+
+    private String teamname;
+
+    public String getTeamname() {
+        return teamname;
+    }
+
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
     public Integer getId() {
         return id;
     }
