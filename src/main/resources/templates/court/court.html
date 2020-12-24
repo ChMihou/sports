@@ -31,7 +31,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="/message/message" method="post">
+                    <form class="layui-form layui-col-space5" action="/court/court" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入场地关键字查询" name="key" id="key"
                                    th:value=""></div>
@@ -67,7 +67,7 @@
                             <th>操作</th>
                         </thead>
                         <tbody>
-                        <tr th:each="message:${mlist.list}">
+                        <tr th:each="">
                             <td>
                                 <input type="checkbox" name="id" th:value="" lay-skin="primary">
                             </td>
@@ -90,28 +90,28 @@
                     <div class="page">
                         <div>
                             <a aria-label="Previous" id="firstpage"
-                               th:href="@{/message/message(pageNum=1,key=${key},check=${check})}">首页</a>
-                            <a th:if="${mlist.pageNum} > '1'" id="previouspage"
-                               th:href="@{/message/message(pageNum=${mlist.prePage},key=${key},check=${check})}"
+                               th:href="@{/court/court(pageNum=1,key=${key},check=${check})}">首页</a>
+                            <a th:if="${clist.pageNum} > '1'" id="previouspage"
+                               th:href="@{/court/court(pageNum=${clist.prePage},key=${key},check=${check})}"
                                aria-label="Previous">
                                 &lt;&lt;</a>
                             <!--   当前页数 ，方便js调用 display:none;隐藏        -->
-                            <span style="display:none;" id="pagenums">[[${mlist.pageNum}]]</span>
+                            <span style="display:none;" id="pagenums">[[${clist.pageNum}]]</span>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
                                 <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <a class="num layui-btn layui-btn-warm" th:if="${mlist.pageNum==pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num layui-btn layui-btn-warm" th:if="${clist.pageNum==pagenum}"
+                                   th:href="@{/court/court(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${mlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
-                                   th:href="@{/message/message(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
+                                <a class="num" th:if="${clist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
+                                   th:href="@{/court/court(pageNum=${pagenum},key=${key},check=${check})}">[[${pagenum}]]</a>
                             </th:block>
-                            <a class="next" th:if="${mlist.pageNum} < ${mlist.pages}" id="nextpage"
-                               th:href="@{/message/message(pageNum=${mlist.nextPage},key=${key},check=${check})}"
+                            <a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage"
+                               th:href="@{/court/court(pageNum=${clist.nextPage},key=${key},check=${check})}"
                                aria-label="Next">
                                 &gt;&gt;</a>
                             <a id="endpage"
-                               th:href="@{/message/message(pageNum=${mlist.pages},key=${key},check=${check})}">末页</a>
-                            <span aria-label="Next">相关留言记录[[${mlist.total}]]条，共[[${mlist.pages}]]页。</span>
+                               th:href="@{/court/court(pageNum=${clist.pages},key=${key},check=${check})}">末页</a>
+                            <span aria-label="Next">相关留言记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax(
                 {
-                    url: "deleteOneMessage",
+                    url: "deleteOnecourt",
                     type: "POST",
                     data: {"id": id},
                     dataType: "json",
