@@ -2,6 +2,7 @@ package com.physical.movement.service;
 
 import com.physical.movement.entity.Court;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface CourtService {
@@ -18,4 +19,6 @@ public interface CourtService {
     List<Court> selectAll(Court court, int pageNum, int pageSize);
 
     Court select(Court court);
+
+    void addListCourt() throws ParseException;
 }

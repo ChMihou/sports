@@ -28,7 +28,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">队伍类型</label>
                 <div class="layui-input-inline layui-show-xs-block">
-                    <select name="check">
+                    <select id="check" name="check">
                         <tr th:each="sports:${SportsType}">
                             <option th:value="${sports.key}">
                                 <th:block th:text="${sports.value.name}"/>

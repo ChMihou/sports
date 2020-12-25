@@ -151,7 +151,7 @@ public class TeamController {
 
     @RequestMapping("/addTeam")
     @ResponseBody
-    public ResultJson addTeam(String n_title, String n_article, String check, HttpServletRequest request) {
+    public ResultJson addTeam(String n_title, String n_article, Integer check, HttpServletRequest request) {
         HttpSession session = request.getSession();
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         Team team = new Team();
@@ -171,8 +171,7 @@ public class TeamController {
         team.setTeamleader(sysUser.getUsername());
         team.setTeamemail(sysUser.getEmail());
         if (check != null && !check.equals("0")) {
-            Integer ch = Integer.parseInt(check);
-            team.setTeamtype(ch);
+            team.setTeamtype(check);
         } else {
             team.setTeamtype(5);
         }
