@@ -27,7 +27,7 @@ public class GetDate {
     }
 
     public static Date StringToDate(String date) throws ParseException {
-        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         return fmt.parse(date);
     }
 
