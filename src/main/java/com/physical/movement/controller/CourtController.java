@@ -35,14 +35,14 @@ public class CourtController {
         String key = request.getParameter("key");
         mv.addObject("key", key);
         Court court = new Court();
-        court.setGmtCreate(date == null ? GetDate.getTimeToday() : GetDate.StringToDate(date));
+        court.setGmtCreate(date == null || date.equals("") ? GetDate.getTimeToday() : GetDate.StringToDate(date));
         court.setAddress(key);
         List<Court> courts = courtService.selectAll(court, pageSize, pageNum);
         PageInfo clist = new PageInfo(courts);
         List pagenums = new ArrayList();
         Paginator.page(pagenums, clist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
-        mv.addObject("tlist", clist);
+        mv.addObject("clist", clist);
         return mv;
     }
 

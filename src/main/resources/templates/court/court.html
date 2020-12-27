@@ -116,6 +116,10 @@
 </div>
 </body>
 <script>
+    laydate.render({
+        elem: '#test13'
+        ,format: 'yyyyMMdd'
+    });
     layui.use(['laydate', 'form'], function () {
         var laydate = layui.laydate;
         var form = layui.form;
@@ -128,11 +132,6 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#end' //指定元素
-        });
-
-        laydate.render({
-            elem: '#test13'
-            ,format: 'yyyyMMdd'
         });
     });
     /*用户-删除*/

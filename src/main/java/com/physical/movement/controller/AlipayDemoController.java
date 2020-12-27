@@ -7,6 +7,8 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.physical.movement.config.AlipayConfig;
 import com.physical.movement.entity.Court;
+import com.physical.movement.entity.SysUser;
+import com.physical.movement.entity.Team;
 import com.physical.movement.service.CourtService;
 import com.physical.movement.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,17 +85,22 @@ public class AlipayDemoController {
             //验证成功
             //请在这里加上商户的业务逻辑程序代码，如保存支付宝交易号
             //商户订单号
+            SysUser sysUser = (SysUser) session.getAttribute("sysUser");
             String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
             //支付宝交易号
             String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
-            String ids = (String) request.getSession().getAttribute("ids");
             Integer id = (Integer) session.getAttribute(out_trade_no);
             session.removeAttribute(out_trade_no);
             Court court = new Court();
-            court.setCost(Integer.valueOf(COST));
-            return "redirect:?id=" + id;
-
+            Team team = new Team();
+            team.setTeamleaderid(sysUser.getId());
+            team = teamService.select(team);
+            court.setTeamname(team.getTeamname());
+            court.setTid(team.getId());
+            court.setId(id);
+            courtService.updateByPrimaryKeySelective(court);
+            return "redirect:admin/index";
         } else {
             return "redirect:error";
 
@@ -194,9 +201,9 @@ public class AlipayDemoController {
 
             }
             System.out.println("回调验证数据");
-            return "redirect:view";
+            return "redirect:admin/index";
         }
 
-        return "redirect:view";
+        return "redirect:error";
     }
 }

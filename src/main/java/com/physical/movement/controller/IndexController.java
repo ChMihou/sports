@@ -14,8 +14,10 @@ public class IndexController {
         return "/login/login";
     }
 
-    @RequestMapping("adminadd")
+    @RequestMapping("/error")
     public String admin(){
-        return "admin-add";
+        return "/error";
     }
+
+
 }
