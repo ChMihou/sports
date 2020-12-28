@@ -51,7 +51,7 @@ public class GameController {
         mv.addObject("key", key);
         int uid = (int) session.getAttribute("uid");
         Team team = new Team();
-        if (check != null && !check.equals("0")) {
+        if (check != null && !check.equals("0") && !check.equals("")) {
             team.setTeamtype(Integer.parseInt(check));
         }
         if (flag != null && !flag.equals("0")) {
@@ -80,7 +80,7 @@ public class GameController {
         mv.addObject("key", key);
         int uid = (int) session.getAttribute("uid");
         Team team = new Team();
-        if (check != null && !check.equals("0")) {
+        if (check != null && !check.equals("0") && !check.equals("")) {
             team.setTeamtype(Integer.parseInt(check));
         }
         if (flag != null && !flag.equals("0")) {

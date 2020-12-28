@@ -22,7 +22,7 @@
       #{cflag,jdbcType=INTEGER}, #{caboy,jdbcType=VARCHAR}),now(),now())
     </insert>
     <sql id="Base_Column_List">
-    id, comment, advisoryid, uid, apply, flag, aboy, gmt_create, gmt_modified
+    id, comment, advisoryid, cuid, apply, flag, aboy, gmt_create, gmt_modified
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -36,8 +36,8 @@
             <if test="id!=null">
                 and id = #{id}
             </if>
-            <if test="uid!=null">
-                and uid = #{uid}
+            <if test="cuid!=null">
+                and cuid = #{cuid}
             </if>
         </where>
     </sql>
@@ -71,8 +71,8 @@
             <if test="advisoryid != null">
                 advisoryid,
             </if>
-            <if test="uid != null">
-                uid,
+            <if test="cuid != null">
+                cuid,
             </if>
             <if test="apply != null">
                 apply,
@@ -96,8 +96,8 @@
             <if test="advisoryid != null">
                 #{advisoryid,jdbcType=INTEGER},
             </if>
-            <if test="uid != null">
-                #{uid,jdbcType=INTEGER},
+            <if test="cuid != null">
+                #{cuid,jdbcType=INTEGER},
             </if>
             <if test="apply != null">
                 #{apply,jdbcType=VARCHAR},
@@ -121,8 +121,8 @@
             <if test="advisoryid != null">
                 advisoryid = #{advisoryid,jdbcType=INTEGER},
             </if>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=INTEGER},
+            <if test="cuid != null">
+                cuid = #{cuid,jdbcType=INTEGER},
             </if>
             <if test="apply != null">
                 apply = #{apply,jdbcType=VARCHAR},
@@ -144,7 +144,7 @@
     update comment
     set comment = #{comment,jdbcType=VARCHAR},
       advisoryid = #{advisoryid,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=INTEGER},
+      cuid = #{cuid,jdbcType=INTEGER},
       apply = #{apply,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=INTEGER},
       aboy = #{aboy,jdbcType=VARCHAR},

@@ -38,4 +38,10 @@ public class AdminController {
         return mv;
     }
 
+    @RequestMapping("/welcome")
+    public ModelAndView welcome(ModelAndView mv) {
+        mv.setViewName("/admin/welcome");
+        return mv;
+    }
+
 }

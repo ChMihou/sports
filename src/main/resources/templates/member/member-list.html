@@ -31,10 +31,10 @@
                     <div class="layui-card-body ">
                         <form class="layui-form layui-col-space5" action="/member/member-list" method="post">
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="search" th:value="${search}" placeholder="请输入用户名字关键字查询" autocomplete="off" class="layui-input">
+                                <input type="text" id="search" name="search" th:value="${search}" placeholder="请输入用户名字关键字查询" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="search" th:value="${studentid}" placeholder="请输入用户学号查询" autocomplete="off" class="layui-input">
+                                <input type="text" id="studentid" name="studentid" th:value="${studentid}" placeholder="请输入用户学号查询" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
@@ -63,9 +63,9 @@
                                 <tr th:each="user:${ulist.list}">
                                     <td th:text="${user.id}"></td>
                                     <td><img style="height: 50px;weight:50px" th:src="${user.image}"></td>
-                                    <td th:text="${user.username}"></td>
                                     <td th:text="${user.truename}"></td>
                                     <td th:text="${user.studentid}"></td>
+                                    <td th:text="${user.username}"></td>
                                     <td th:text="${user.email}"></td>
                                     <td th:text="${user.phone}"></td>
                                     <td class="td-status">

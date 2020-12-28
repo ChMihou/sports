@@ -26,7 +26,7 @@
                 and id = #{id}
             </if>
             <if test="enemy!=null and enemy!=''">
-                and enemy like concat("%",#{enemy},"%") or challenger like concat("%",#{challenger},"%")
+                and (enemy like concat("%",#{enemy},"%") or challenger like concat("%",#{challenger},"%"))
             </if>
             <if test="flag!=null">
                 and flag = #{flag}

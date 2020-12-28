@@ -223,6 +223,16 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/news/**", "anon");
         //配置记住我或认证通过可以访问的地址
         filterChainDefinitionMap.put("/admin/**", "admin");
+        filterChainDefinitionMap.put("/advisory/**", "admin");
+        filterChainDefinitionMap.put("/payment/**", "admin");
+        filterChainDefinitionMap.put("/announcement/**", "admin");
+        filterChainDefinitionMap.put("/comment/**", "admin");
+        filterChainDefinitionMap.put("/game/**", "admin");
+        filterChainDefinitionMap.put("/message/**", "admin");
+        filterChainDefinitionMap.put("/team/**", "admin");
+        filterChainDefinitionMap.put("/court/**", "admin");
+        filterChainDefinitionMap.put("/websocket/**", "admin");
+        filterChainDefinitionMap.put("/member/**", "admin");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

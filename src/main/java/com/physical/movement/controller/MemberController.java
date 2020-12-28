@@ -2,9 +2,14 @@ package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.physical.movement.entity.SysUser;
+import com.physical.movement.entity.Team;
+import com.physical.movement.entity.UserTeamRef;
+import com.physical.movement.entity.vo.UserTeamVo;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.model.ResultJson;
 import com.physical.movement.service.SysUserService;
+import com.physical.movement.service.TeamService;
+import com.physical.movement.service.UserTeamRefService;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +35,13 @@ public class MemberController {
     @Autowired
     SysUserService sysUserService;
 
-    @RequestMapping("member-alter")
+    @Autowired
+    TeamService teamService;
+
+    @Autowired
+    UserTeamRefService userTeamRefService;
+
+    @RequestMapping("/member-alter")
     public ModelAndView memberalter(HttpSession session, ModelAndView mv) {
         SysUser user = (SysUser) session.getAttribute("sysUser");
         SysUser flag = new SysUser();
@@ -41,7 +52,7 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping("memberAlter")
+    @RequestMapping("/memberAlter")
     @ResponseBody
     public ResultJson memberAlter(String username, String usex,
                                   String email, String mobile, HttpSession session) throws IOException {
@@ -71,7 +82,7 @@ public class MemberController {
         }
     }
 
-    @RequestMapping("image")
+    @RequestMapping("/image")
     public ModelAndView image(Integer id) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("id", id);
@@ -79,7 +90,7 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping("member-list")
+    @RequestMapping("/member-list")
     public ModelAndView memberlist(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, String search, String studentid, HttpServletRequest request, ModelAndView mv) {
         SysUser sysUser = new SysUser();
         sysUser.setUsername(search);
@@ -98,7 +109,7 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping("authority")
+    @RequestMapping("/authority")
     public ModelAndView authorityList(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, String search, String studentid, HttpServletRequest request, ModelAndView mv) {
         SysUser sysUser = new SysUser();
         sysUser.setUsername(search);
@@ -117,20 +128,35 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
+    @RequestMapping("/teamList")
+    public ModelAndView affiliateManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
+        UserTeamRef userTeamRef = new UserTeamRef();
+        userTeamRef.setUserid(sysUser.getId());
+        List<UserTeamVo> userTeamVoList = userTeamRefService.selectUserTeam(userTeamRef, pageNum, pageSize);
+        PageInfo utlist = new PageInfo(userTeamVoList);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, utlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("utlist", utlist);
+        mv.setViewName("/member/team-list");
+        return mv;
+    }
+
+    @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
     @ResponseBody
-    public ResultJson updateStatus(Integer id,Byte status){
+    public ResultJson updateStatus(Integer id, Byte status) {
         SysUser sysUser = new SysUser();
         sysUser.setId(id);
         sysUser.setStatus(status);
         Integer flag = sysUserService.updateByPrimaryKeySelective(sysUser);
-        if (flag>0){
+        if (flag > 0) {
             return ResultJson.success("操作成功");
         }
         return ResultJson.error("操作失败");
     }
 
-    @RequestMapping(value = "deleteUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     @ResponseBody
     public ResultJson deleteUser(String id) throws IOException {
         Integer uid = Integer.valueOf(id);
@@ -143,7 +169,8 @@ public class MemberController {
             return ResultJson.error("删除用户失败");
         }
     }
-    @RequestMapping("authority-alter")
+
+    @RequestMapping("/authority-alter")
     public ModelAndView authorityAlter(Integer id) {
         ModelAndView mv = new ModelAndView();
         SysUser sysUser = new SysUser();
@@ -154,14 +181,14 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping(value = "power", method = RequestMethod.POST)
+    @RequestMapping(value = "/power", method = RequestMethod.POST)
     @ResponseBody
     public ResultJson poweRedirect(Byte dutyid, Integer id) {
         SysUser sysUser = new SysUser();
         sysUser.setId(id);
         sysUser.setUsertype(dutyid);
         int flag = sysUserService.updateByPrimaryKeySelective(sysUser);
-        if (flag>0) {
+        if (flag > 0) {
             return ResultJson.success("权限修改成功");
         } else {
             return ResultJson.error("权限修改失败");

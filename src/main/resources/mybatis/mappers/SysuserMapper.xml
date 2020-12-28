@@ -78,8 +78,8 @@
             <if test="studentid != null">
                 studentid,
             </if>
-                gmt_create,
-                gmt_modified,
+            gmt_create,
+            gmt_modified,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -158,7 +158,10 @@
                 and id = #{id}
             </if>
             <if test="username!=null">
-                and username like concat("%",#{username},"%") or truename like concat("%",#{truename},"%")
+                and (username like concat("%",#{username},"%") or truename like concat("%",#{truename},"%"))
+            </if>
+            <if test="studentid!=null">
+                and studentid like concat("%",#{studentid},"%")
             </if>
         </where>
     </sql>
