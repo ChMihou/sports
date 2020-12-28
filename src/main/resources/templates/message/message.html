@@ -82,7 +82,7 @@
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe705;</i>
                                 </a>
-                                <a title="回复"
+                                <a th:if="${session.sysUser.usertype==1}" title="回复"
                                    th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>

@@ -77,7 +77,7 @@
                             </th:block>
                             <td th:text="${team.gmtCreate}"></td>
                             <td>
-                                <a title="审核"
+                                <a th:if="${session.sysUser.usertype==1}" title="审核"
                                    th:onclick="xadmin.open('审核','/team/check-team?id=[[${team.id}]]')"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe642;</i>
