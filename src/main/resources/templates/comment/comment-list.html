@@ -74,7 +74,7 @@
                             <a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage" th:href="@{/comment-list(pageNum=${clist.nextPage})}" aria-label="Next">
                                 &gt;&gt;</a>
                             <a id="endpage" th:href="@{/comment-list(pageNum=${clist.pages})}">末页</a>
-                            <span aria-label="Next">相关积分记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
+                            <span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
                         </div>
                     </div>
                 </div>
