@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2020-12-24 18:22:25
+Date: 2020-12-28 18:38:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,7 +70,7 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) DEFAULT NULL,
   `advisoryid` int(20) DEFAULT NULL,
-  `uid` int(20) DEFAULT NULL,
+  `cuid` int(20) DEFAULT NULL,
   `apply` varchar(255) DEFAULT NULL,
   `flag` int(11) DEFAULT NULL,
   `aboy` varchar(255) DEFAULT NULL,
@@ -99,11 +99,75 @@ CREATE TABLE `court` (
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of court
 -- ----------------------------
+INSERT INTO `court` VALUES ('3', '篮球4', '2', '50', '篮球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('4', '篮球4', '2', '50', '篮球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('5', '篮球4', '2', '50', '篮球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('6', '篮球4', '2', '50', '篮球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('7', '篮球3', '2', '50', '篮球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('8', '篮球3', '2', '50', '篮球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('9', '篮球3', '2', '50', '篮球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('10', '篮球3', '2', '50', '篮球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('11', '篮球2', '2', '50', '篮球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('12', '篮球2', '2', '50', '篮球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('13', '篮球2', '2', '50', '篮球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('14', '篮球2', '2', '50', '篮球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('15', '篮球1', '2', '50', '篮球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('16', '篮球1', '2', '50', '篮球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('17', '篮球1', '2', '50', '篮球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('18', '篮球1', '2', '50', '篮球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('19', '足球4', '2', '50', '足球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('20', '足球4', '2', '50', '足球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('21', '足球4', '2', '50', '足球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('22', '足球4', '2', '50', '足球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('23', '足球3', '2', '50', '足球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('24', '足球3', '2', '50', '足球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('25', '足球3', '2', '50', '足球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('26', '足球3', '2', '50', '足球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('27', '足球2', '2', '50', '足球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('28', '足球2', '2', '50', '足球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('29', '足球2', '2', '50', '足球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('30', '足球2', '2', '50', '足球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('31', '足球1', '2', '50', '足球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('32', '足球1', '2', '50', '足球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('33', '足球1', '2', '50', '足球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('34', '足球1', '2', '50', '足球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('35', '网球4', '2', '50', '网球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('36', '网球4', '2', '50', '网球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('37', '网球4', '2', '50', '网球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('38', '网球4', '2', '50', '网球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('39', '网球3', '2', '50', '网球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('40', '网球3', '2', '50', '网球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('41', '网球3', '2', '50', '网球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('42', '网球3', '2', '50', '网球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('43', '网球2', '2', '50', '网球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('44', '网球2', '2', '50', '网球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('45', '网球2', '2', '50', '网球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('46', '网球2', '2', '50', '网球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('47', '网球1', '2', '50', '网球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('48', '网球1', '2', '50', '网球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('49', '网球1', '2', '50', '网球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('50', '网球1', '2', '50', '网球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('51', '排球4', '2', '50', '排球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('52', '排球4', '2', '50', '排球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('53', '排球4', '2', '50', '排球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('54', '排球4', '2', '50', '排球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('55', '排球3', '2', '50', '排球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('56', '排球3', '2', '50', '排球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('57', '排球3', '2', '50', '排球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('58', '排球3', '2', '50', '排球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('59', '排球2', '2', '50', '排球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('60', '排球2', '2', '50', '排球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('61', '排球2', '2', '50', '排球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('62', '排球2', '2', '50', '排球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('63', '排球1', '2', '50', '排球', null, null, '2020-12-29 17:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('64', '排球1', '2', '50', '排球', null, null, '2020-12-29 19:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('65', '排球1', '2', '50', '排球', null, null, '2020-12-29 21:38:22', '2020-12-28 11:38:22');
+INSERT INTO `court` VALUES ('66', '排球1', '2', '50', '排球', null, null, '2020-12-29 23:38:22', '2020-12-28 11:38:22');
 
 -- ----------------------------
 -- Table structure for game
@@ -196,11 +260,12 @@ CREATE TABLE `team` (
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of team
 -- ----------------------------
+INSERT INTO `team` VALUES ('3', 'dsadasdasdasdsad', '1', 'cmh', '2', null, '0', '<p>dasdasdasda</p>', null, '106358@qq.com', '2020-12-24 18:39:45', '2020-12-24 18:39:45');
 
 -- ----------------------------
 -- Table structure for user_team_ref
