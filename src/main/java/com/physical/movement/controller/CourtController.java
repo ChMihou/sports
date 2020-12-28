@@ -29,7 +29,7 @@ public class CourtController {
     CourtService courtService;
 
     @RequestMapping("/court")
-    public ModelAndView teamManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) throws ParseException {
+    public ModelAndView teamManage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) throws ParseException {
         mv.setViewName("/court/court");
         String date = request.getParameter("date");
         mv.addObject("date", date);
@@ -38,7 +38,7 @@ public class CourtController {
         Court court = new Court();
         court.setGmtCreate(date == null || date.equals("") ? GetDate.getTimeToday() : GetDate.StringToDate(date));
         court.setAddress(key);
-        List<Court> courts = courtService.selectAll(court, pageSize, pageNum);
+        List<Court> courts = courtService.selectAll(court, pageNum, pageSize);
         PageInfo clist = new PageInfo(courts);
         List pagenums = new ArrayList();
         Paginator.page(pagenums, clist, pageNum, pageSize);

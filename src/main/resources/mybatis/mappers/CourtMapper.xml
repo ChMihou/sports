@@ -40,7 +40,7 @@
         <include refid="Base_Column_List"/>
         from court
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by gmt_modified desc,id desc
+        order by gmt_create asc
     </select>
 
     <select id="select" parameterType="com.physical.movement.entity.Court" resultMap="BaseResultMap">
@@ -48,7 +48,7 @@
         <include refid="Base_Column_List"/>
         from court
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by gmt_modified desc,id desc
+        order by gmt_modified asc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from court
