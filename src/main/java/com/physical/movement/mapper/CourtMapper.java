@@ -2,6 +2,7 @@ package com.physical.movement.mapper;
 
 import com.physical.movement.entity.Court;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface CourtMapper extends BaseMapper<Court> {
 
     int updateByPrimaryKey(Court record);
 
-    void addListCourt(List<Court> courts);
+    void addListCourt(@Param("courts") List<Court> courts);
 }

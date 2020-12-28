@@ -65,8 +65,8 @@ public class CourtServiceImpl implements CourtService {
         List<String> TypeList = Arrays.asList("篮球", "足球", "网球", "排球");
         for (String sport : TypeList) {
             List<Court> courts = new ArrayList<>();
-            for (int a = 5; a < 0; a--) {
-                for (int hour = 14; hour > 21; hour = hour + 2) {
+            for (int a = 4; a > 0; a--) {
+                for (int hour = 14; hour < 21; hour = hour + 2) {
                     Court court = new Court();
                     court.setCost(50);
                     court.setCosttime(2);

@@ -118,9 +118,7 @@
             <if test="gmtCreate != null">
                 #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            now(),
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.physical.movement.entity.Court">
@@ -152,24 +150,19 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <insert id="addListCourt" parameterType="List">
-        <selectKey resultType="java.lang.Integer" keyProperty="id"
-                   order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into court(
-        id,
-        address,
-        costtime,
-        cost,
-        type,
-        tid,
-        teamname,
-        gmt_create,
-        gmt_modified
-        )
-        values
-        <foreach collection="list" item="court" index="index" separator=",">
-            (#{court.id},#{court.address},#{court.costtime},#{court.type},#{court.tid},#{court.tid},#{court.teamname},now(),now())
+        insert into court(id,address,costtime,cost,type,tid,teamname,gmt_create,gmt_modified) values
+        <foreach collection="courts" item="court" index="index" separator=",">
+            (
+            #{court.id},
+            #{court.address},
+            #{court.costtime},
+            #{court.cost},
+            #{court.type},
+            #{court.tid},
+            #{court.teamname},
+            #{court.gmtCreate},
+            now()
+            )
         </foreach>
     </insert>
 </mapper>
