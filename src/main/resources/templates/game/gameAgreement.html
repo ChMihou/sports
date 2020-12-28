@@ -36,10 +36,10 @@
                             <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <select name="check">
+                            <select id="check" name="check">
                                 <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}" th:text="${sports.key==check?'selected':''}">
-                                        <th:block th:text="${sports.value.name}"></th:block>
+                                    <option th:value="${sports.key}">
+                                        <th:block th:text="${sports.value.name}" />
                                     </option>
                             </select>
                         </div>
