@@ -35,7 +35,7 @@
         from court
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectAll" parameterType="com.physical.movement.entity.Court" resultType="Court">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Court" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from court
