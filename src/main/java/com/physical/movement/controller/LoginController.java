@@ -151,7 +151,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "/sendme", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMe", method = RequestMethod.POST)
     @ResponseBody
     public ResultJson sendme(String username, String mobile, HttpServletRequest request) throws HttpException, IOException {
         SysUser user = new SysUser();
