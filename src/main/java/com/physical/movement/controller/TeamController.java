@@ -109,7 +109,7 @@ public class TeamController {
         ModelAndView mv = new ModelAndView();
         Integer mid = Integer.valueOf(request.getParameter("id"));
         Team team = new Team();
-        team.setTeamleaderid(mid);
+        team.setId(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
         mv.setViewName("/team/read-team");
@@ -195,7 +195,7 @@ public class TeamController {
 
     @RequestMapping("/submitCheck")
     @ResponseBody
-    public ResultJson submitCheck(int nid, int n_flag, String n_cause, HttpSession session) {
+    public ResultJson submitCheck(int nid, int nflag, String n_cause, HttpSession session) {
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         UserTeamRef userTeamRef = new UserTeamRef();
         userTeamRef.setUserid(sysUser.getId());
@@ -203,7 +203,7 @@ public class TeamController {
         userTeamRefService.insert(userTeamRef);
         Team team = new Team();
         team.setId(nid);
-        if (n_flag == 1) {
+        if (nflag == 1) {
             team.setFlag((byte) 1);
         } else {
             team.setFlag((byte) 0);

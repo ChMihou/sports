@@ -73,7 +73,7 @@
                             <td>
                                 <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
                             </td>
-                            <td th:text="${team.teamname}"></td>
+                            <td th:text="${team.teamleader}"></td>
                             <th:block th:each="sports:${SportsType}">
                                 <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
                             </th:block>
