@@ -1,77 +1,101 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html class="x-admin-sm">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles-merged.css">
-    <link rel="stylesheet" href="/css/style.min.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <script type="text/javascript" src="/js/wangEditor.min.js"></script>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
-    <link rel="stylesheet" href="/lib/layui/css/layui.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!--[if lt IE 9]>
-    <script src="/js/vendor/html5shiv.min.js"></script>
-    <script src="/js/vendor/respond.min.js"></script>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<
 <body>
-<section class="probootstrap-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5 probootstrap-animate">
-                <form action="#" method="post" id="form" class="probootstrap-form">
-                    <div class="form-group">
-                        <label for="name">队伍名字</label>
-                        <input type="text" class="form-control" th:value="${team.teamname}" id="name" name="name"
-                               readonly>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" id="form">
+            <div class="layui-form-item">
+                <label for="L_mobile" class="layui-form-label">
+                    <span class="x-red">*</span>队伍名字</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="name" th:value="${team.teamname}" readonly="readonly"
+                           name="name" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>邮箱地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="email" th:value="${sysUser.email}" readonly="readonly"
+                               name="email" required="" lay-verify="required" autocomplete="off" class="layui-input">
                     </div>
-                    <input type="hidden" name="teamtype" th:value="${team.teamtype}" id="teamtype">
-                    <div class="form-group">
-                        <label for="email">邮箱地址</label>
-                        <input type="email" th:value="${sysUser.email}" class="form-control" id="email" name="email"
-                               readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">挑战主题</label>
-                        <input type="text" class="form-control" onblur="verfiy2()" id="subject" name="subject">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">比赛时间</label>
-                        <input type="text" class="form-control" id="time" name="time">
-                    </div>
-                    <div class="form-group">
-                        <label id="message">内容</label>
-                        <div id="editor">
+                    <div class="layui-form-item">
+                        <label for="subject" class="layui-form-label">
+                            <span class="x-red">*</span>挑战主题</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="subject" readonly="readonly" onblur="verfiy2()"
+                                   name="subject" required="" lay-verify="required" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                        <label for="L_studentid" class="layui-form-label">
+                            <span class="x-red">*</span>比赛时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="L_studentid" readonly="readonly" th:id="subject" onblur="verfiy2()"
+                                   name="subject" required="" lay-verify="required" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                        <div class="form-group">
+                            <label id="message">内容</label>
+                            <div id="editor">
 
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" lay-filter="add" lay-submit="" onclick="send()" type="button">修改
+                            </button>
                         </div>
                     </div>
-                    <input type="hidden" th:value="${team.id}" name="id" id="id">
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" onclick="send()"
-                               value="发送">
-                    </div>
-                </form>
+                </div>
             </div>
-            <div class="col-md-6 col-md-push-1 probootstrap-animate">
-
-            </div>
-        </div>
+        </form>
     </div>
-</section>
-<script src="/js/scripts.min.js"></script>
-<script src="/js/main.min.js"></script>
-<script src="/js/custom.js"></script>
+</div>
+<script>
+    layui.use('form1544', function () {
+        var form = layui.form;
 
-</body>
+        //监听提交
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            var gid = $("#gid").val();
+            var mess = $("#mess").val();
+            $.ajax(
+                {
+                    type: "POST",//方法类型
+                    url: "/game/sendGame",//url
+                    data: {gid: gid, mess: mess},
+                    success: function (data) {
+                        if (data) {
+                            confirm("回复成功");
+                            window.parent.layer.closeAll();
+                            window.parent.location.reload();
+                        }
+                    }
+
+                }
+            );
+            //Demo
+            return false;
+        });
+    });
+</script>
 <script>
     var E = window.wangEditor;
     var editor = new E('#editor');
@@ -133,4 +157,5 @@
         }
     }
 </script>
+</body>
 </html>
