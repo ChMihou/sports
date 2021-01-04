@@ -31,6 +31,9 @@
             <if test="flag!=null">
                 and flag = #{flag}
             </if>
+            <if test="challengerid!=null">
+                and challengerid = #{challengerid}
+            </if>
         </where>
     </sql>
 

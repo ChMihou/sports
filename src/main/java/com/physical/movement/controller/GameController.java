@@ -72,24 +72,20 @@ public class GameController {
 
     @RequestMapping("/gameResult")
     public ModelAndView gameResult(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
-        String check = request.getParameter("check");
+        Byte check = Byte.valueOf(request.getParameter("check"));
         mv.addObject("check", check);
-        String flag = request.getParameter("flag");
-        mv.addObject("flag", flag);
         String key = request.getParameter("key");
         mv.addObject("key", key);
         int uid = (int) session.getAttribute("uid");
-        Team team = new Team();
+        Game game = new Game();
         if (check != null && !check.equals("0") && !check.equals("")) {
-            team.setTeamtype(Integer.parseInt(check));
+            game.setFlag(check);
         }
-        if (flag != null && !flag.equals("0")) {
-            team.setTeamleaderid(uid);
-        }
-        team.setTeamname(key);
-        team.setFlag((byte) 1);
-        List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
-        PageInfo tlist = new PageInfo(teamList);
+        game.setEnemyid(uid);
+        game.setChallenger(key);
+        game.setEnemy(key);
+        List<Game> gameList = gameService.selectAll(game, pageNum, pageSize);
+        PageInfo tlist = new PageInfo(gameList);
         List pagenums = new ArrayList();
         Paginator.page(pagenums, tlist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
