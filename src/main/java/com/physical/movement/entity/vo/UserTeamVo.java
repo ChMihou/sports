@@ -3,12 +3,11 @@ package com.physical.movement.entity.vo;
 import com.physical.movement.entity.common.Id;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserTeamVo extends Id implements Serializable {
 
     private static final long serialVersionUID = -3606834060095467144L;
-    private Integer userid;
-
     private String username;
 
     private String password;
@@ -17,31 +16,39 @@ public class UserTeamVo extends Id implements Serializable {
 
     private Byte usertype;
 
-    private String truename;
-
     private String phone;
 
     private Byte status;
 
+    private String image;
+
     private String sex;
 
-    private Integer teamid;
+    private String email;
+
+    private String truename;
+
+    private String studentid;
 
     private String teamname;
 
     private Integer teamtype;
 
-    private Integer teamleader;
+    private String teamleader;
 
     private Integer teamleaderid;
 
-    public String getTruename() {
-        return truename;
-    }
+    private Byte flag;
 
-    public void setTruename(String truename) {
-        this.truename = truename;
-    }
+    private String reason;
+
+    private String cause;
+
+    private String intro;
+
+    private String teamemail;
+
+    private Date gmtCreate;
 
     public String getUsername() {
         return username;
@@ -91,6 +98,14 @@ public class UserTeamVo extends Id implements Serializable {
         this.status = status;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -99,20 +114,28 @@ public class UserTeamVo extends Id implements Serializable {
         this.sex = sex;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Integer getTeamid() {
-        return teamid;
+    public String getTruename() {
+        return truename;
     }
 
-    public void setTeamid(Integer teamid) {
-        this.teamid = teamid;
+    public void setTruename(String truename) {
+        this.truename = truename;
+    }
+
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
     }
 
     public String getTeamname() {
@@ -131,11 +154,11 @@ public class UserTeamVo extends Id implements Serializable {
         this.teamtype = teamtype;
     }
 
-    public Integer getTeamleader() {
+    public String getTeamleader() {
         return teamleader;
     }
 
-    public void setTeamleader(Integer teamleader) {
+    public void setTeamleader(String teamleader) {
         this.teamleader = teamleader;
     }
 
@@ -145,5 +168,45 @@ public class UserTeamVo extends Id implements Serializable {
 
     public void setTeamleaderid(Integer teamleaderid) {
         this.teamleaderid = teamleaderid;
+    }
+
+    public Byte getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Byte flag) {
+        this.flag = flag;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getTeamemail() {
+        return teamemail;
+    }
+
+    public void setTeamemail(String teamemail) {
+        this.teamemail = teamemail;
     }
 }

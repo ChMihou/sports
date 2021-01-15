@@ -12,7 +12,11 @@
     id, userid, teamid, gmt_create, gmt_modified
     </sql>
     <select id="selectUserTeam" parameterType="UserTeamRef" resultType="com.physical.movement.entity.vo.UserTeamVo">
-        select a.* ,b.*,c.* from sysuser a,team b,user_team_ref c
+        select
+        a.username, a.password, a.salt,a.email,a.image, a.usertype, a.phone, a.status, a.sex,a.truename,a.studentid,
+        b.teamname,b.teamemail, b.teamtype, b.teamleader, b.teamleaderid, b.flag ,b.reason, b.cause,b.intro,
+        c.id, c.userid, c.teamid, c.gmt_create, c.gmt_modified
+        from sysuser a,team b,user_team_ref c
         <where>
             1>2
             <if test="teamid!=null">

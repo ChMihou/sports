@@ -235,6 +235,7 @@ public class TeamController {
         Paginator.page(pagenums, utlist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
         mv.addObject("utlist", utlist);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/team/affiliateManage");
         return mv;
     }
