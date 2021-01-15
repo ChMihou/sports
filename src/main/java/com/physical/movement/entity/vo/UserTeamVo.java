@@ -1,24 +1,16 @@
 package com.physical.movement.entity.vo;
 
-import com.physical.movement.entity.common.Id;
-
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserTeamVo extends Id implements Serializable {
+public class UserTeamVo implements Serializable {
 
     private static final long serialVersionUID = -3606834060095467144L;
     private String username;
 
-    private String password;
-
-    private String salt;
-
     private Byte usertype;
 
     private String phone;
-
-    private Byte status;
 
     private String image;
 
@@ -38,17 +30,42 @@ public class UserTeamVo extends Id implements Serializable {
 
     private Integer teamleaderid;
 
-    private Byte flag;
-
-    private String reason;
-
-    private String cause;
-
-    private String intro;
-
     private String teamemail;
 
+    private Integer id;
+
     private Date gmtCreate;
+
+    private Date gmtModified;
+
+    private Integer userid;
+
+    private Integer teamid;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
 
     public String getUsername() {
         return username;
@@ -56,22 +73,6 @@ public class UserTeamVo extends Id implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public Byte getUsertype() {
@@ -88,14 +89,6 @@ public class UserTeamVo extends Id implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
     }
 
     public String getImage() {
@@ -158,6 +151,22 @@ public class UserTeamVo extends Id implements Serializable {
         return teamleader;
     }
 
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public Integer getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Integer teamid) {
+        this.teamid = teamid;
+    }
+
     public void setTeamleader(String teamleader) {
         this.teamleader = teamleader;
     }
@@ -168,38 +177,6 @@ public class UserTeamVo extends Id implements Serializable {
 
     public void setTeamleaderid(Integer teamleaderid) {
         this.teamleaderid = teamleaderid;
-    }
-
-    public Byte getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Byte flag) {
-        this.flag = flag;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getCause() {
-        return cause;
-    }
-
-    public void setCause(String cause) {
-        this.cause = cause;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
     }
 
     public String getTeamemail() {

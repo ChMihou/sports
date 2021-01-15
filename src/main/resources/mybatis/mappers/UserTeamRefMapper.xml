@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.physical.movement.mapper.UserTeamRefMapper">
-    <resultMap id="BaseResultMap" type="com.physical.movement.entity.UserTeamRef">
+    <resultMap id="BaseResultMap" type="com.physical.movement.entity.vo.UserTeamVo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="userid" jdbcType="INTEGER" property="userid"/>
         <result column="teamid" jdbcType="INTEGER" property="teamid"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="truename" jdbcType="VARCHAR" property="truename"/>
+        <result column="studentid" jdbcType="VARCHAR" property="studentid"/>
+        <result column="teamname" jdbcType="VARCHAR" property="teamname"/>
+        <result column="teamtype" jdbcType="INTEGER" property="teamtype"/>
+        <result column="teamleader" jdbcType="VARCHAR" property="teamleader"/>
+        <result column="teamleaderid" jdbcType="INTEGER" property="teamleaderid"/>
+        <result column="flag" jdbcType="TINYINT" property="flag"/>
+        <result column="reason" jdbcType="LONGVARCHAR" property="reason"/>
+        <result column="cause" jdbcType="LONGVARCHAR" property="cause"/>
+        <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, userid, teamid, gmt_create, gmt_modified
     </sql>
-    <select id="selectUserTeam" parameterType="UserTeamRef" resultType="com.physical.movement.entity.vo.UserTeamVo">
+    <select id="selectUserTeam" parameterType="UserTeamRef" resultMap="BaseResultMap">
         select
-        a.username, a.password, a.salt,a.email,a.image, a.usertype, a.phone, a.status, a.sex,a.truename,a.studentid,
-        b.teamname,b.teamemail, b.teamtype, b.teamleader, b.teamleaderid, b.flag ,b.reason, b.cause,b.intro,
-        c.id, c.userid, c.teamid, c.gmt_create, c.gmt_modified
+        a.username,a.email,a.image, a.phone, a.sex,a.truename,a.studentid,
+        b.teamname,b.teamemail, b.teamtype, b.teamleader, b.teamleaderid,
+        c.teamid,c.gmt_create,c.gmt_modified,c.userid
         from sysuser a,team b,user_team_ref c
         <where>
             1>2
