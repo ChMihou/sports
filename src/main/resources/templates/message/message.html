@@ -76,20 +76,19 @@
                             <td th:text="${message.gmtCreate}"></td>
                             <td th:if="${message.mflag==0}">否</td>
                             <td th:if="${message.mflag==1}">是</td>
-                            <td>
-                                <a title="查看"
-                                   th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe705;</i>
-                                </a>
-                                <a th:if="${session.sysUser.usertype==1}" title="回复"
-                                   th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe642;</i>
-                                </a>
-                                <a title="删除" th:onclick="member_del(this,'[[${message.id}]]')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i>
-                                </a>
+                            <td class="td-manage">
+                                <button class="layui-btn layui-btn-warm layui-btn-xs"
+                                        th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')">
+                                    <i class="layui-icon">&#xe705;</i>查看
+                                </button>
+                                <button class="layui-btn layui-btn layui-btn-xs"
+                                        th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')">
+                                    <i class="layui-icon">&#xe642;</i>回复
+                                </button>
+                                <button class="layui-btn-danger layui-btn layui-btn-xs"
+                                        th:onclick="member_del(this,'[[${message.id}]]')">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
                             </td>
                         </tr>
                         </tbody>

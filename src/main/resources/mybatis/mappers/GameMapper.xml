@@ -47,7 +47,7 @@
     <select id="selectAll" parameterType="com.physical.movement.entity.Game" resultType="Game">
         select
         <include refid="Base_Column_List"/>
-        from team
+        from game
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc,id desc
     </select>

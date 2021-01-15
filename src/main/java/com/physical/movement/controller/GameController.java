@@ -72,7 +72,11 @@ public class GameController {
 
     @RequestMapping("/gameResult")
     public ModelAndView gameResult(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
-        Byte check = Byte.valueOf(request.getParameter("check"));
+        String ch = request.getParameter("check");
+        Byte check = null;
+        if (ch != null && !ch.equals("")) {
+            check = Byte.valueOf(ch);
+        }
         mv.addObject("check", check);
         String key = request.getParameter("key");
         mv.addObject("key", key);

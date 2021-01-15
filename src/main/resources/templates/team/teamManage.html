@@ -63,6 +63,7 @@
                                 <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                             </th>
                             <th>队长</th>
+                            <th>队名</th>
                             <th>队伍类型</th>
                             <th>联系方式</th>
                             <th>创建时间</th>
@@ -73,26 +74,26 @@
                             <td>
                                 <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
                             </td>
+                            <td th:text="${team.teamleader}"></td>
                             <td th:text="${team.teamname}"></td>
                             <th:block th:each="sports:${SportsType}">
                                 <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
                             </th:block>
                             <td th:text="${team.teamemail}"></td>
                             <td th:text="${team.gmtCreate}"></td>
-                            <td>
-                                <a title="查看"
-                                   th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe705;</i>
-                                </a>
-                                <a title="简介"
-                                   th:onclick="xadmin.open('简介修改','/team/apply-team?id=[[${team.id}]]')"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe642;</i>
-                                </a>
-                                <a title="删除" th:onclick="member_del(this,'[[${team.id}]]')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i>
-                                </a>
+                            <td class="td-manage">
+                                <button class="layui-btn layui-btn-warm layui-btn-xs"
+                                        th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')">
+                                    <i class="layui-icon">&#xe705;</i>查看
+                                </button>
+                                <button class="layui-btn layui-btn layui-btn-xs"
+                                        th:onclick="xadmin.open('简介修改','/team/apply-team?id=[[${team.id}]]')">
+                                    <i class="layui-icon">&#xe642;</i>简介修改
+                                </button>
+                                <button class="layui-btn-danger layui-btn layui-btn-xs"
+                                        th:onclick="member_del(this,'[[${team.id}]]')">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
                             </td>
                         </tr>
                         </tbody>

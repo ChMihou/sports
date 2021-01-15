@@ -50,9 +50,17 @@
                             <td th:if="${comment.capply==null}" ></td>
                             <td th:if="${comment.capply!=null}" th:text="${comment.capply}"></td>
                             <td th:if="${session.sysUser.usertype==1}">
-                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn-warm layui-btn-xs"  th:onclick="xadmin.open('回复','/comment/apply-comment?id=[[${comment.cid}]]',600,300)" ><i class="layui-icon">&#xe642;</i>回复</button>
+                                <button th:if="${session.sysUser.usertype==1}"
+                                        class="layui-btn layui-btn-warm layui-btn-xs"
+                                        th:onclick="xadmin.open('回复','/comment/apply-comment?id=[[${comment.cid}]]',600,300)">
+                                    <i class="layui-icon">&#xe642;</i>回复
+                                </button>
 
-                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn-danger layui-btn layui-btn-xs"  th:onclick="member_del(this,'[[${comment.cid}]]')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+                                <button th:if="${session.sysUser.usertype==1}"
+                                        class="layui-btn-danger layui-btn layui-btn-xs"
+                                        th:onclick="member_del(this,'[[${comment.cid}]]')" href="javascript:;"><i
+                                        class="layui-icon">&#xe640;</i>删除
+                                </button>
 
                             </td>
                         </tr>
