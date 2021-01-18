@@ -23,18 +23,18 @@
     <div class="layui-row">
         <form class="layui-form" id="form">
             <div class="layui-form-item">
-                <label for="L_mobile" class="layui-form-label">
+                <label for="L_name" class="layui-form-label">
                     <span class="x-red">*</span>队伍名字</label>
                 <div class="layui-input-inline">
                     <input type="text" id="name" th:value="${team.teamname}" readonly="readonly"
-                           name="name" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                           name="name" required="" lay-verify="required" autocomplete="off" class="layui-input" readonly>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱地址</label>
                     <div class="layui-input-inline">
                         <input type="text" id="email" th:value="${sysUser.email}" readonly="readonly"
-                               name="email" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                               name="email" required="" lay-verify="required" autocomplete="off" class="layui-input" readonly>
                     </div>
                     <div class="layui-form-item">
                         <label for="subject" class="layui-form-label">
@@ -67,35 +67,6 @@
         </form>
     </div>
 </div>
-<script>
-    layui.use('form1544', function () {
-        var form = layui.form;
-
-        //监听提交
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            var gid = $("#gid").val();
-            var mess = $("#mess").val();
-            $.ajax(
-                {
-                    type: "POST",//方法类型
-                    url: "/game/sendGame",//url
-                    data: {gid: gid, mess: mess},
-                    success: function (data) {
-                        if (data) {
-                            confirm("回复成功");
-                            window.parent.layer.closeAll();
-                            window.parent.location.reload();
-                        }
-                    }
-
-                }
-            );
-            //Demo
-            return false;
-        });
-    });
-</script>
 <script>
     var E = window.wangEditor;
     var editor = new E('#editor');
