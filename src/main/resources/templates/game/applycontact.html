@@ -17,6 +17,7 @@
     <!--[if lt IE 9]>
     <script src="/js/vendor/html5shiv.min.js"></script>
     <script src="/js/vendor/respond.min.js"></script>
+    <script type="text/javascript" src="/js/wangEditor.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -57,9 +58,11 @@
                         </div>
                     </div>
                     <input type="hidden" th:value="${team.id}" name="id" id="id">
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" onclick="send()"
-                               value="发送">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">发送</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -76,6 +79,7 @@
 </body>
 <script>
     var E = window.wangEditor;
+    var E = window.wangEditor;
     var editor = new E('#editor');
     var images;
     editor.customConfig.showLinkImg = false;
@@ -89,37 +93,40 @@
         }
     };
     editor.create();
+    layui.use('form', function () {
+        var form = layui.form;
 
-    function send() {
-        let message = editor.txt.html();
-        let id = $("#id").val();
-        let name = $("#name").val();
-        let email = $("#email").val();
-        let radio = document.getElementsByName("n_flag");
-        let time = $("#time").val();
-        let subject = $("#subject").val();
-        for (i = 0; i < radio.length; i++) {
-            if (radio[i].checked) {
-                n_flag = radio[i].value;
-            }
-        }
-        $.ajax({
-            //几个参数需要注意一下
-            type: "POST",//方法类型
-            url: "/game/sendGameApply",//url
-            data: {message: message, name: name, email: email, subject: subject, id: id, time: time, n_flag: n_flag},
-            dataType: "json",
-            success: function (data) {
-                console.log(data);//打印服务端返回的数据(调试用)
-                if (data.success) {
-                    alert(data.msg);
-                } else {
-                    alert(data.msg);
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            let message = editor.txt.html();
+            let id = $("#id").val();
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let time = $("#time").val();
+            let subject = $("#subject").val();
+            $.ajax(
+                {
+                    url: "/game/sendGameApply",
+                    type: "POST",
+                    data: {message: message, name: name, email: email, subject: subject, id: id, time: time},
+                    success: function (data) {
+                        console.log(data);//打印服务端返回的数据(调试用)
+                        if (data.success) {
+                            alert(data.msg);
+                            window.parent.layer.closeAll();
+                            window.parent.location.reload();
+                        } else {
+                            alert(data.msg);
+                            window.parent.layer.closeAll();
+                            window.parent.location.reload();
+                        }
+                    }
                 }
-                ;
-            }
+            );
+            //Demo
+            return false;
         });
-    }
+    });
 
     function verfiy() {
         var message = document.getElementById('message').value;//内容

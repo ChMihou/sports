@@ -26,6 +26,25 @@ public class AdvisoryController {
     @Autowired
     AdvisoryService advisoryService;
 
+    @RequestMapping("wonderful")
+    public ModelAndView wonderful(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        String key = request.getParameter("key");
+        Advisory advisory = new Advisory();
+        advisory.setTitle(key);
+        advisory.setNselect(1);
+        advisory.setWonderful(1);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
+        mv.addObject("key", key);
+        mv.setViewName("/advisory/wonderful");
+        return mv;
+    }
+
     @RequestMapping("basketball")
     public ModelAndView basketball(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -120,6 +139,31 @@ public class AdvisoryController {
             return ResultJson.success("删除成功");
         }
         return ResultJson.error("删除失败");
+    }
+
+    @RequestMapping("wonderfulAdd")
+    @ResponseBody
+    public ResultJson wonderfulAdd(Integer id) {
+        Advisory advisory = new Advisory();
+        advisory.setId(id);
+        advisory.setWonderful(1);
+        int i = advisoryService.updateByPrimaryKeySelective(advisory);
+        if (i > 0) {
+            return ResultJson.success("添加成功");
+        }
+        return ResultJson.error("添加失败");
+    }
+    @RequestMapping("wonderfulDel")
+    @ResponseBody
+    public ResultJson wonderfulDel(Integer id) {
+        Advisory advisory = new Advisory();
+        advisory.setId(id);
+        advisory.setWonderful(0);
+        int i = advisoryService.updateByPrimaryKeySelective(advisory);
+        if (i > 0) {
+            return ResultJson.success("撤消成功");
+        }
+        return ResultJson.error("撤消失败");
     }
 
     @RequestMapping("deleteListAdvisory")

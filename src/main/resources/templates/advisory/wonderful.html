@@ -19,7 +19,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" action="/advisory/runSports" method="post">
+                    <form class="layui-form layui-col-space5" action="/advisory/basketball" method="post">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入标题关键字查询" name="key" id="key" th:value="${key}"></div>
                         <div class="layui-input-inline layui-show-xs-block">
@@ -27,13 +27,6 @@
                                 <i class="layui-icon">&#xe615;</i></button>
                         </div>
                     </form>
-                </div>
-                <div class="layui-card-header">
-
-                    <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-
-                    <button th:if="${session.sysUser.usertype==1}" class="layui-btn" th:onclick="xadmin.open('添加用户','/advisory/articleAdd?nselect=3')"><i class="layui-icon">&#xe654;</i>添加</button>
-
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -61,26 +54,19 @@
                             <td th:text="${notice.author}"></td>
                             <td th:text="${notice.gmtCreate}"></td>
                             <td th:text="${notice.gmtModified}"></td>
+
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"
                                         th:onclick="xadmin.open('查看','/advisory/readArticle?id=[[${notice.id}]]')"><i
                                         class="layui-icon">&#xe705;</i>查看
                                 </button>
 
-                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"
-                                        th:onclick="xadmin.open('编辑','/advisory/editArticle?id=[[${notice.id}]]')"><i
-                                        class="layui-icon">&#xe642;</i>编辑
-                                </button>
-
                                 <button th:if="${session.sysUser.usertype==1}"
                                         class="layui-btn-danger layui-btn layui-btn-xs"
-                                        th:onclick="member_del(this,'[[${notice.id}]]')" href="javascript:;"><i
-                                        class="layui-icon">&#xe640;</i>删除
+                                        th:onclick="wonderful_del(this,'[[${notice.id}]]')" href="javascript:;"><i
+                                        class="layui-icon">&#xe640;</i>撤销
                                 </button>
-                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"
-                                        th:onclick="wonderful(this,'[[${notice.id}]]')" href="javascript:;"><i
-                                        class="layui-icon">&#xe640;</i>加精
-                                </button>
+
                             </td>
                         </tr>
                         </tbody>
@@ -89,17 +75,17 @@
                 <div class="layui-card-body ">
                     <div class="page">
                         <div>
-                            <a aria-label="Previous" id="firstpage" th:href="@{/advisory/runSports(pageNum=1,key=${key})}">首页</a>
-                            <a th:if="${nlist.pageNum} > '1'" id="previouspage" th:href="@{/advisory/runSports(pageNum=${nlist.prePage},key=${key})}" aria-label="Previous">
+                            <a aria-label="Previous" id="firstpage" th:href="@{/advisory/basketball(pageNum=1,key=${key})}">首页</a>
+                            <a th:if="${nlist.pageNum} > '1'" id="previouspage" th:href="@{/advisory/basketball(pageNum=${nlist.prePage},key=${key})}" aria-label="Previous">
                                 &lt;&lt;</a>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
-                                <a class="num layui-btn layui-btn-warm" th:if="${nlist.pageNum==pagenum}" th:href="@{/advisory/runSports(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
+                                <a class="num layui-btn layui-btn-warm" th:if="${nlist.pageNum==pagenum}" th:href="@{/advisory/basketball(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${nlist.pageNum!=pagenum}"th:class="'pagenum'+${pagenum}" th:href="@{/advisory/runSports(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
+                                <a class="num" th:if="${nlist.pageNum!=pagenum}"th:class="'pagenum'+${pagenum}" th:href="@{/advisory/basketball(pageNum=${pagenum},key=${key})}">[[${pagenum}]]</a>
                             </th:block>
-                            <a class="next" th:if="${nlist.pageNum} < ${nlist.pages}" id="nextpage" th:href="@{/advisory/runSports(pageNum=${nlist.nextPage},key=${key})}" aria-label="Next">
+                            <a class="next" th:if="${nlist.pageNum} < ${nlist.pages}" id="nextpage" th:href="@{/advisory/basketball(pageNum=${nlist.nextPage},key=${key})}" aria-label="Next">
                                 &gt;&gt;</a>
-                            <a id="endpage" th:href="@{/advisory/runSports(pageNum=${nlist.pages},key=${key})}">末页</a>
+                            <a id="endpage" th:href="@{/advisory/basketball(pageNum=${nlist.pages},key=${key})}">末页</a>
                             <span aria-label="Next">相关记录[[${nlist.total}]]条，共[[${nlist.pages}]]页。</span>
                         </div>
                     </div>
@@ -152,23 +138,22 @@
                     data:{"id":id},
                     dataType:"json",
                     success : function (data) {
-
+                        $(obj).parents("tr").remove();
+                        layer.msg(data.msg,{icon:1,time:1000});
+                        window.parent.location.reload();
                     }
                 }
             );
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
-            window.parent.location.reload();
         });
     }
 
-    function wonderful(obj,id){
-        layer.confirm('确认要加入精彩系列吗？',function(index){
+    function wonderful_del(obj,id){
+        layer.confirm('确认要撤消精彩文章吗？',function(index){
             //发异步删除数据
 
             $.ajax(
                 {
-                    url:"/advisory/wonderfulAdd",
+                    url:"/advisory/wonderfulDel",
                     type:"POST",
                     data:{"id":id},
                     dataType:"json",
@@ -206,13 +191,12 @@
                     data:{"ids":checkedList.toString()},
                     dataType:"json",
                     success : function (data) {
-
+                        layer.msg(data.msg, {icon: 1});
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                        window.parent.location.reload();
                     }
                 }
             );
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-            window.parent.location.reload();
         });
     }
 </script>

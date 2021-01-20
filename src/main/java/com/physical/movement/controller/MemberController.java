@@ -2,7 +2,6 @@ package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.physical.movement.entity.SysUser;
-import com.physical.movement.entity.Team;
 import com.physical.movement.entity.UserTeamRef;
 import com.physical.movement.entity.vo.UserTeamVo;
 import com.physical.movement.model.Paginator;
@@ -26,6 +25,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.physical.movement.model.SportsType.STATUS_MAP;
 
 @Controller
 @RequestMapping("member")
@@ -137,6 +138,7 @@ public class MemberController {
         PageInfo utlist = new PageInfo(userTeamVoList);
         List pagenums = new ArrayList();
         Paginator.page(pagenums, utlist, pageNum, pageSize);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.addObject("pagenums", pagenums);
         mv.addObject("utlist", utlist);
         mv.setViewName("/member/team-list");

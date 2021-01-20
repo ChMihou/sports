@@ -21,6 +21,8 @@ public class Advisory extends Id {
 
     private String nimage;
 
+    private Integer wonderful;
+
     public Integer getId() {
         return id;
     }
@@ -101,4 +103,11 @@ public class Advisory extends Id {
         this.gmtModified = gmtModified;
     }
 
+    public Integer getWonderful() {
+        return wonderful;
+    }
+
+    public void setWonderful(Integer wonderful) {
+        this.wonderful = wonderful;
+    }
 }

@@ -6,6 +6,7 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="author" jdbcType="VARCHAR" property="author"/>
         <result column="nselect" jdbcType="INTEGER" property="nselect"/>
+        <result column="wonderful" jdbcType="INTEGER" property="wonderful"/>
         <result column="nimage" jdbcType="VARCHAR" property="nimage"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
@@ -13,7 +14,7 @@
         <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, title,author, nselect, nimage, gmt_create, gmt_modified, article, intro
+    id, title,author, nselect, nimage, gmt_create, gmt_modified, article, intro,wonderful
     </sql>
     <sql id="WHERE_SELECT_CONDIYION">
         <where>
@@ -29,6 +30,9 @@
             </if>
             <if test="nselect!=null">
                 and nselect = #{nselect}
+            </if>
+            <if test="wonderful!=null">
+                and wonderful = #{wonderful}
             </if>
         </where>
     </sql>
@@ -71,11 +75,11 @@
     <insert id="insert" parameterType="com.physical.movement.entity.Advisory">
     insert into advisory (id, title, author, nselect,
       nimage, gmt_create, gmt_modified, 
-      article, intro
+      article, intro,wonderful
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
       #{nimage,jdbcType=VARCHAR}, now(), now(),
-      #{article,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR}
+      #{article,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR},#{wonderful}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.Advisory">
@@ -104,6 +108,9 @@
             <if test="intro != null">
                 intro,
             </if>
+            <if test="wonderful != null">
+                wonderful
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -128,6 +135,9 @@
             </if>
             <if test="intro != null">
                 #{intro,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="wonderful != null">
+                #{wonderful,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -156,16 +166,10 @@
             <if test="intro != null">
                 intro = #{intro,jdbcType=LONGVARCHAR},
             </if>
+            <if test="wonderful != null">
+                wonderful = #{wonderful,jdbcType=INTEGER},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Advisory">
-    update advisory
-    set title = #{title,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      nselect = #{nselect,jdbcType=INTEGER},
-      nimage = #{nimage,jdbcType=VARCHAR},
-      gmt_modified = now()
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>

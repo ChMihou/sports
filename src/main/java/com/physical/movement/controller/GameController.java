@@ -143,7 +143,7 @@ public class GameController {
     public ModelAndView challengeTeam(HttpServletRequest request, ModelAndView mv) {
         Integer mid = Integer.valueOf(request.getParameter("id"));
         Team team = new Team();
-        team.setTeamleaderid(mid);
+        team.setId(mid);
         team = teamService.select(team);
         SysUser sysUser = new SysUser();
         sysUser.setId(team.getTeamleaderid());
@@ -156,7 +156,7 @@ public class GameController {
 
     @RequestMapping("/sendGame")
     @ResponseBody
-    public ResultJson sendGame(String message, String name, String email, String subject, Integer id, String time, Session session) {
+    public ResultJson sendGame(String message, String name, String email, String subject, Integer id, String time, HttpSession session) {
         Game game = new Game();
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         Team challenger = new Team();
@@ -168,6 +168,7 @@ public class GameController {
         Team enemy = new Team();
         enemy.setId(id);
         enemy = teamService.select(enemy);
+        message = message + "-------" + "队伍名称：" + name + "-------" + "队长名字：" + challenger.getTeamleader() + "-------" + "比赛时间:" + time;
         boolean flag = mailService.sendWithHtml(email, subject, message);
         if (flag) {
             game.setChallenger(challenger.getTeamname());
@@ -185,7 +186,7 @@ public class GameController {
 
     @RequestMapping("/sendGameApply")
     @ResponseBody
-    public ResultJson sendGameApply(String message, String email, String subject, Integer id, Byte n_flag, Session session) {
+    public ResultJson sendGameApply(String message, String email, String subject, Integer id, Byte n_flag, HttpSession session) {
         boolean flag = mailService.sendWithHtml(email, subject, message);
         if (flag) {
             Game game = new Game();
