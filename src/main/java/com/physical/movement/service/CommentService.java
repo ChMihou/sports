@@ -22,5 +22,7 @@ public interface CommentService {
     List<Comment> selectAll(Comment comment, int pageNum, int pageSize);
 
     int deleteListId(int[] ids);
+
+    int selectCount();
 }
 

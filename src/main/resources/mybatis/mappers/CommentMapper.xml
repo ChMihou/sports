@@ -140,15 +140,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Comment">
-    update comment
-    set comment = #{comment,jdbcType=VARCHAR},
-      advisoryid = #{advisoryid,jdbcType=INTEGER},
-      cuid = #{cuid,jdbcType=INTEGER},
-      apply = #{apply,jdbcType=VARCHAR},
-      flag = #{flag,jdbcType=INTEGER},
-      aboy = #{aboy,jdbcType=VARCHAR},
-      gmt_modified = now()
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM comment;
+    </select>
 </mapper>

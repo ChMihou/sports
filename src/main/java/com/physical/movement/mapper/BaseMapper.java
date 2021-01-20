@@ -20,4 +20,6 @@ public interface BaseMapper<T extends Id> {
 
     public List<T> selectAll(T t);
 
+    int selectCount();
+
 }

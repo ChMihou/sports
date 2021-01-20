@@ -20,4 +20,6 @@ public interface MessageService {
     Boolean insert(Message message);
 
     List<Message> selectAll(Message message, int pageNum, int pageSize);
+
+    int selectCount();
 }

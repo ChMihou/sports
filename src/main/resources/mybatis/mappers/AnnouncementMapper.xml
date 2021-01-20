@@ -143,15 +143,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Announcement">
-    update announcement
-    set author = #{author,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      uid = #{uid,jdbcType=INTEGER},
-      article = #{article,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM announcement;
+    </select>
 </mapper>

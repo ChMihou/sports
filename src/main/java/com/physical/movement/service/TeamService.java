@@ -15,4 +15,6 @@ public interface TeamService {
 
     int deleteByPrimaryKey(Integer id);
 
+    int selectCount();
+
 }

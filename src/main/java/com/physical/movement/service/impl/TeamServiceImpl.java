@@ -40,4 +40,9 @@ public class TeamServiceImpl implements TeamService {
     public int deleteByPrimaryKey(Integer id) {
         return teamMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int selectCount() {
+        return teamMapper.selectCount();
+    }
 }

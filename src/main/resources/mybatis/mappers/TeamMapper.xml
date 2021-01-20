@@ -183,16 +183,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Team">
-    update team
-    set teamname = #{teamname,jdbcType=VARCHAR},
-      teamtype = #{teamtype,jdbcType=INTEGER},
-      teamleader = #{teamleader,jdbcType=VARCHAR},
-      teamemail = #{teamemail,jdbcType=VARCHAR},
-      teamleaderid = #{teamleaderid,jdbcType=INTEGER},
-      gmt_modified = now(),
-      flag = #{flag,jdbcType=TINYINT},
-      intro = #{intro,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM team;
+    </select>
 </mapper>

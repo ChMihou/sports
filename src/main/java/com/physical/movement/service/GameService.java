@@ -14,4 +14,6 @@ public interface GameService {
     int updateByPrimaryKeySelective(Game game);
 
     int deleteByPrimaryKey(Integer id);
+
+    int selectCount();
 }

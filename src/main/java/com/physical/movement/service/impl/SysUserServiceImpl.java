@@ -41,4 +41,9 @@ public class SysUserServiceImpl implements SysUserService {
         return sysuserMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public int selectCount() {
+        return sysuserMapper.selectCount();
+    }
+
 }

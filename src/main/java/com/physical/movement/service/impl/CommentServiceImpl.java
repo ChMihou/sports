@@ -60,4 +60,9 @@ public class CommentServiceImpl implements CommentService {
     public int deleteListId(int[] ids) {
         return commentMapper.deleteListId(ids);
     }
+
+    @Override
+    public int selectCount() {
+        return commentMapper.selectCount();
+    }
 }

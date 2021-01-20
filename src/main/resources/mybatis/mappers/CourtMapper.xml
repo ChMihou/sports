@@ -165,4 +165,7 @@
             )
         </foreach>
     </insert>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM court;
+    </select>
 </mapper>

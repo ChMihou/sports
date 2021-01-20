@@ -172,4 +172,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM advisory;
+    </select>
 </mapper>

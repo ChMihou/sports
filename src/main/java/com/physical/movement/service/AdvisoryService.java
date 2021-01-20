@@ -17,4 +17,6 @@ public interface AdvisoryService {
 
     int deleteListId(int[] ids);
 
+    int selectCount();
+
 }

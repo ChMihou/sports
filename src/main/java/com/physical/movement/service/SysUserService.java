@@ -16,5 +16,7 @@ public interface SysUserService {
 
     int deleteByPrimaryKey(Integer id);
 
+    int selectCount();
+
 
 }

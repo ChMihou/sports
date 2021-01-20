@@ -40,4 +40,9 @@ public class GameServiceImpl implements GameService {
     public int deleteByPrimaryKey(Integer id) {
         return gameMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int selectCount() {
+        return gameMapper.selectCount();
+    }
 }

@@ -55,7 +55,7 @@
     <select id="select" parameterType="com.physical.movement.entity.Game" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from team
+        from game
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc,id desc
     </select>
@@ -182,19 +182,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-
-    <update id="updateByPrimaryKey" parameterType="com.physical.movement.entity.Game">
-    update game
-    set type = #{type,jdbcType=INTEGER},
-      challenger = #{challenger,jdbcType=VARCHAR},
-      challengerid = #{challengerid,jdbcType=INTEGER},
-      enemy = #{enemy,jdbcType=VARCHAR},
-      enemyid = #{enemyid,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=TINYINT}.
-      result = #{result},
-      statement = #{statement}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM game;
+    </select>
 </mapper>

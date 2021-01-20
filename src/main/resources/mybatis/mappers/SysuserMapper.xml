@@ -237,5 +237,8 @@
       studentid = #{studentid,jdbcType=VARCHAR},
       gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
+    <select id="selectCount" resultType="INTEGER">
+        SELECT COUNT(1) FROM sysuser;
+    </select>
 </mapper>

@@ -45,4 +45,11 @@ public class AdvisoryServiceImpl implements AdvisoryService {
     public int deleteListId(int[] ids) {
         return advisoryMapper.deleteListId(ids);
     }
+
+    @Override
+    public int selectCount() {
+        return advisoryMapper.selectCount();
+    }
+
+
 }

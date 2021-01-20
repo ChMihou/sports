@@ -12,10 +12,12 @@ public class SysUser extends Id {
 
     private String salt;
 
+    //1为管理员 0为普通会员
     private Byte usertype;
 
     private String phone;
 
+    //0为禁用用户 1为启用用户
     private Byte status;
 
     private String image;

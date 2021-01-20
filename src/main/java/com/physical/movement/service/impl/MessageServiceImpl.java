@@ -55,4 +55,9 @@ public class MessageServiceImpl implements MessageService {
         PageHelper.startPage(pageNum, pageSize);
         return messageMapper.selectAll(message);
     }
+
+    @Override
+    public int selectCount() {
+        return messageMapper.selectCount();
+    }
 }
