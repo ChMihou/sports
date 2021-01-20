@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2020-12-28 18:38:23
+Date: 2021-01-20 15:43:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,21 +25,25 @@ CREATE TABLE `advisory` (
   `article` text,
   `author` varchar(20) DEFAULT NULL,
   `nselect` int(11) DEFAULT NULL,
+  `wonderful` int(10) unsigned zerofill DEFAULT '0000000000',
   `nimage` varchar(100) DEFAULT NULL,
   `intro` text,
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of advisory
 -- ----------------------------
-INSERT INTO `advisory` VALUES ('1', 'dasd', '<p>asdasd</p>', 'dasd', '1', null, 'dasd', '2020-12-08 18:24:05', '2020-12-08 18:24:05');
-INSERT INTO `advisory` VALUES ('5', 'dsad', '<p>dsad</p>', 'sadsa', '2', null, 'dasdas', '2020-12-08 18:28:29', '2020-12-08 18:28:29');
-INSERT INTO `advisory` VALUES ('6', 'dsad', '<p>dsasd</p>', 'sadas', '3', null, 'dasd', '2020-12-08 18:28:35', '2020-12-08 18:28:35');
-INSERT INTO `advisory` VALUES ('7', 'dsad', '<p>dasd</p>', 'asdas', '5', null, 'dasd', '2020-12-08 18:28:42', '2020-12-08 18:28:42');
-INSERT INTO `advisory` VALUES ('8', 'dsa', '<p><br></p>', 'dsa', '5', null, 'dsad', '2020-12-08 18:31:21', '2020-12-08 18:31:21');
+INSERT INTO `advisory` VALUES ('1', 'dasd', '<p>asdasd</p>', 'dasd', '1', '0000000000', null, 'dasd', '2020-12-08 18:24:05', '2021-01-20 10:50:07');
+INSERT INTO `advisory` VALUES ('5', 'dsad', '<p>dsad</p>', 'sadsa', '2', '0000000000', null, 'dasdas', '2020-12-08 18:28:29', '2021-01-20 10:40:04');
+INSERT INTO `advisory` VALUES ('6', 'dsad', '<p>dsasd</p>', 'sadas', '3', '0000000000', null, 'dasd', '2020-12-08 18:28:35', '2021-01-20 10:40:05');
+INSERT INTO `advisory` VALUES ('7', 'dsad', '<p>dasd</p>', 'asdas', '5', '0000000000', null, 'dasd', '2020-12-08 18:28:42', '2021-01-20 10:40:07');
+INSERT INTO `advisory` VALUES ('8', 'dsa', '<p><br></p>', 'dsa', '5', '0000000000', null, 'dsad', '2020-12-08 18:31:21', '2021-01-20 10:40:08');
+INSERT INTO `advisory` VALUES ('9', null, null, null, null, null, null, null, '2021-01-20 11:56:16', '2021-01-20 11:56:16');
+INSERT INTO `advisory` VALUES ('10', null, null, null, null, null, null, null, '2021-01-20 11:56:28', '2021-01-20 11:56:28');
+INSERT INTO `advisory` VALUES ('11', null, null, null, null, null, null, null, '2021-01-20 11:57:39', '2021-01-20 11:57:39');
 
 -- ----------------------------
 -- Table structure for announcement
@@ -186,11 +190,15 @@ CREATE TABLE `game` (
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of game
 -- ----------------------------
+INSERT INTO `game` VALUES ('1', null, 'dsadasdasdasdsad', '3', 'dsadasdasdasdsad', '3', null, '<p>sdas</p>', '0', '2021-01-20 13:50:03', '2021-01-20 13:50:03');
+INSERT INTO `game` VALUES ('2', null, 'dsadasdasdasdsad', '3', 'dsadasdasdasdsad', '3', null, '<p>sdas</p>/n---------------------------------------------------------------------/n队伍名称：dsadasdasdasdsad   队长名字：cmh/n----------------------------------------------------------------------------/n比赛时间:null', '0', '2021-01-20 13:56:39', '2021-01-20 13:56:39');
+INSERT INTO `game` VALUES ('3', null, 'dsadasdasdasdsad', '3', 'dsadasdasdasdsad', '3', null, '<p>sdas</p>/n---------------------------------------------------------------------/n队伍名称：dsadasdasdasdsad   队长名字：cmh/n----------------------------------------------------------------------------/n比赛时间:null', '0', '2021-01-20 13:57:46', '2021-01-20 13:57:46');
+INSERT INTO `game` VALUES ('4', null, 'dsadasdasdasdsad', '3', 'dsadasdasdasdsad', '3', 'dsadasd', '<h1>准时赴约</h1>/n---------------------------------------------------------------------/n队伍名称：dsadasdasdasdsad   队长名字：cmh/n----------------------------------------------------------------------------/n比赛时间:null', '0', '2021-01-20 14:02:37', '2021-01-20 15:13:55');
 
 -- ----------------------------
 -- Table structure for message
@@ -239,8 +247,8 @@ CREATE TABLE `sysuser` (
 -- ----------------------------
 -- Records of sysuser
 -- ----------------------------
-INSERT INTO `sysuser` VALUES ('2', 'cmh', '4c41c8ee9e59e72c0463f87ffb7d356f', 'mj0x89ImC/rRoC4yK7bZGg==', '1', '15362478021', '1', '/images/noimage.jpg', '男', '106358@qq.com', '2020-12-04 11:45:34', '2020-12-04 17:55:12', '201653684', '陈明浩');
-INSERT INTO `sysuser` VALUES ('3', 'rzh', '6373b90b4be5aa7ddcb0843265bc57a9', 'RwgAOcVSZF/TiZifb5UJgw==', '0', '15236984723', '1', '/images/noimage.jpg', '男', '1536982@qq.com', '2020-12-04 18:07:00', '2020-12-04 18:07:00', '201758964', '容志恒');
+INSERT INTO `sysuser` VALUES ('2', 'cmh', '4c41c8ee9e59e72c0463f87ffb7d356f', 'mj0x89ImC/rRoC4yK7bZGg==', '1', '13433623007', '1', '/images/noimage.jpg', '男', '1063565468@qq.com', '2020-12-04 11:45:34', '2020-12-30 11:37:58', '201653684', '陈明浩');
+INSERT INTO `sysuser` VALUES ('3', 'rzh', '6373b90b4be5aa7ddcb0843265bc57a9', 'RwgAOcVSZF/TiZifb5UJgw==', '1', '15236984723', '1', '/images/noimage.jpg', '男', '1536982@qq.com', '2020-12-04 18:07:00', '2021-01-20 14:44:21', '201758964', '容志恒');
 
 -- ----------------------------
 -- Table structure for team
@@ -265,7 +273,7 @@ CREATE TABLE `team` (
 -- ----------------------------
 -- Records of team
 -- ----------------------------
-INSERT INTO `team` VALUES ('3', 'dsadasdasdasdsad', '1', 'cmh', '2', null, '0', '<p>dasdasdasda</p>', null, '106358@qq.com', '2020-12-24 18:39:45', '2020-12-24 18:39:45');
+INSERT INTO `team` VALUES ('3', 'dsadasdasdasdsad', '1', 'cmh', '2', null, '1', '<p>dasdasdasda</p>', null, '106358@qq.com', '2020-12-24 18:39:45', '2021-01-15 11:49:43');
 
 -- ----------------------------
 -- Table structure for user_team_ref
@@ -278,8 +286,9 @@ CREATE TABLE `user_team_ref` (
   `gmt_create` timestamp NOT NULL DEFAULT '1970-12-31 16:00:00' COMMENT '创建时间',
   `gmt_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_team_ref
 -- ----------------------------
+INSERT INTO `user_team_ref` VALUES ('1', '2', '3', '2021-01-15 11:49:43', '2021-01-15 11:49:43');
