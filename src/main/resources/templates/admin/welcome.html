@@ -26,9 +26,9 @@
                             <blockquote class="layui-elem-quote">欢迎<th:block th:text="${session.sysUser.usertype==1?'管理员':'普通用户'}"/>：
                                 <span class="x-red"><th:block th:text="${session.sysUser.username}" /></span>
                                 ！当前时间:
-                                <script type="text/javascript">
-                                    var new = new Date();
-                                    document.write(new);
+                                <script>
+                                    let time =new Date();
+                                    document.write(time);
                                 </script>
                             </blockquote>
                         </div>
