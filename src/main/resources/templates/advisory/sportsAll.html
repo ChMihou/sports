@@ -32,7 +32,7 @@
 
                     <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
 
-                    <button th:if="${session.sysUser.usertype==1}" class="layui-btn" th:onclick="xadmin.open('添加文章','/advisory/articleAdd?nselect=5')"><i class="layui-icon">&#xe654;</i>添加</button>
+                    <button class="layui-btn" th:onclick="xadmin.open('添加文章','/advisory/articleAdd?nselect=5')"><i class="layui-icon">&#xe654;</i>添加</button>
 
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">

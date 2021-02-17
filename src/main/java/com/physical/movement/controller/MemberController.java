@@ -28,6 +28,9 @@ import java.util.List;
 
 import static com.physical.movement.model.SportsType.STATUS_MAP;
 
+/**
+ * 会员管理
+ */
 @Controller
 @RequestMapping("member")
 public class MemberController {

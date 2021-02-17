@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 留言
+ */
 @Controller
 @RequestMapping("message")
 public class MessageController {

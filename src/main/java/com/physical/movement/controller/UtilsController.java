@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 工具类 上传照片
+ */
 @Controller
 public class UtilsController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
