@@ -64,7 +64,7 @@ public class AdvisoryController {
     }
 
     @RequestMapping("sports-all")
-    public ModelAndView sportsAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request,ModelAndView mv) {
+    public ModelAndView sportsAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, ModelAndView mv) {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
@@ -79,6 +79,7 @@ public class AdvisoryController {
         mv.setViewName("/advisory/sportsAll");
         return mv;
     }
+
     @RequestMapping("football")
     public ModelAndView football(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -96,6 +97,7 @@ public class AdvisoryController {
         mv.setViewName("/advisory/football");
         return mv;
     }
+
     @RequestMapping("runSports")
     public ModelAndView runSports(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -113,6 +115,7 @@ public class AdvisoryController {
         mv.setViewName("/advisory/runsports");
         return mv;
     }
+
     @RequestMapping("game")
     public ModelAndView game(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -153,6 +156,7 @@ public class AdvisoryController {
         }
         return ResultJson.error("添加失败");
     }
+
     @RequestMapping("wonderfulDel")
     @ResponseBody
     public ResultJson wonderfulDel(Integer id) {
@@ -211,7 +215,12 @@ public class AdvisoryController {
     @RequestMapping("editArticle")
     public ModelAndView editArticle(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id;
+        if (request.getParameter("id") == null) {
+            id = 1;
+        } else {
+            id = Integer.parseInt(request.getParameter("id"));
+        }
         Advisory advisory = new Advisory();
         advisory.setId(id);
         advisory = advisoryService.select(advisory);
