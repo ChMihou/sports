@@ -49,12 +49,13 @@
 </div>
 
 <script>
+    debugger
     var E = window.wangEditor
     var images;
     var editor = new E('#editor');
     editor.customConfig.showLinkImg = false;
     editor.customConfig.uploadFileName = 'myFileName';
-    editor.customConfig.uploadImgServer = 'upload';
+    editor.customConfig.uploadImgServer = '/advisory/upload';
     editor.customConfig.uploadImgHooks = {
         customInsert: function (insertImg, result, editor) {
             var url = result.data;
