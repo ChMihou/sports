@@ -44,7 +44,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <select id="selectAll" parameterType="com.physical.movement.entity.Game" resultType="Game">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Game" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from game
@@ -97,7 +97,7 @@
             <if test="enemyid != null">
                 enemyid,
             </if>
-                gmt_create,
+            gmt_create,
             <if test="gmtModified != null">
                 gmt_modified,
             </if>

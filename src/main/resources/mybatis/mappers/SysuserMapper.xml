@@ -174,7 +174,7 @@
         order by id desc
     </select>
 
-    <select id="selectAll" parameterType="com.physical.movement.entity.SysUser" resultType="SysUser">
+    <select id="selectAll" parameterType="com.physical.movement.entity.SysUser" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sysuser

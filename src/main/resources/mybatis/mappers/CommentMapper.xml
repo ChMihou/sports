@@ -41,7 +41,7 @@
             </if>
         </where>
     </sql>
-    <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultType="Announcement">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from message

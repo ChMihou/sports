@@ -39,7 +39,7 @@
             </if>
         </where>
     </sql>
-    <select id="selectAll" parameterType="com.physical.movement.entity.Message" resultType="Message">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Message" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from message

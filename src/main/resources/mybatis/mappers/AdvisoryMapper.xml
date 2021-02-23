@@ -36,7 +36,7 @@
             </if>
         </where>
     </sql>
-    <select id="selectAll" parameterType="com.physical.movement.entity.Advisory" resultType="Advisory">
+    <select id="selectAll" parameterType="com.physical.movement.entity.Advisory" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from advisory
