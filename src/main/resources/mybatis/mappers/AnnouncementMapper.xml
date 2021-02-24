@@ -65,7 +65,7 @@
     insert into announcement (id, author,article,image, title,
       uid, gmt_create, gmt_modified
       )
-    values (#{id,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR},#{article},#{image}, #{title,jdbcType=VARCHAR},
+    values (null, #{author,jdbcType=VARCHAR},#{article},#{image}, #{title,jdbcType=VARCHAR},
       #{uid,jdbcType=INTEGER}, now(), now()
       )
   </insert>

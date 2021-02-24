@@ -70,7 +70,7 @@
       teamleader, teamleaderid, gmt_create, 
       gmt_modified, flag, reason, intro,
       cause)
-    values (#{id,jdbcType=INTEGER},#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
+    values (null,#{teamemail}, #{teamname,jdbcType=VARCHAR}, #{teamtype,jdbcType=INTEGER},
       #{teamleader,jdbcType=VARCHAR}, #{teamleaderid,jdbcType=INTEGER}, now(),
       now(), #{flag,jdbcType=TINYINT}, #{reason,jdbcType=LONGVARCHAR}, #{intro},
       #{cause,jdbcType=LONGVARCHAR})

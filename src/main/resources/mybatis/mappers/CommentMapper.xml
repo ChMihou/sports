@@ -17,7 +17,7 @@
     insert into comment (Cid, Comment, Cnid, 
       Cuid, Capply, Ctime, 
       Cflag, Caboy,gmt_create,gmt_modified)
-    values (#{cid,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{cnid,jdbcType=INTEGER}, 
+    values (null, #{comment,jdbcType=VARCHAR}, #{cnid,jdbcType=INTEGER},
       #{cuid,jdbcType=INTEGER}, #{capply,jdbcType=VARCHAR}, now(),
       #{cflag,jdbcType=INTEGER}, #{caboy,jdbcType=VARCHAR}),now(),now())
     </insert>

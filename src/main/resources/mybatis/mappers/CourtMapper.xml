@@ -58,7 +58,7 @@
     insert into court (id, address, costtime, 
       cost, type, tid, teamname, gmt_create,
       gmt_modified)
-    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{costtime,jdbcType=INTEGER}, 
+    values (null, #{address,jdbcType=VARCHAR}, #{costtime,jdbcType=INTEGER},
       #{cost,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},#{tid},#{teamname} now(),
       now())
      </insert>

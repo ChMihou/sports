@@ -70,7 +70,7 @@
       challengerid, enemy, enemyid, 
       gmt_create, gmt_modified, flag, 
       result,statement)
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR}, 
+    values (null, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR},
       #{challengerid,jdbcType=INTEGER}, #{enemy,jdbcType=VARCHAR}, #{enemyid,jdbcType=INTEGER}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, 
       #{result,jdbcType=LONGVARCHAR},#{statement})

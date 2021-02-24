@@ -35,7 +35,7 @@
       salt, usertype, phone, 
       status, sex,image,email,truename,studentid ,gmt_create,
       gmt_modified)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (null, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{salt,jdbcType=VARCHAR}, #{usertype,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{sex,jdbcType=VARCHAR},#{image},#{email},#{truename},#{studentid},now(),now())
   </insert>

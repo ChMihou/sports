@@ -77,7 +77,7 @@
       nimage, gmt_create, gmt_modified, 
       article, intro,wonderful
       )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
+    values (null #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{nselect,jdbcType=INTEGER},
       #{nimage,jdbcType=VARCHAR}, now(), now(),
       #{article,jdbcType=LONGVARCHAR}, #{intro,jdbcType=LONGVARCHAR},#{wonderful}
       )

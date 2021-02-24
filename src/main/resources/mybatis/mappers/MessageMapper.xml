@@ -62,7 +62,7 @@
       title, checkboy, gmt_create, 
       gmt_modified, mess, apply
       )
-    values (#{id,jdbcType=INTEGER},#{uid}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER},
+    values (null,#{uid}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER},
       #{title,jdbcType=VARCHAR}, #{checkboy,jdbcType=VARCHAR}, now(),
       now(), #{mess,jdbcType=LONGVARCHAR}, #{apply,jdbcType=LONGVARCHAR}
       )

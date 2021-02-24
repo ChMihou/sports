@@ -55,7 +55,7 @@
     <insert id="insert" parameterType="com.physical.movement.entity.UserTeamRef">
     insert into user_team_ref (id, userid, teamid, 
       gmt_create, gmt_modified)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER}, 
+    values (null, #{userid,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER},
       now(), now())
   </insert>
     <insert id="insertSelective" parameterType="com.physical.movement.entity.UserTeamRef">
