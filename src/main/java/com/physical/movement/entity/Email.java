@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.sql.Timestamp;
 
+/**
+ * 邮箱实体类
+ */
 public class Email extends Id {
     private static final long serialVersionUID = -2093205067046948062L;
 

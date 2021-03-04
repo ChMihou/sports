@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 租场实体类
+ */
 public class Court extends Id {
     private static final long serialVersionUID = -238160128400550657L;
 

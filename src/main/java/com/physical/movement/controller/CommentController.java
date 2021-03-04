@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 评论管理
+ */
 @Controller
 @RequestMapping("comment")
 public class CommentController {

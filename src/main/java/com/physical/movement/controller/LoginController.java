@@ -30,6 +30,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * 登陆页面
+ */
 @Controller
 @RequestMapping("login")
 public class LoginController {

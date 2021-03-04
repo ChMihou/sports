@@ -22,6 +22,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 聊天室
+ */
 @ServerEndpoint("/websocket/{username}")
 @Controller
 public class WebsocketController {

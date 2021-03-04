@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 用户实体类
+ */
 public class SysUser extends Id {
     private static final long serialVersionUID = 9188347979626319041L;
     private String username;

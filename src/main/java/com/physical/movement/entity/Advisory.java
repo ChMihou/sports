@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 文章实体类
+ */
 public class Advisory extends Id {
     private static final long serialVersionUID = -1506031664527103014L;
 

@@ -2,6 +2,9 @@ package com.physical.movement.entity;
 
 import com.physical.movement.entity.common.Id;
 
+/**
+ * 队伍信息实体类
+ */
 public class Team extends Id {
 
     private static final long serialVersionUID = -152366404030727918L;

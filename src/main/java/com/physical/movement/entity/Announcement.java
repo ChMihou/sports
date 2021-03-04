@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 公告实体类
+ */
 public class Announcement extends Id {
     private static final long serialVersionUID = -1678337599015161298L;
 

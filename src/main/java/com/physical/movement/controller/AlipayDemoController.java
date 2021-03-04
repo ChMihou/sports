@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 支付宝支付
+ */
 @Controller
 @RequestMapping("payment")
 public class AlipayDemoController {

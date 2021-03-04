@@ -18,6 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 个人中心
+ */
 @Controller
 @RequestMapping("admin")
 public class AdminController {

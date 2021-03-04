@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 
+/**
+ * 定时器触发器的具体配置
+ */
 @Component
 public class ScheduledTask {
 

@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 用户队伍实体类
+ */
 public class UserTeamRef extends Id {
     private static final long serialVersionUID = 8725866490767392925L;
 

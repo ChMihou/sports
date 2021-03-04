@@ -33,6 +33,9 @@ import java.util.Map;
 
 import static com.physical.movement.model.SportsType.STATUS_MAP;
 
+/**
+ * 比赛模块
+ */
 @Controller
 @RequestMapping("game")
 public class GameController {

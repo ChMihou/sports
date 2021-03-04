@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 留言实体类
+ */
 public class Message extends Id {
     private static final long serialVersionUID = 4588167538928127368L;
 

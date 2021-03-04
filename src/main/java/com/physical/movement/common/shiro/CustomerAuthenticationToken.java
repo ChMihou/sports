@@ -3,7 +3,7 @@ package com.physical.movement.common.shiro;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
- * @author geekcattle
+ * 封装Token用户的信息
  */
 public class CustomerAuthenticationToken extends UsernamePasswordToken {
 

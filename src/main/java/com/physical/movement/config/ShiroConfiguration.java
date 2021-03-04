@@ -24,6 +24,9 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import javax.servlet.Filter;
 import java.util.*;
 
+/**
+ * shiro环境配置
+ */
 @Configuration
 public class ShiroConfiguration {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

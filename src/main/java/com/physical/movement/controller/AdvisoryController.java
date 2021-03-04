@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 文章管理
+ */
 @Controller
 @RequestMapping("advisory")
 public class AdvisoryController {

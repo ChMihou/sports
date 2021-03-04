@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 错误页面配置
+ */
 @Configuration
 public class ContextConfig {
     @Bean

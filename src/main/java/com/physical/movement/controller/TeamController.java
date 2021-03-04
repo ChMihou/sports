@@ -32,6 +32,9 @@ import java.util.Map;
 
 import static com.physical.movement.model.SportsType.STATUS_MAP;
 
+/**
+ * 校园队伍管理
+ */
 @Controller
 @RequestMapping("team")
 public class TeamController {

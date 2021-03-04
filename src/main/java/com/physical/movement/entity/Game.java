@@ -2,6 +2,9 @@ package com.physical.movement.entity;
 
 import com.physical.movement.entity.common.Id;
 
+/**
+ * 比赛实体类
+ */
 public class Game extends Id {
 
     private static final long serialVersionUID = -8331637732864573070L;

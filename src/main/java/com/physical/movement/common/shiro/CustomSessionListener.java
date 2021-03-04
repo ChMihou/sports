@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author geekcattle
+ * 常规shiro生命周期配置
  */
 @Configuration
 public class CustomSessionListener implements SessionListener {

@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 公告管理
+ */
 @Controller
 @RequestMapping("announcement")
 public class AnnouncementController {

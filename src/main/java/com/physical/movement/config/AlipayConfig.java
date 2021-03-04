@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * 支付宝沙箱环境配置
+ */
 public class AlipayConfig {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     // 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号

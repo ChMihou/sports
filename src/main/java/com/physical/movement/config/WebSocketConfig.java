@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
+/**
+ * 聊天室环境配置
+ */
 @Configuration
 public class WebSocketConfig {
     Logger logger = LoggerFactory.getLogger(this.getClass());

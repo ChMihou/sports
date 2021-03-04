@@ -4,6 +4,9 @@ import com.physical.movement.entity.common.Id;
 
 import java.util.Date;
 
+/**
+ * 评论实体
+ */
 public class Comment extends Id {
     private static final long serialVersionUID = -1207988480570475255L;
     private Integer cid;
