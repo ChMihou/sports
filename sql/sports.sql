@@ -13,6 +13,9 @@ File Encoding         : 65001
 Date: 2021-01-20 15:43:06
 */
 
+Create  database sports;
+use sports;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

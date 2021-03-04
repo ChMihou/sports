@@ -94,7 +94,7 @@ public class UtilsController {
                 // 要上传的目标文件存放的绝对路径
                 //用src为保存绝对路径不能改名只能用原名，不用原名会导致ajax上传图片后在前端显示时出现404错误-->原因未知
 //                String localPath="F:\\IDEAProject\\imageupload\\src\\main\\resources\\static\\img";
-                final String localPath = "D:\\\\sports\\\\src\\\\main\\\\resources\\\\static\\\\images";
+                final String localPath = "C:\\Users\\RZH\\Desktop\\\\sports\\\\src\\\\main\\\\resources\\\\static\\\\images";
                 //上传后保存的文件名(需要防止图片重名导致的文件覆盖)
                 //获取文件名
                 String fileName = file.getOriginalFilename();
