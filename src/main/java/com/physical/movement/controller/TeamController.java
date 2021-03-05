@@ -123,6 +123,7 @@ public class TeamController {
         team.setId(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/team/read-team");
         return mv;
     }
@@ -135,6 +136,7 @@ public class TeamController {
         team.setId(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/team/apply-team");
         return mv;
     }
@@ -254,6 +256,7 @@ public class TeamController {
     @RequestMapping("/add-userTeam")
     public ModelAndView addUserTeam(ModelAndView mv) {
         mv.setViewName("/team/add-userteam");
+        mv.addObject("SportsType", STATUS_MAP);
         return mv;
     }
 

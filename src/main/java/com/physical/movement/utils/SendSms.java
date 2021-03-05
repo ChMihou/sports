@@ -16,10 +16,10 @@ import java.util.HashMap;
  * 短信验证码SDK
  */
 public class SendSms {
-    public static HashMap<String,String> getMessageStatus(String mobile) throws IOException {
-        HashMap<String,String> hashMap = new HashMap<>();
+    public static HashMap<String, String> getMessageStatus(String mobile) throws IOException {
+        HashMap<String, String> hashMap = new HashMap<>();
         // 第三方平台网站地址阿里
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "你阿里的accessKeyId", "你的阿里的secret");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G2XzZTbM7AXTP6RSFET", "uqLbE7oK47weD5ix4kOQ9RCjBsUDVP");
         IAcsClient client = new DefaultAcsClient(profile);
         String randMun = String.valueOf(RandomUtil.getRandNum());
         System.out.println(randMun);
@@ -32,7 +32,7 @@ public class SendSms {
         request.putQueryParameter("PhoneNumbers", mobile);
         request.putQueryParameter("SignName", "爱心献社会");
         request.putQueryParameter("TemplateCode", "SMS_184815493");
-        request.putQueryParameter("TemplateParam", "{code:"+randMun+"}");
+        request.putQueryParameter("TemplateParam", "{code:" + randMun + "}");
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());

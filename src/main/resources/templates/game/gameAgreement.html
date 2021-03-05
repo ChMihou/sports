@@ -35,19 +35,20 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
+                        队伍类型：
                         <div class="layui-input-inline layui-show-xs-block">
                             <select id="check" name="check">
                                 <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}">
-                                        <th:block th:text="${sports.value.name}" />
+                                    <option th:value="${sports.key}" th:selected="${sports.key==check?'selected':''}">
+                                        <th:block th:text="${sports.value.name}"/>
                                     </option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="radio" name="flag" value="0" title="全部队伍"
-                                   th:text="${flag==0?'checked':''}">
+                                   th:checked="${flag==0?'checked':''}">
                             <input type="radio" name="flag" value="1" title="我的队伍"
-                                   th:text="${flag==1?'checked':''}">
+                                   th:checked="${flag==1?'checked':''}">
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">
@@ -83,11 +84,11 @@
                             <td th:text="${team.gmtCreate}"></td>
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"
-                                   th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')">
+                                        th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')">
                                     <i class="layui-icon">&#xe705;</i>查看
                                 </button>
                                 <button class="layui-btn layui-btn layui-btn-xs"
-                                   th:onclick="xadmin.open('发起挑战','/game/challenge-team?id=[[${team.id}]]')">
+                                        th:onclick="xadmin.open('发起挑战','/game/challenge-team?id=[[${team.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>发起挑战
                                 </button>
                             </td>
