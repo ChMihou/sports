@@ -47,6 +47,28 @@
             </if>
         </where>
     </sql>
+    <sql id="WHERE_SELECT">
+        <where>
+            <if test="teamleaderid!=null">
+                teamleaderid = #{teamleaderid}
+            </if>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="teamtype!=null">
+                and teamtype = #{teamtype}
+            </if>
+            <if test="flag!=null">
+                and flag = #{flag}
+            </if>
+            <if test="teamname!=null and teamname!=''">
+                and teamname like concat("%",#{teamname},"%")
+            </if>
+            <if test="teamleaderid!=null">
+                and teamleaderid = teamleaderid
+            </if>
+        </where>
+    </sql>
     <select id="selectAll" parameterType="com.physical.movement.entity.Team" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -58,7 +80,7 @@
         select
         <include refid="Base_Column_List"/>
         from team
-        <include refid="WHERE_SELECT_CONDIYION"/>
+        <include refid="WHERE_SELECT"/>
         order by gmt_modified desc,id desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
