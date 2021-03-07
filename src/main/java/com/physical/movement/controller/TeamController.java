@@ -285,7 +285,7 @@ public class TeamController {
         }
         UserTeamRef userTeamRef = new UserTeamRef();
         userTeamRef.setTeamid(team.getId());
-        userTeamRef.setUserid(sysUser.getId());
+        userTeamRef.setUserid(user.getId());
         Boolean i = userTeamRefService.insert(userTeamRef);
         if (i)
             return ResultJson.success("添加成功");
