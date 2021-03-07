@@ -28,6 +28,7 @@
     </sql>
     <select id="selectUserTeam" parameterType="UserTeamRef" resultMap="BaseResultMap">
         select
+        c.id,
         a.username,a.email,a.image, a.phone, a.sex,a.truename,a.studentid,
         b.teamname,b.teamemail, b.teamtype, b.teamleader, b.teamleaderid,
         c.teamid,c.gmt_create,c.gmt_modified,c.userid
@@ -35,7 +36,7 @@
         <where>
             1>2
             <if test="teamid!=null">
-                or c.teamid = #{teamid} and c.userid = b.id and b.id = #{teamid}
+                or c.teamid = #{teamid} and c.userid = a.id and b.id = #{teamid}
             </if>
             <if test="userid!=null">
                 or c.userid = #{userid} and c.teamid = b.id and a.id = #{userid}
