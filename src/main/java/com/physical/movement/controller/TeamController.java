@@ -234,7 +234,7 @@ public class TeamController {
         UserTeamRef userTeamRef = new UserTeamRef();
         Team team = new Team();
         team.setTeamleaderid(sysUser.getId());
-        team.setFlag((byte) 0);
+        team.setFlag((byte) 1);
         team = teamService.select(team);
         if (team != null) {
             userTeamRef.setTeamid(team.getId());
