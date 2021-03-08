@@ -59,8 +59,14 @@
                   <li class="active"><a href="/home/contact">Contact</a></li>
                 </ul>
               </li>
-              
-              <li class="probootstra-cta-button last"><a href="/home/donate" class="btn btn-primary">Donate</a></li>
+              <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"
+                                                                                           class="btn btn-primary">登录</a>
+              </li>
+              <li th:if="${session.username!=null}" class="probootstra-cta-button last"><a href="#"
+                                                                                           class="btn btn-primary">
+                <th:block th:text="${session.username}"/>
+              </a></li>
+              <li th:if="${session.username!=null}"><a href="/login/logout">退出</a></li>
             </ul>
           </div>
         </div>
