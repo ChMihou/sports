@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>schoolteam</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -144,7 +144,7 @@
                                                    th:href="@{/testimonial(pageNum=${pagenum},province=${province},city=${city},area=${area})}">[[${pagenum}]]</a>
                                 </li>
                             </th:block>
-                            <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage"
+                            <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.更多}" id="nextpage"
                                                th:href="@{/testimonial(pageNum=${clist.nextPage})}" aria-label="Next">
                                 &gt;&gt;</a></li>
                             <li class="num"><a id="endpage" th:href="@{/testimonial(pageNum=${clist.pages})}">末页</a>
