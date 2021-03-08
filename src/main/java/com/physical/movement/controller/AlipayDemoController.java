@@ -105,7 +105,7 @@ public class AlipayDemoController {
             court.setTid(team.getId());
             court.setId(id);
             courtService.updateByPrimaryKeySelective(court);
-            return "redirect:admin/index";
+            return "redirect:/admin/index";
         } else {
             return "redirect:error";
 
