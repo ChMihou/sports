@@ -107,8 +107,7 @@ public class AlipayDemoController {
             courtService.updateByPrimaryKeySelective(court);
             return "redirect:/admin/index";
         } else {
-            return "redirect:error";
-
+            return "redirect:/error";
         }
     }
 
