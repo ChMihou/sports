@@ -236,12 +236,11 @@ public class TeamController {
         UserTeamRef userTeamRef = new UserTeamRef();
         Team team = new Team();
         team.setTeamleaderid(sysUser.getId());
-        team.setFlag((byte) 0);
+        team.setFlag((byte) 1);
         team = teamService.select(team);
         if (team != null) {
             userTeamRef.setTeamid(team.getId());
         }
-        userTeamRef.setUserid(sysUser.getId());
         List<UserTeamVo> userTeamVoList = userTeamRefService.selectUserTeam(userTeamRef, pageNum, pageSize);
         PageInfo utlist = new PageInfo(userTeamVoList);
         List pagenums = new ArrayList();
@@ -262,8 +261,8 @@ public class TeamController {
 
     @RequestMapping("/deleteOneUserTeam")
     @ResponseBody
-    public ResultJson deleteOneUserTeam(Integer id) {
-        int i = userTeamRefService.deleteByPrimaryKey(id);
+    public ResultJson deleteOneUserTeam(String id) {
+        int i = userTeamRefService.deleteByPrimaryKey(Integer.valueOf(id));
         if (i > 0) {
             return ResultJson.success("删除成功");
         }
@@ -288,7 +287,7 @@ public class TeamController {
         }
         UserTeamRef userTeamRef = new UserTeamRef();
         userTeamRef.setTeamid(team.getId());
-        userTeamRef.setUserid(sysUser.getId());
+        userTeamRef.setUserid(user.getId());
         Boolean i = userTeamRefService.insert(userTeamRef);
         if (i)
             return ResultJson.success("添加成功");

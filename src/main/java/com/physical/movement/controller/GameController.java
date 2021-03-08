@@ -142,7 +142,7 @@ public class GameController {
         game.setId(gid);
         game = gameService.select(game);
         Team team = new Team();
-        team.setId(game.getEnemyid());
+        team.setId(game.getChallengerid());
         team = teamService.select(team);
         mv.addObject("team", team);
         mv.addObject("game", game);

@@ -1,9 +1,11 @@
 package com.physical.movement.entity.vo;
 
+import com.physical.movement.entity.common.Id;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserTeamVo implements Serializable {
+public class UserTeamVo extends Id implements Serializable {
 
     private static final long serialVersionUID = -3606834060095467144L;
     private String username;
