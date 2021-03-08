@@ -39,16 +39,14 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <select id="check" name="check">
                                 <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}" th:selected="${sports.key==check?'selected':''}">
+                                    <option th:value="${sports.key}">
                                         <th:block th:text="${sports.value.name}"/>
                                     </option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="radio" name="flag" value="0" title="全部队伍"
-                                   th:checked="${flag==0?'checked':''}">
-                            <input type="radio" name="flag" value="1" title="我的队伍"
-                                   th:checked="${flag==1?'checked':''}">
+                            <input type="radio" name="flag" value="0" title="全部队伍">
+                            <input type="radio" name="flag" value="1" title="我的队伍">
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">

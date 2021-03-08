@@ -39,7 +39,7 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <select id="check" name="check">
                                 <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}" th:selected="${sports.key==check?'selected':''}">
+                                    <option th:value="${sports.key}">
                                         <th:block th:text="${sports.value.name}"/>
                                     </option>
                             </select>
