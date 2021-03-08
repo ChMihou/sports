@@ -288,6 +288,9 @@ public class TeamController {
         UserTeamRef userTeamRef = new UserTeamRef();
         userTeamRef.setTeamid(team.getId());
         userTeamRef.setUserid(user.getId());
+        if (userTeamRefService.select(userTeamRef) != null) {
+            return ResultJson.error("此队员已在你的队伍中，请勿重复添加");
+        }
         Boolean i = userTeamRefService.insert(userTeamRef);
         if (i)
             return ResultJson.success("添加成功");

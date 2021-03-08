@@ -49,6 +49,10 @@
         from user_team_ref
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="select" parameterType="com.physical.movement.entity.UserTeamRef"
+            resultMap="com.physical.movement.entity.UserTeamRef">
+        select * from user_team_ref where teamid= #{teamid} and userid=#{userid}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_team_ref
     where id = #{id,jdbcType=INTEGER}
