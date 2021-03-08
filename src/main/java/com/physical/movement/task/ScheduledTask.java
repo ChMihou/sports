@@ -20,7 +20,7 @@ public class ScheduledTask {
      * 定时插入第二天的订场信息  晚上12点
      * @throws ParseException
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
     public void scheduledTask() throws ParseException {
         System.out.println("开始插入订场场地信息");
         courtService.addListCourt();
