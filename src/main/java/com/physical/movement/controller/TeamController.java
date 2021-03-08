@@ -123,6 +123,7 @@ public class TeamController {
         team.setId(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/team/read-team");
         return mv;
     }
@@ -135,6 +136,7 @@ public class TeamController {
         team.setId(mid);
         team = teamService.select(team);
         mv.addObject("team", team);
+        mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/team/apply-team");
         return mv;
     }
@@ -253,6 +255,7 @@ public class TeamController {
     @RequestMapping("/add-userTeam")
     public ModelAndView addUserTeam(ModelAndView mv) {
         mv.setViewName("/team/add-userteam");
+        mv.addObject("SportsType", STATUS_MAP);
         return mv;
     }
 
@@ -285,6 +288,9 @@ public class TeamController {
         UserTeamRef userTeamRef = new UserTeamRef();
         userTeamRef.setTeamid(team.getId());
         userTeamRef.setUserid(user.getId());
+        if (userTeamRefService.select(userTeamRef) != null) {
+            return ResultJson.error("此队员已在你的队伍中，请勿重复添加");
+        }
         Boolean i = userTeamRefService.insert(userTeamRef);
         if (i)
             return ResultJson.success("添加成功");

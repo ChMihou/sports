@@ -35,19 +35,18 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
                                    th:value="${key}"></div>
+                        队伍类型：
                         <div class="layui-input-inline layui-show-xs-block">
-                            <select name="check">
+                            <select id="check" name="check">
                                 <tr th:each="sports:${SportsType}">
-                                    <option th:value="${sports.key}" th:text="${sports.key==check?'selected':''}">
-                                        <th:block th:text="${sports.value.name}"></th:block>
+                                    <option style="left: auto" th:value="${sports.key}">
+                                        <th:block th:text="${sports.value.name}"/>
                                     </option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="radio" name="flag" value="0" title="全部队伍"
-                                   th:text="${flag==0?'checked':''}">
-                            <input type="radio" name="flag" value="1" title="我的队伍"
-                                   th:text="${flag==1?'checked':''}">
+                            <input type="radio" name="flag" value="0" title="全部队伍">
+                            <input type="radio" name="flag" value="1" title="我的队伍">
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">

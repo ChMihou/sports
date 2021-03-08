@@ -131,7 +131,7 @@
                 and id = #{id}
             </if>
             <if test="username!=null">
-                and username like #{username}
+                and (username like concat("%",#{username},"%") or truename like concat("%",#{truename},"%"))
             </if>
             <if test="password!=null">
                 and password = #{password}
