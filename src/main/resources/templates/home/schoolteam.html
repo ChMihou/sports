@@ -86,28 +86,29 @@
             <div class="layui-col-md12">
                 <div class="layui-card">
                     <div class="layui-card-body ">
-                        <form class="layui-form layui-col-space5" action="testimonial">
-                            <div class="layui-form-item x-city" id="start">
-                                <label class="layui-form-label">搜索的城市：</label>
-                                <div class="layui-input-inline">
-                                    <select name="province" th:id="province" lay-filter="province">
-                                        <option>请选择省</option>
-                                    </select>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="city" th:id="city" lay-filter="city">
-                                        <option>请选择市</option>
-                                    </select>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="area" th:id="area" lay-filter="area">
-                                        <option>请选择县/区</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
-                                    </button>
-                                </div>
+                        <form class="layui-form layui-col-space5" action="/team/teamManage" method="post">
+                            <div class="layui-input-inline layui-show-xs-block">
+                                <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
+                                       th:value="${key}"></div>
+                            队伍类型：
+                            <div class="layui-input-inline layui-show-xs-block">
+                                <select id="check" name="check">
+                                    <tr th:each="sports:${SportsType}">
+                                        <option th:value="${sports.key}"
+                                                th:selected="${sports.key==check?'selected':''}">
+                                            <th:block th:text="${sports.value.name}"/>
+                                        </option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline layui-show-xs-block">
+                                <input type="radio" name="flag" value="0" title="全部队伍"
+                                       th:text="${flag==0?'checked':''}">
+                                <input type="radio" name="flag" value="1" title="我的队伍"
+                                       th:text="${flag==1?'checked':''}">
+                            </div>
+                            <div class="layui-input-inline layui-show-xs-block">
+                                <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">
+                                    <i class="layui-icon">&#xe615;</i></button>
                             </div>
                         </form>
                     </div>
@@ -115,43 +116,59 @@
                         <table class="layui-table layui-form">
                             <thead>
                             <tr>
-                                <th>公益柜名称</th>
-                                <th>公益柜具体地址</th>
+                                <th>
+                                    <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
+                                </th>
+                                <th>队长</th>
+                                <th>队名</th>
+                                <th>队伍类型</th>
+                                <th>联系方式</th>
+                                <th>创建时间</th>
                             </thead>
                             <tbody>
-                            <tr th:each="testimonial:${clist.list}">
-                                <td th:text="${testimonial.cname}"></td>
-                                <td th:text="${testimonial.caddress}"></td>
+                            <tr th:each="team:${tlist.list}">
+                                <td>
+                                    <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
+                                </td>
+                                <td th:text="${team.teamleader}"></td>
+                                <td th:text="${team.teamname}"></td>
+                                <th:block th:each="sports:${SportsType}">
+                                    <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
+                                </th:block>
+                                <td th:text="${team.teamemail}"></td>
+                                <td th:text="${team.gmtCreate}"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="page">
-                        <ul class="pager">
-                            <li class="num"><a th:href="@{/testimonial(pageNum=1,id=${id})}">首页</a></li>
-                            <li class="num"><a th:if="${clist.pageNum} > '1'" id="previouspage"
-                                               th:href="@{/testimonial(pageNum=${clist.prePage})}" class="previous">
-                                &lt;&lt;</a></li>
-                            <th:block class="pagination" th:each="pagenum:${pagenums}">
-                                <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <li class="num"><a class="active" style="color: #ff2727"
-                                                   th:if="${clist.pageNum==pagenum}"
-                                                   th:href="@{/testimonial(pageNum=${pagenum},province=${province},city=${city},area=${area})}">[[${pagenum}]]</a>
-                                </li>
+                    <div class="layui-card-body ">
+                        <div class="page">
+                            <div>
+                                <a aria-label="Previous" id="firstpage"
+                                   th:href="@{/team/teamManage(pageNum=1,key=${key},check=${check},flag=${flag})}">首页</a>
+                                <a th:if="${tlist.pageNum} > '1'" id="previouspage"
+                                   th:href="@{/team/teamManage(pageNum=${tlist.prePage},key=${key},check=${check},flag=${flag})}"
+                                   aria-label="Previous">
+                                    &lt;&lt;</a>
+                                <!--   当前页数 ，方便js调用 display:none;隐藏        -->
+                                <span style="display:none;" id="pagenums">[[${tlist.pageNum}]]</span>
+                                <th:block class="pagination" th:each="pagenum:${pagenums}">
+                                    <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
+                                    <a class="num layui-btn layui-btn-warm" th:if="${tlist.pageNum==pagenum}"
+                                       th:href="@{/team/teamManage(pageNum=${pagenum},key=${key},check=${check},flag=${flag})}">[[${pagenum}]]</a>
 
-                                <li class="num"><a class="num" th:if="${clist.pageNum!=pagenum}"
-                                                   th:class="'pagenum'+${pagenum}"
-                                                   th:href="@{/testimonial(pageNum=${pagenum},province=${province},city=${city},area=${area})}">[[${pagenum}]]</a>
-                                </li>
-                            </th:block>
-                            <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.更多}" id="nextpage"
-                                               th:href="@{/testimonial(pageNum=${clist.nextPage})}" aria-label="Next">
-                                &gt;&gt;</a></li>
-                            <li class="num"><a id="endpage" th:href="@{/testimonial(pageNum=${clist.pages})}">末页</a>
-                            </li>
-                            <li class="num"><span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
-                            </li>
-                        </ul>
+                                    <a class="num" th:if="${tlist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}"
+                                       th:href="@{/team/teamManage(pageNum=${pagenum},key=${key},check=${check},flag=${flag})}">[[${pagenum}]]</a>
+                                </th:block>
+                                <a class="next" th:if="${tlist.pageNum} < ${tlist.pages}" id="nextpage"
+                                   th:href="@{/team/teamManage(pageNum=${tlist.nextPage},key=${key},check=${check},flag=${flag})}"
+                                   aria-label="Next">
+                                    &gt;&gt;</a>
+                                <a id="endpage"
+                                   th:href="@{/team/teamManage(pageNum=${tlist.pages},key=${key},check=${check},flag=${flag})}">末页</a>
+                                <span aria-label="Next">相关记录[[${tlist.total}]]条，共[[${tlist.pages}]]页。</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
