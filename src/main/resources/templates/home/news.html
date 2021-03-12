@@ -7,7 +7,7 @@
     <title>news</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/sports/css/styles-merged.css">
     <link rel="stylesheet" href="/sports/css/style.min.css">
@@ -20,7 +20,7 @@
   </head>
   <body>
 
-    
+
       <nav class="navbar navbar-default probootstrap-navbar">
         <div class="container">
           <div class="navbar-header">
@@ -35,28 +35,19 @@
 
           <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/home/index">Home</a></li>
-              <li><a href="/home/about">About Us</a></li>
-              <li class="active"><a href="/home/news">News</a></li>
-              <li><a href="/home/causes">Causes</a></li>
+              <li><a href="/home/index">首页</a></li>
+              <li class="active"><a href="/home/news">精彩校园</a></li>
+              <li><a href="/home/causes">体育趣图</a></li>
+              <li><a href="/home/about">关于我们</a></li>
+              <li><a href="/admin/index">个人中心</a></li>
               <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
                 <ul class="dropdown-menu">
-                  <li><a href="/home/about">About Us</a></li>
-                  <li><a href="/home/testimonial">Testimonial</a></li>
-                  <li><a href="/home/cause-single">Cause Single</a></li>
-                  <li><a href="/home/gallery">Gallery</a></li>
-                  <li class="dropdown-submenu dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Second Level Menu</a></li>
-                      <li><a href="#">Second Level Menu</a></li>
-                      <li><a href="#">Second Level Menu</a></li>
-                      <li><a href="#">Second Level Menu</a></li>
-                    </ul>
-                  </li>
-                  <li class="active"><a href="/home/news">News</a></li>
-                  <li><a href="/home/contact">Contact</a></li>
+                  <li><a href="/home/testimonial">篮球文章</a></li>
+                  <li><a href="/home/cause-single">足球文章</a></li>
+                  <li><a href="/home/gallery">其他体育</a></li>
+                  <li><a href="/home/news">校园队伍</a></li>
+                  <li><a href="/home/contact">联系我们</a></li>
                 </ul>
               </li>
               <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"
@@ -71,7 +62,7 @@
           </div>
         </div>
       </nav>
-      
+
       <section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(/sports/img/hero_bg_bw_2.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
@@ -174,7 +165,7 @@
         </div>
       </section>
 
-      
+
 
       <footer class="probootstrap-footer probootstrap-bg">
         <div class="container">
@@ -193,7 +184,7 @@
                 </ul>
               </div>
             </div>
-           
+
             <div class="col-md-4 probootstrap-animate">
               <div class="probootstrap-footer-widget">
                 <h3>Contact Info</h3>
@@ -202,7 +193,7 @@
                   <li><i class="icon-mail"></i><span>info@domain.com</span></li>
                   <li><i class="icon-phone2"></i><span>+123 456 7890</span></li>
                 </ul>
-                
+
               </div>
             </div>
 
@@ -213,10 +204,10 @@
                 <p><a href="#" class="btn btn-primary">Donate Now</a></p>
               </div>
             </div>
-           
+
           </div>
           <!-- END row -->
-          
+
         </div>
 
         <div class="probootstrap-copyright">

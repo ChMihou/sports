@@ -38,20 +38,19 @@
 
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">首页</a></li>
-                <li><a href="news">爱心资讯</a></li>
-                <li><a href="testimonial">我们在路上</a></li>
-                <li><a href="specialnews">特别新闻</a></li>
-                <li><a href="about">关于我们</a></li>
-                <li class="active"><a href="testimonial">公益柜</a></li>
-                <li><a href="gallery">现场实况</a></li>
-                <li><a href="index">个人中心</a></li>
+                <li><a href="/home/index">首页</a></li>
+                <li><a href="/home/news">精彩校园</a></li>
+                <li><a href="/home/causes">体育趣图</a></li>
+                <li><a href="/home/about">关于我们</a></li>
+                <li><a href="/admin/index">个人中心</a></li>
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
                     <ul class="dropdown-menu">
-                        <li><a href="cause-single">优秀成员</a></li>
-                        <li><a href="comment">平台评价留言</a></li>
-                        <li><a href="donate">平台捐款</a></li>
+                        <li><a href="/home/testimonial">篮球文章</a></li>
+                        <li><a href="/home/cause-single">足球文章</a></li>
+                        <li><a href="/home/gallery">其他体育</a></li>
+                        <li class="active"><a href="/home/news">校园队伍</a></li>
+                        <li><a href="/home/contact">联系我们</a></li>
                     </ul>
                 </li>
                 <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"

@@ -36,27 +36,18 @@
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/home/index">首页</a></li>
+                <li><a href="/home/news">精彩校园</a></li>
+                <li><a href="/home/causes">体育趣图</a></li>
                 <li><a href="/home/about">关于我们</a></li>
-                <li><a href="/home/news">News</a></li>
-                <li><a href="/home/causes">Causes</a></li>
+                <li><a href="/admin/index">个人中心</a></li>
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/home/about">About Us</a></li>
-                        <li><a href="/home/testimonial">Testimonial</a></li>
-                        <li><a href="/home/cause-single">Cause Single</a></li>
-                        <li><a href="/home/gallery">Gallery</a></li>
-                        <li class="dropdown-submenu dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Second Level Menu</a></li>
-                                <li><a href="#">Second Level Menu</a></li>
-                                <li><a href="#">Second Level Menu</a></li>
-                                <li><a href="#">Second Level Menu</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/home/news">News</a></li>
-                        <li><a href="/home/contact">Contact</a></li>
+                        <li><a href="/home/testimonial">篮球文章</a></li>
+                        <li><a href="/home/cause-single">足球文章</a></li>
+                        <li><a href="/home/gallery">其他体育</a></li>
+                        <li><a href="/home/news">校园队伍</a></li>
+                        <li><a href="/home/contact">联系我们</a></li>
                     </ul>
                 </li>
                 <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"
