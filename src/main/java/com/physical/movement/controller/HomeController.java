@@ -61,9 +61,9 @@ public class HomeController {
         return mv;
     }
 
-    @RequestMapping("/concat")
+    @RequestMapping("/contact")
     public ModelAndView concat(ModelAndView mv) {
-        mv.addObject("/home/concat");
+        mv.addObject("/home/contact");
         return mv;
     }
 
