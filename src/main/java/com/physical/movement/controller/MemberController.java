@@ -47,10 +47,10 @@ public class MemberController {
 
     @RequestMapping("/member-alter")
     public ModelAndView memberalter(HttpSession session, ModelAndView mv) {
-        SysUser user = (SysUser) session.getAttribute("sysUser");
+        SysUser user = (SysUser) session.getAttribute("sysUser");//将当前用户的信息从sesion中取出来放在user中
         SysUser flag = new SysUser();
-        flag.setId(user.getId());
-        SysUser sysUser = sysUserService.select(flag);
+        flag.setId(user.getId());//给当前用户的id赋给flag
+        SysUser sysUser = sysUserService.select(flag);//调用select方法
         mv.addObject("sysUser", sysUser);
         mv.setViewName("/member/member-alter");
         return mv;

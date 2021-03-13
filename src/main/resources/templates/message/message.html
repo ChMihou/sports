@@ -74,8 +74,8 @@
                             <td th:text="${message.name}"></td>
                             <td th:text="${message.title}"></td>
                             <td th:text="${message.gmtCreate}"></td>
-                            <td th:if="${message.mflag==0}">否</td>
-                            <td th:if="${message.mflag==1}">是</td>
+                            <td th:if="${message.flag==0}">否</td>
+                            <td th:if="${message.flag==1}">是</td>
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"
                                         th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')">

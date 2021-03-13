@@ -44,14 +44,14 @@
     <select id="selectAll" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from message
+        from comment
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by ctime desc,id desc
     </select>
     <select id="select" parameterType="com.physical.movement.entity.Announcement" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from message
+        from comment
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by ctime desc
     </select>
