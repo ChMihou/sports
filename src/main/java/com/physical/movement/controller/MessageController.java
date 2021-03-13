@@ -96,7 +96,7 @@ public class MessageController {
         ModelAndView mv = new ModelAndView();
         Integer mid = Integer.valueOf(request.getParameter("id"));
         Message message = new Message();
-        message.setUid(mid);
+        message.setId(mid);
         message = messageService.select(message);
         mv.addObject("message", message);
         mv.setViewName("/message/read-message");
