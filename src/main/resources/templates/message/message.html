@@ -149,7 +149,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax(
                 {
-                    url: "deleteOneMessage",
+                    url: "/message/deleteOneMessage",
                     type: "POST",
                     data: {"id": id},
                     dataType: "json",

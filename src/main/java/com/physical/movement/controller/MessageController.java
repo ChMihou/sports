@@ -71,7 +71,15 @@ public class MessageController {
         mv.setViewName("/message/add-message");
         return mv;
     }
-
+    @RequestMapping("deleteOneMessage")
+    @ResponseBody
+    public ResultJson deleteOneComment(Integer id) {
+        int i = messageService.deleteByPrimaryKey(id);
+        if (i > 0) {
+            return ResultJson.success("删除成功");
+        }
+        return ResultJson.error("删除失败");
+    }
     @RequestMapping("/addMessage")
     @ResponseBody
     public ResultJson addMessage(String n_title, String n_article, HttpServletRequest request) {
