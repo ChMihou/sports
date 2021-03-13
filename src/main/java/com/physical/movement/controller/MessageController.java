@@ -122,7 +122,7 @@ public class MessageController {
         String Mcheckboy = (String) session.getAttribute("username");
         message.setId(mid);
         message.setFlag(1);
-        message.setMess(mess);
+        message.setApply(mess);
         message.setCheckboy(Mcheckboy);
         int a = messageService.updateByPrimaryKeySelective(message);
         if (a > 0) {
