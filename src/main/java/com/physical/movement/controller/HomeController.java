@@ -93,13 +93,9 @@ public class HomeController {
         mv.addObject("flag", flag);
         String key = request.getParameter("key");
         mv.addObject("key", key);
-        int uid = (int) session.getAttribute("uid");
         Team team = new Team();
         if (check != null && !check.equals("0") && !check.equals("")) {
             team.setTeamtype(Integer.parseInt(check));
-        }
-        if (flag != null && !flag.equals("0")) {
-            team.setTeamleaderid(uid);
         }
         team.setTeamname(key);
         team.setFlag((byte) 1);
