@@ -1,6 +1,8 @@
 package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.physical.movement.entity.Advisory;
+import com.physical.movement.entity.Comment;
 import com.physical.movement.entity.Team;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.service.*;
@@ -93,13 +95,9 @@ public class HomeController {
         mv.addObject("flag", flag);
         String key = request.getParameter("key");
         mv.addObject("key", key);
-        int uid = (int) session.getAttribute("uid");
         Team team = new Team();
         if (check != null && !check.equals("0") && !check.equals("")) {
             team.setTeamtype(Integer.parseInt(check));
-        }
-        if (flag != null && !flag.equals("0")) {
-            team.setTeamleaderid(uid);
         }
         team.setTeamname(key);
         team.setFlag((byte) 1);
@@ -111,6 +109,28 @@ public class HomeController {
         mv.addObject("tlist", tlist);
         mv.addObject("SportsType", STATUS_MAP);
         mv.setViewName("/home/schoolteam");
+        return mv;
+    }
+
+
+    @RequestMapping("article")
+    public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
+
+        ModelAndView mv = new ModelAndView();
+        Advisory advisory = new Advisory();
+        advisory.setId(id);
+        advisory = advisoryService.select(advisory);
+        mv.addObject("advisory", advisory);
+        mv.addObject("id", id);
+        Comment comment = new Comment();
+        comment.setId(id);
+        List<Comment> userCommentVos = commentService.selectAll(comment, pageNum, pageSize);
+        PageInfo clist = new PageInfo(userCommentVos);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, clist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("clist", clist);
+        mv.setViewName("article");
         return mv;
     }
 }

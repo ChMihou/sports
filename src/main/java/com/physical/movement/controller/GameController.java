@@ -182,7 +182,7 @@ public class GameController {
         if(enemy!=null&&enemy.getTeamleaderid()==sysUser.getId()){
             return ResultJson.error("您不能约战自己的队伍");
         }
-        message = message + "-------" + "队伍名称：" + name + "-------" + "队长名字：" + challenger.getTeamleader() + "-------" + "比赛时间:" + time;
+        message = message + "-------" + "队伍名称：" + challenger.getTeamname() + "-------" + "队长名字：" + challenger.getTeamleader() + "-------" + "比赛时间:" + time;
         boolean flag = mailService.sendWithHtml(email, subject, message);
         if (flag) {
             game.setChallenger(challenger.getTeamname());
