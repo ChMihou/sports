@@ -91,6 +91,8 @@ public class MessageController {
         message.setTitle(n_title);
         message.setName(Mname);
         message.setFlag(0);
+        int uid = (int) session.getAttribute("uid");
+        message.setUid(uid);
         message.setMess(n_article);
         Boolean i = messageService.insert(message);
         if (i)

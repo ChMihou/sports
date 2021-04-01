@@ -81,7 +81,7 @@
                                         th:onclick="xadmin.open('查看','/message/read-message?id=[[${message.id}]]')">
                                     <i class="layui-icon">&#xe705;</i>查看
                                 </button>
-                                <button class="layui-btn layui-btn layui-btn-xs"
+                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"
                                         th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>回复
                                 </button>
