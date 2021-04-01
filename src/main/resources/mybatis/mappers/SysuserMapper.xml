@@ -158,7 +158,7 @@
                 and id = #{id}
             </if>
             <if test="username!=null">
-                and (username like concat("%",#{username},"%") or truename like concat("%",#{truename},"%"))
+                and username = #{username}
             </if>
             <if test="studentid!=null">
                 and studentid like concat("%",#{studentid},"%")
