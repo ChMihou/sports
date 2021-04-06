@@ -180,19 +180,28 @@ public class LoginController {
 
     @RequestMapping(value = "/comparecode", method = RequestMethod.POST)
     @ResponseBody
-    public String comparecode(String username, String mobile, String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResultJson comparecode(String username, String mobile, String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        String sessionCode = (String) session.getAttribute(mobile + "code");
-        if (sessionCode != null && code.equals(sessionCode)) {
-            // 把comparecode放进session，用于判断请求修改密码页面时是否通过了手机验证
-            session.setAttribute("comparecode", "1");
-            session.setAttribute("username", username);   // 把修改密码的用户名放进session
-            return "1";     // 验证码正确
-        } else if (sessionCode != null && !code.equals(sessionCode)) {
-            return "2";     // 验证码错误
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(username);
+        sysUser.setPhone(mobile);
+        sysUser.setEmail(email);
+        sysUser = sysUserService.select(sysUser);
+        if (sysUser != null) {
+            session.setAttribute("memberpassword", sysUser.getUsername());
+            return ResultJson.success("输入的验证信息错误，请核对后重新输入！");
         } else {
-            return "3";     // 没有按发送验真码按钮
+            return ResultJson.error("核对成功！");
         }
+
+    }
+
+
+    @RequestMapping("member-password")
+    public ModelAndView memberpassword(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/login/member-password");
+        return mv;
     }
 
     @RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
@@ -200,7 +209,7 @@ public class LoginController {
     public ResultJson updatepassword(String newpassword, String repassword, HttpServletRequest request) throws IOException {
         if (newpassword.equals(repassword)) {
             HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
+            String username = (String) session.getAttribute("memberpassword");
             SysUser sysUser = new SysUser();
             sysUser.setUsername(username);
             SysUser user = sysUserService.select(sysUser);
