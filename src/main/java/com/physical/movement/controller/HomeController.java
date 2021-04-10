@@ -3,13 +3,16 @@ package com.physical.movement.controller;
 import com.github.pagehelper.PageInfo;
 import com.physical.movement.entity.Advisory;
 import com.physical.movement.entity.Comment;
+import com.physical.movement.entity.Message;
 import com.physical.movement.entity.Team;
 import com.physical.movement.model.Paginator;
+import com.physical.movement.model.ResultJson;
 import com.physical.movement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +70,24 @@ public class HomeController {
     public ModelAndView concat(ModelAndView mv) {
         mv.addObject("/home/contact");
         return mv;
+    }
+
+    @RequestMapping("/contactSubmit")
+    @ResponseBody
+    public ResultJson concat(String message, String subject, HttpSession session) {
+        Message messages = new Message();
+        if (session.getAttribute("uid") != null) {
+            messages.setUid((Integer) session.getAttribute("uid"));
+        }
+        messages.setMess(message);
+        messages.setTitle(subject);
+        Boolean flag = messageService.insert(messages);
+        if (flag) {
+            return ResultJson.success("谢谢您的反馈！");
+        } else {
+            return ResultJson.error("留言失败，请稍后重试!");
+        }
+
     }
 
     @RequestMapping("/gallery")
