@@ -42,7 +42,7 @@
                 <label for="subject" class="layui-form-label">
                     <span class="x-red">*</span>回应主题</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="subject"  onblur="verfiy2()"
+                    <input type="text" id="subject" onblur="verfiy2()"
                            name="subject" required="" lay-verify="required" autocomplete="off"
                            class="layui-input">
                 </div>
@@ -52,7 +52,8 @@
                     <span class="x-red">*</span>比赛时间</label>
                 <div class="layui-input-inline">
                     <input type="text" id="time" th:id="subject" onblur="verfiy3()"
-                           name="subject" required="" th:value="${game.gmtModified}" lay-verify="required" autocomplete="off"
+                           name="subject" required="" th:value="${game.gmtModified}" lay-verify="required"
+                           autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
@@ -110,11 +111,24 @@
             let email = $("#email").val();
             let time = $("#time").val();
             let subject = $("#subject").val();
+            for (i = 0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    n_flag = radio[i].value;
+                }
+            }
             $.ajax(
                 {
                     url: "/game/sendGameApply",
                     type: "POST",
-                    data: {message: message, name: name, email: email, subject: subject, id: id, time: time},
+                    data: {
+                        message: message,
+                        n_flag: n_flag,
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        id: id,
+                        time: time
+                    },
                     success: function (data) {
                         console.log(data);//打印服务端返回的数据(调试用)
                         if (data.success) {
