@@ -85,11 +85,11 @@
                                         th:onclick="xadmin.open('查看','/team/read-team?id=[[${team.id}]]')">
                                     <i class="layui-icon">&#xe705;</i>查看
                                 </button>
-                                <button class="layui-btn layui-btn layui-btn-xs"
+                                <button th:if="${session.sysUser.username==team.teamleader}" class="layui-btn layui-btn layui-btn-xs"
                                         th:onclick="xadmin.open('简介修改','/team/apply-team?id=[[${team.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>简介修改
                                 </button>
-                                <button class="layui-btn-danger layui-btn layui-btn-xs"
+                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn-danger layui-btn layui-btn-xs"
                                         th:onclick="member_del(this,'[[${team.id}]]')">
                                     <i class="layui-icon">&#xe640;</i>删除
                                 </button>
