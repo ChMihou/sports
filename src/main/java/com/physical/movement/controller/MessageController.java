@@ -41,7 +41,7 @@ public class MessageController {
         Integer flag;
         String check = request.getParameter("check");
         model.addObject("check", check);
-        if (request.getParameter("check") == "" || request.getParameter("check") == null) {
+        if (request.getParameter("check").equals("") || request.getParameter("check") == null) {
             flag = null;
         } else {
             flag = Integer.valueOf(request.getParameter("check"));
@@ -71,6 +71,7 @@ public class MessageController {
         mv.setViewName("/message/add-message");
         return mv;
     }
+
     @RequestMapping("deleteOneMessage")
     @ResponseBody
     public ResultJson deleteOneComment(Integer id) {
@@ -80,6 +81,7 @@ public class MessageController {
         }
         return ResultJson.error("删除失败");
     }
+
     @RequestMapping("/addMessage")
     @ResponseBody
     public ResultJson addMessage(String n_title, String n_article, HttpServletRequest request) {
