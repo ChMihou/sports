@@ -35,7 +35,7 @@
                 and title like concat("%",#{title},"%")
             </if>
             <if test="flag!=null and flag!=''">
-                and author = #{author}
+                and flag = #{flag}
             </if>
         </where>
     </sql>

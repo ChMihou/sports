@@ -39,7 +39,7 @@
                             <select name="check">
                                 <option value="">回复状态</option>
                                 <option value="1">已回复</option>
-                                <option value="0">未回复</option>
+                                <option value="2">未回复</option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
@@ -74,7 +74,7 @@
                             <td th:text="${message.name}"></td>
                             <td th:text="${message.title}"></td>
                             <td th:text="${message.gmtCreate}"></td>
-                            <td th:if="${message.flag==0}">否</td>
+                            <td th:if="${message.flag==2||message.flag ==null}">否</td>
                             <td th:if="${message.flag==1}">是</td>
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"

@@ -170,7 +170,7 @@ public class TeamController {
         Team team = new Team();
         Team flagTeam = new Team();
         flagTeam.setTeamleaderid(sysUser.getId());
-        flagTeam = teamService.select(team);
+        flagTeam = teamService.select(flagTeam);
         if (flagTeam != null) {
             return ResultJson.error("一个人只能拥有一支队伍或者您申请的队伍正在审核中，请勿重复申请");
         }
@@ -262,7 +262,14 @@ public class TeamController {
     @RequestMapping("/deleteOneUserTeam")
     @ResponseBody
     public ResultJson deleteOneUserTeam(String id) {
-        int i = userTeamRefService.deleteByPrimaryKey(Integer.valueOf(id));
+        Team team = new Team();
+        int tid = Integer.valueOf(id);
+        team.setId(Integer.valueOf(tid));
+        team = teamService.select(team);
+        if (team.getTeamleaderid() ==tid ){
+            return ResultJson.error("队伍不能剔除自己");
+        }
+        int i = userTeamRefService.deleteByPrimaryKey(tid);
         if (i > 0) {
             return ResultJson.success("删除成功");
         }

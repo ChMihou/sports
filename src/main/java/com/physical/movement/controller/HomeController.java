@@ -80,6 +80,7 @@ public class HomeController {
             messages.setUid((Integer) session.getAttribute("uid"));
         }
         messages.setMess(message);
+        messages.setFlag(2);
         messages.setTitle(subject);
         Boolean flag = messageService.insert(messages);
         if (flag) {
@@ -88,12 +89,6 @@ public class HomeController {
             return ResultJson.error("留言失败，请稍后重试!");
         }
 
-    }
-
-    @RequestMapping("/gallery")
-    public ModelAndView gallery(ModelAndView mv) {
-        mv.addObject("/home/gallery");
-        return mv;
     }
 
     @RequestMapping("/news")

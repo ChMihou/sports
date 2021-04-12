@@ -41,7 +41,7 @@ public class MessageController {
         Integer flag;
         String check = request.getParameter("check");
         model.addObject("check", check);
-        if (request.getParameter("check").equals("") || request.getParameter("check") == null) {
+        if (request.getParameter("check") == null|| request.getParameter("check").equals("") ) {
             flag = null;
         } else {
             flag = Integer.valueOf(request.getParameter("check"));
@@ -92,7 +92,7 @@ public class MessageController {
         Message message = new Message();
         message.setTitle(n_title);
         message.setName(Mname);
-        message.setFlag(0);
+        message.setFlag(2);
         int uid = (int) session.getAttribute("uid");
         message.setUid(uid);
         message.setMess(n_article);

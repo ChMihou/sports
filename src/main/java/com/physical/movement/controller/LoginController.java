@@ -189,11 +189,10 @@ public class LoginController {
         sysUser = sysUserService.select(sysUser);
         if (sysUser != null) {
             session.setAttribute("memberpassword", sysUser.getUsername());
-            return ResultJson.success("输入的验证信息错误，请核对后重新输入！");
+            return ResultJson.success("核对成功！");
         } else {
-            return ResultJson.error("核对成功！");
+            return ResultJson.error("输入的验证信息错误，请核对后重新输入！");
         }
-
     }
 
 
@@ -218,7 +217,6 @@ public class LoginController {
             user.setPassword(password);
             int flag = sysUserService.updateByPrimaryKeySelective(user);
             if (flag > 0) {
-                session.invalidate();
                 // 密码修改成功
                 return ResultJson.success("密码修改成功");
             } else {
