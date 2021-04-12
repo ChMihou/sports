@@ -71,7 +71,9 @@
                             <td th:text="${game.enemy}"></td>
                             <td th:text="${game.result}"></td>
                             <td th:text="${game.gmtCreate}"></td>
-                            <td th:if="${game.flag!=null}" th:text="${game.flag==1?'同意':'拒绝'}"></td>
+                            <td th:if="${game.flag!=null&&game.flag ==1}">同意</td>
+                            <td th:if="${game.flag!=null&&game.flag ==2}">拒绝</td>
+                            <td th:if="${game.flag!=null&&game.flag ==0}">未回复</td>
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs" title="查看"
                                         th:onclick="xadmin.open('查看','/game/read-game?id=[[${game.id}]]')"><i

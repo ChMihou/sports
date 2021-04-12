@@ -44,7 +44,6 @@ public class AdvisoryController {
         String key = request.getParameter("key");
         Advisory advisory = new Advisory();
         advisory.setTitle(key);
-        advisory.setNselect(1);
         advisory.setWonderful(1);
         List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
         PageInfo nlist = new PageInfo(advisories);

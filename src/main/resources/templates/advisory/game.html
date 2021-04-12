@@ -64,7 +64,7 @@
 
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"
-                                        th:onclick="xadmin.open('查看','read-article?id=[[${notice.nid}]]')"><i
+                                        th:onclick="xadmin.open('查看','read-article?id=[[${notice.id}]]')"><i
                                         class="layui-icon">&#xe705;</i>查看
                                 </button>
 
@@ -114,6 +114,7 @@
 </body>
 <script type="text/javascript" src="/js/xcity.js"></script>
 <script>
+
     //监听全选
     layui.use(['laydate','form'], function(){
         var laydate = layui.laydate;
@@ -168,7 +169,6 @@
     function wonderful(obj,id){
         layer.confirm('确认要加入精彩系列吗？',function(index){
             //发异步删除数据
-
             $.ajax(
                 {
                     url:"/advisory/wonderfulAdd",
