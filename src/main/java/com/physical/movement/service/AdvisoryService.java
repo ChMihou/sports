@@ -19,4 +19,5 @@ public interface AdvisoryService {
 
     int selectCount();
 
+    List<String> selectAllImage(int pageNum, int pageSize);
 }

@@ -3,6 +3,8 @@ package com.physical.movement.mapper;
 import com.physical.movement.entity.Advisory;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AdvisoryMapper extends BaseMapper<Advisory> {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface AdvisoryMapper extends BaseMapper<Advisory> {
     int updateByPrimaryKey(Advisory record);
 
     int deleteListId(int[] ids);
+
+    List<String> selectAllImage();
 }

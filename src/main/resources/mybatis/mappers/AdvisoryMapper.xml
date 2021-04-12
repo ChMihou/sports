@@ -50,6 +50,13 @@
         <include refid="WHERE_SELECT_CONDIYION"/>
         order by gmt_modified desc
     </select>
+
+    <select id="selectAllImage" resultType="STRING">
+        select
+        nimage
+        from advisory
+        order by gmt_modified desc
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -51,5 +51,11 @@ public class AdvisoryServiceImpl implements AdvisoryService {
         return advisoryMapper.selectCount();
     }
 
+    @Override
+    public List<String> selectAllImage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return advisoryMapper.selectAllImage();
+    }
+
 
 }

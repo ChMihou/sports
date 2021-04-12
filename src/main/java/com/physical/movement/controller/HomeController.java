@@ -111,7 +111,23 @@ public class HomeController {
         mv.setViewName("/home/schoolteam");
         return mv;
     }
+    @RequestMapping("/gallery")
+    public ModelAndView gallery(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "16") int pageSize) {
 
+        ModelAndView mv = new ModelAndView();
+
+        List<String> images = advisoryService.selectAllImage(pageNum, pageSize);
+
+        PageInfo ilist = new PageInfo(images);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums,ilist,pageNum,pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("ilist", ilist);
+
+        mv.setViewName("/home/gallery");
+
+        return mv;
+    }
 
     @RequestMapping("article")
     public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
