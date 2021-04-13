@@ -59,28 +59,28 @@
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-                            <th>
-                                <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                            </th>
                             <th>队长</th>
                             <th>队名</th>
                             <th>队伍类型</th>
                             <th>创建时间</th>
+                            <th>审核状态</th>
+                            <th>审核回复</th>
                             <th>操作</th>
                         </thead>
                         <tbody>
                         <tr th:each="team:${tlist.list}">
-                            <td>
-                                <input type="checkbox" name="id" th:value="${team.id}" lay-skin="primary">
-                            </td>
                             <td th:text="${team.teamleader}"></td>
                             <td th:text="${team.teamname}"></td>
                             <th:block th:each="sports:${SportsType}">
                                 <td th:if="${team.teamtype==sports.key}" th:text="${sports.value.name}"></td>
                             </th:block>
                             <td th:text="${team.gmtCreate}"></td>
+                            <td th:if="${team.flag==0}">未审核</td>
+                            <td th:if="${team.flag==1}">通过</td>
+                            <td th:if="${team.flag==2}">驳回</td>
+                            <td th:text="${team.reason}"></td>
                             <td class="td-manage">
-                                <button class="layui-btn layui-btn layui-btn-xs"
+                                <button th:if="${session.sysUser.usertype==1}" class="layui-btn layui-btn layui-btn-xs"
                                         th:onclick="xadmin.open('审核','/team/check-team?id=[[${team.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>审核
                                 </button>

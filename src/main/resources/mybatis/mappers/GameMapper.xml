@@ -3,7 +3,7 @@
 <mapper namespace="com.physical.movement.mapper.GameMapper">
     <resultMap id="BaseResultMap" type="com.physical.movement.entity.Game">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
         <result column="challenger" jdbcType="VARCHAR" property="challenger"/>
         <result column="challengerid" jdbcType="INTEGER" property="challengerid"/>
         <result column="enemy" jdbcType="VARCHAR" property="enemy"/>
@@ -70,7 +70,7 @@
       challengerid, enemy, enemyid, 
       gmt_create, gmt_modified, flag, 
       result,statement)
-    values (null, #{type,jdbcType=INTEGER}, #{challenger,jdbcType=VARCHAR},
+    values (null, #{type,jdbcType=VARCHAR}, #{challenger,jdbcType=VARCHAR},
       #{challengerid,jdbcType=INTEGER}, #{enemy,jdbcType=VARCHAR}, #{enemyid,jdbcType=INTEGER}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{flag,jdbcType=TINYINT}, 
       #{result,jdbcType=LONGVARCHAR},#{statement})
@@ -116,7 +116,7 @@
                 #{id,jdbcType=INTEGER},
             </if>
             <if test="type != null">
-                #{type,jdbcType=INTEGER},
+                #{type,jdbcType=VARCHAR},
             </if>
             <if test="challenger != null">
                 #{challenger,jdbcType=VARCHAR},
@@ -150,7 +150,7 @@
         update game
         <set>
             <if test="type != null">
-                type = #{type,jdbcType=INTEGER},
+                type = #{type,jdbcType=VARCHAR},
             </if>
             <if test="challenger != null">
                 challenger = #{challenger,jdbcType=VARCHAR},

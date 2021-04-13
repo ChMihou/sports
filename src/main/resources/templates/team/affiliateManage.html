@@ -131,7 +131,9 @@
                     data: {"id": id},
                     dataType: "json",
                     success: function (data) {
-
+                        if (!data) {
+                            layer.msg(data.msg, {icon: 1, time: 1000});
+                        }
                     }
                 }
             );

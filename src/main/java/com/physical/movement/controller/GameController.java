@@ -190,6 +190,7 @@ public class GameController {
             game.setChallengerid(challenger.getId());
             game.setEnemy(enemy.getTeamname());
             game.setEnemyid(enemy.getId());
+            game.setType(time);
             game.setFlag((byte) 0);
             game.setStatement(message);
             gameService.insert(game);

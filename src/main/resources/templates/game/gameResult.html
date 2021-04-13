@@ -70,7 +70,7 @@
                             <td th:text="${game.challenger}"></td>
                             <td th:text="${game.enemy}"></td>
                             <td th:text="${game.result}"></td>
-                            <td th:text="${game.gmtCreate}"></td>
+                            <td th:text="${game.type}"></td>
                             <td th:if="${game.flag!=null&&game.flag ==1}">同意</td>
                             <td th:if="${game.flag!=null&&game.flag ==2}">拒绝</td>
                             <td th:if="${game.flag!=null&&game.flag ==0}">未回复</td>
@@ -79,10 +79,12 @@
                                         th:onclick="xadmin.open('查看','/game/read-game?id=[[${game.id}]]')"><i
                                         class="layui-icon">&#xe705;</i>查看
                                 </button>
-                                <button th:if="${game.enemyid==session.sysUser.id}" class="layui-btn layui-btn-warm layui-btn-xs" title="回复"
+                                <button th:if="${game.enemyid==session.sysUser.id}"
+                                        class="layui-btn layui-btn-warm layui-btn-xs" title="回复"
                                         th:onclick="xadmin.open('回复','/game/apply-game?id=[[${game.id}]]')">回复
                                 </button>
-                                <button th:if="${game.challengerid==session.sysUser.id||game.enemyid==session.sysUser.id}" class="layui-btn layui-btn layui-btn-xs"
+                                <button th:if="${game.challengerid==session.sysUser.id||game.enemyid==session.sysUser.id||session.sysUser.usertype==1}"
+                                        class="layui-btn layui-btn layui-btn-xs"
                                         th:onclick="xadmin.open('编辑','/game/game-result?id=[[${game.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>编辑
                                 </button>

@@ -8,7 +8,7 @@ import com.physical.movement.entity.common.Id;
 public class Game extends Id {
 
     private static final long serialVersionUID = -8331637732864573070L;
-    private Integer type;
+    private String type;
 
     private String challenger;
 
@@ -24,11 +24,11 @@ public class Game extends Id {
 
     private String result;
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 

@@ -64,8 +64,8 @@ public class TeamController {
         if (flag != null && !flag.equals("0")) {
             team.setTeamleaderid(uid);
         }
-        team.setTeamname(key);
         team.setFlag((byte) 1);
+        team.setTeamname(key);
         List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
         PageInfo tlist = new PageInfo(teamList);
         List pagenums = new ArrayList();
@@ -93,7 +93,6 @@ public class TeamController {
             team.setTeamleaderid(uid);
         }
         team.setTeamname(key);
-        team.setFlag((byte) 0);
         List<Team> teamList = teamService.selectAll(team, pageNum, pageSize);
         PageInfo tlist = new PageInfo(teamList);
         List pagenums = new ArrayList();
@@ -208,19 +207,19 @@ public class TeamController {
 
     @RequestMapping("/submitCheck")
     @ResponseBody
-    public ResultJson submitCheck(int nid, int nflag, String n_cause, HttpSession session) {
-        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
-        UserTeamRef userTeamRef = new UserTeamRef();
-        userTeamRef.setUserid(sysUser.getId());
-        userTeamRef.setTeamid(nid);
-        userTeamRefService.insert(userTeamRef);
+    public ResultJson submitCheck(int nid, int nflag, String ncause, HttpSession session) {
         Team team = new Team();
         team.setId(nid);
+        team = teamService.select(team);
         if (nflag == 1) {
             team.setFlag((byte) 1);
+            UserTeamRef userTeamRef = new UserTeamRef();
+            userTeamRef.setUserid(team.getTeamleaderid());
+            userTeamRef.setTeamid(nid);
+            userTeamRefService.insert(userTeamRef);
         } else {
-            team.setFlag((byte) 0);
-            team.setReason(n_cause);
+            team.setFlag((byte) 2);
+            team.setReason(ncause);
         }
         int a = teamService.updateByPrimaryKeySelective(team);
         if (a > 0) {
@@ -261,12 +260,17 @@ public class TeamController {
 
     @RequestMapping("/deleteOneUserTeam")
     @ResponseBody
-    public ResultJson deleteOneUserTeam(String id) {
+    public ResultJson deleteOneUserTeam(String id, HttpSession session) {
+        SysUser sysUser = (SysUser) session.getAttribute("sysUser");
         Team team = new Team();
         int tid = Integer.parseInt(id);
         team.setId(tid);
+        UserTeamRef userTeamRef = new UserTeamRef();
+        userTeamRef.setId(tid);
+        userTeamRef = userTeamRefService.select(userTeamRef);
+        team.setId(userTeamRef.getTeamid());
         team = teamService.select(team);
-        if (team.getTeamleaderid() == tid) {
+        if (team != null && team.getTeamleaderid().equals(userTeamRef.getUserid())) {
             return ResultJson.error("队伍不能剔除自己");
         }
         int i = userTeamRefService.deleteByPrimaryKey(tid);

@@ -51,7 +51,7 @@
     </select>
     <select id="select" parameterType="com.physical.movement.entity.UserTeamRef"
             resultType="com.physical.movement.entity.UserTeamRef">
-        select * from user_team_ref where teamid= #{teamid} and userid=#{userid}
+        select * from user_team_ref where teamid= #{teamid} and userid=#{userid}  or id = #{id}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_team_ref
