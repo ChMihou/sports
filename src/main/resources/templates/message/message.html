@@ -85,7 +85,8 @@
                                         th:onclick="xadmin.open('回复','/message/apply-message?id=[[${message.id}]]')">
                                     <i class="layui-icon">&#xe642;</i>回复
                                 </button>
-                                <button class="layui-btn-danger layui-btn layui-btn-xs"
+                                <button th:if="${session.sysUser.usertype==1||session.sysUser.id==message.uid}"
+                                        class="layui-btn-danger layui-btn layui-btn-xs"
                                         th:onclick="member_del(this,'[[${message.id}]]')">
                                     <i class="layui-icon">&#xe640;</i>删除
                                 </button>

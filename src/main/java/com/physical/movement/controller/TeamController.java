@@ -263,10 +263,10 @@ public class TeamController {
     @ResponseBody
     public ResultJson deleteOneUserTeam(String id) {
         Team team = new Team();
-        int tid = Integer.valueOf(id);
-        team.setId(Integer.valueOf(tid));
+        int tid = Integer.parseInt(id);
+        team.setId(tid);
         team = teamService.select(team);
-        if (team.getTeamleaderid() ==tid ){
+        if (team.getTeamleaderid() == tid) {
             return ResultJson.error("队伍不能剔除自己");
         }
         int i = userTeamRefService.deleteByPrimaryKey(tid);
