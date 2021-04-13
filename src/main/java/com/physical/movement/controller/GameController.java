@@ -13,9 +13,9 @@ import com.physical.movement.service.SysUserService;
 import com.physical.movement.service.TeamService;
 import com.physical.movement.utils.RandomUtil;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.glassfish.jersey.internal.guava.ThreadFactoryBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 import static com.physical.movement.model.SportsType.STATUS_MAP;
 
@@ -201,17 +202,25 @@ public class GameController {
     @RequestMapping("/sendGameApply")
     @ResponseBody
     public ResultJson sendGameApply(String message, String email, String subject, Integer id, Byte n_flag, HttpSession session) {
-        boolean flag = mailService.sendWithHtml(email, subject, message);
-        if (flag) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
+        ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5),namedThreadFactory);
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                mailService.sendWithHtml(email, subject, message);
+            }
+        });
             Game game = new Game();
             game.setId(id);
             game.setStatement(message);
             game.setFlag(n_flag);
-            gameService.updateByPrimaryKeySelective(game);
-            return ResultJson.success("回复成功");
-        } else {
-            return ResultJson.error("回复失败");
-        }
+            Integer flag = gameService.updateByPrimaryKeySelective(game);
+            if (flag>0) {
+                return ResultJson.success("回复成功");
+            }else{
+                return ResultJson.error("回复失败");
+            }
     }
 
     @RequestMapping("/submitResult")
