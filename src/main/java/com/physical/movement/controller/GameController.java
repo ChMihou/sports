@@ -180,7 +180,7 @@ public class GameController {
         Team enemy = new Team();
         enemy.setId(id);
         enemy = teamService.select(enemy);
-        if(enemy!=null&&enemy.getTeamleaderid()==sysUser.getId()){
+        if (enemy != null && enemy.getTeamleaderid() == sysUser.getId()) {
             return ResultJson.error("您不能约战自己的队伍");
         }
         message = message + "-------" + "队伍名称：" + challenger.getTeamname() + "-------" + "队长名字：" + challenger.getTeamleader() + "-------" + "比赛时间:" + time;
@@ -204,23 +204,23 @@ public class GameController {
     public ResultJson sendGameApply(String message, String email, String subject, Integer id, Byte n_flag, HttpSession session) {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
         ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10,
-                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5),namedThreadFactory);
+                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5), namedThreadFactory);
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 mailService.sendWithHtml(email, subject, message);
             }
         });
-            Game game = new Game();
-            game.setId(id);
-            game.setStatement(message);
-            game.setFlag(n_flag);
-            Integer flag = gameService.updateByPrimaryKeySelective(game);
-            if (flag>0) {
-                return ResultJson.success("回复成功");
-            }else{
-                return ResultJson.error("回复失败");
-            }
+        Game game = new Game();
+        game.setId(id);
+        game.setStatement(message);
+        game.setFlag(n_flag);
+        Integer flag = gameService.updateByPrimaryKeySelective(game);
+        if (flag > 0) {
+            return ResultJson.success("回复成功");
+        } else {
+            return ResultJson.error("回复失败");
+        }
     }
 
     @RequestMapping("/submitResult")
