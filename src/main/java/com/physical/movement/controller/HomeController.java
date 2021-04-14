@@ -41,9 +41,11 @@ public class HomeController {
     @Autowired
     private AnnouncementService announcementService;
 
+    @Autowired
+    private GameService gameService;
     @RequestMapping("/index")
 
-    public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, ModelAndView mv) {
+    public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "2") int pageSize, ModelAndView mv) {
         mv.addObject("/home/index");
         //精彩文章
         Advisory advisory = new Advisory();
@@ -63,7 +65,7 @@ public class HomeController {
         List pagenumsAll = new ArrayList();
         Paginator.page(pagenumsAll, nlist, pageNum, pageSize);
         mv.addObject("pagenums", pagenumsAll);
-        mv.addObject("nlist", nlist);
+        mv.addObject("slist", nlist);
 
         //体育趣图
         List<String> images = advisoryService.selectAllImage(pageNum, pageSize);
@@ -80,8 +82,21 @@ public class HomeController {
         List pagenumsAnnouncementOne = new ArrayList();
         Paginator.page(pagenumsAnnouncementOne, announcementsOne, pageNum, pageSize);
         mv.addObject("pagenums", pagenumsAnnouncementOne);
-        mv.addObject("nlist", announcementsOne);
-
+        mv.addObject("alist", announcementsOne);
+        // 数据展示
+        int advisoryCount = advisoryService.selectCount();
+        int sysuserCount = sysUserService.selectCount();
+        int messageCount = messageService.selectCount();
+        int teamCount = teamService.selectCount();
+        int gameCount = gameService.selectCount();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
+        mv.addObject("advisoryCount", advisoryCount);
+        mv.addObject("sysuserCount", sysuserCount);
+        mv.addObject("messageCount", messageCount);
+        mv.addObject("teamCount", teamCount);
+        mv.addObject("gameCount", gameCount);
         return mv;
 
     }
@@ -93,21 +108,21 @@ public class HomeController {
     }
 
     @RequestMapping("/cause-single")
-    public ModelAndView causesingle(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
+    public ModelAndView causesingle(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum,
+                                    @RequestParam(defaultValue = "2") int pageSize) {
         mv.addObject("/home/cause-single");
-        Advisory advisory = new Advisory();
-        advisory.setNselect(2);
-        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
-        PageInfo nlist = new PageInfo(advisories);
-        List pagenums = new ArrayList();
-        Paginator.page(pagenums, nlist, pageNum, pageSize);
-        mv.addObject("pagenums", pagenums);
-        mv.addObject("nlist", nlist);
+        Announcement announcement = new Announcement();
+        List<Announcement> announcements = announcementService.selectAll(announcement, pageNum, pageSize);
+        PageInfo announcementsOne = new PageInfo(announcements);
+        List pagenumsAnnouncementOne = new ArrayList();
+        Paginator.page(pagenumsAnnouncementOne, announcementsOne, pageNum, pageSize);
+        mv.addObject("pagenums", pagenumsAnnouncementOne);
+        mv.addObject("nlist", announcementsOne);
         return mv;
     }
 
     @RequestMapping("/causes")
-    public ModelAndView causes(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
+    public ModelAndView causes(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "6") int pageSize) {
         mv.addObject("/home/causes");
         Advisory advisory = new Advisory();
         advisory.setNselect(5);
@@ -142,8 +157,16 @@ public class HomeController {
     }
 
     @RequestMapping("/contact")
-    public ModelAndView concat(ModelAndView mv) {
+    public ModelAndView concat(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum,
+                               @RequestParam(defaultValue = "5") int pageSize) {
         mv.addObject("/home/contact");
+        Message message = new Message();
+        List<Message> messageList = messageService.selectAll(message, pageNum, pageSize);
+        PageInfo mlist = new PageInfo(messageList);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, mlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("mlist", mlist);
         return mv;
     }
 
@@ -167,13 +190,23 @@ public class HomeController {
     }
 
     @RequestMapping("/news")
-    public ModelAndView news(ModelAndView mv) {
+    public ModelAndView news(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum,
+                             @RequestParam(defaultValue = "6") int pageSize) {
         mv.addObject("/home/news");
+        Advisory advisory = new Advisory();
+        advisory.setWonderful(1);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
         return mv;
     }
 
     @RequestMapping("/testimonial")
-    public ModelAndView testimonial(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
+    public ModelAndView testimonial(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum,
+                                    @RequestParam(defaultValue = "5") int pageSize) {
         mv.addObject("/home/testimonial");
         Advisory advisory = new Advisory();
         advisory.setNselect(1);

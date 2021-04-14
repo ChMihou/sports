@@ -43,8 +43,8 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
                     <ul class="dropdown-menu">
+                        <li><a href="/home/cause-single">社区公告</a></li>
                         <li class="active"><a href="/home/testimonial">篮球文章</a></li>
-                        <li><a href="/home/cause-single">足球文章</a></li>
                         <li><a href="/home/causes">其他体育</a></li>
                         <li><a href="/home/schoolteam">校园队伍</a></li>
                         <li><a href="/home/contact">联系我们</a></li>
@@ -79,137 +79,80 @@
 
 <section class="probootstrap-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_1.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Design must be functional and functionality must be translated into
-                        visual aesthetics, without any reliance on gimmicks that have to be explained.&rdquo; <cite
-                                class="author">&mdash; Ferdinand A. Porsche <br>
-                            <span>Design Lead at AirBNB</span></cite></blockquote>
+        <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==0}" class="row mb40">
+            <div class="col-md-6 col-md-push-6 probootstrap-animate">
+                <p><img th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive"></p>
+            </div>
+            <div class="col-md-5 col-md-pull-6 news-entry probootstrap-animate">
+                <h2 class="mb0"><a href=""><th:block th:text="${notice.title}"/></a></h2>
+                <p class="probootstrap-news-date"><th:block th:text="${notice.gmtCreate}"/></p> <p> <a th:href="@{/home/article(id=${notice.id})}" class="btn btn-black">查看更多</a></p>
+            </div>
+        </div>
 
-                </div>
+        <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==1}" class="row mb40">
+            <div class="col-md-6 probootstrap-animate">
+                <p><img th:src="${notice.nimage}"  alt="Free Bootstrap Template " class="img-responsive"></p>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_2.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Creativity is just connecting things. When you ask creative people
-                        how they did something, they feel a little guilty because they didn’t really do it, they just
-                        saw something. It seemed obvious to them after a while.&rdquo; <cite class="author">&mdash;
-                            Steve Jobs <br> <span>Co-Founder Square</span></cite></blockquote>
-                </div>
+            <div class="col-md-5 col-md-push-1  news-entry probootstrap-animate">
+                <h2 class="mb0"><a href=""><th:block th:text="${notice.title}"/></a></h2>
+                <p class="probootstrap-news-date"><th:block th:text="${notice.gmtCreate}"/></p>
+                <p><th:block th:text="${notice.intro}"/></p>
+                <p><span class="probootstrap-meta-share"> <a th:href="@{/home/article(id=${notice.id})}" class="btn btn-black">查看更多</a></span></p>
             </div>
-            <div class="clearfix visible-sm-block visible-xs-block"></div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_3.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;I think design would be better if designers were much more
-                        skeptical about its applications. If you believe in the potency of your craft, where you choose
-                        to dole it out is not something to take lightly.&rdquo; <cite class="author">&mdash; Frank
-                            Chimero <br> <span>Creative Director at Twitter</span></cite></blockquote>
-                </div>
-            </div>
+        </div>
 
-            <div class="clearfix visible-lg-block visible-md-block"></div>
+        <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==2}" class="row mb40">
+            <div class="col-md-6 col-md-push-6 probootstrap-animate">
+                <p><img th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive"></p>
+            </div>
+            <div class="col-md-5 col-md-pull-6 news-entry probootstrap-animate">
+                <h2 class="mb0"><a href=""><th:block th:text="${notice.title}"/></a></h2>
+                <p class="probootstrap-news-date"><th:block th:text="${notice.gmtCreate}"/></p>
+                <p><th:block th:text="${notice.intro}"/></p>
+                <p><span class="probootstrap-meta-share"><a th:href="@{/home/article(id=${notice.id})}" class="btn btn-black">查看更多</a></span></p>
+            </div>
+        </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_1.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Design must be functional and functionality must be translated into
-                        visual aesthetics, without any reliance on gimmicks that have to be explained.&rdquo; <cite
-                                class="author">&mdash; Ferdinand A. Porsche <br>
-                            <span>Design Lead at AirBNB</span></cite></blockquote>
+        <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==3}" class="row mb40">
+            <div class="col-md-6 probootstrap-animate">
+                <p><img th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive"></p>
+            </div>
+            <div class="col-md-5 col-md-push-1  news-entry probootstrap-animate">
+                <h2 class="mb0"><a href=""><th:block th:text="${notice.title}"/></a></h2>
+                <p class="probootstrap-news-date"><th:block th:text="${notice.gmtCreate}"/></p>
+                <p><th:block th:text="${notice.intro}"/></p>
+                <p><span class="probootstrap-meta-share"><a th:href="@{/home/article(id=${notice.id})}" class="btn btn-black">查看更多</a></span></p>
+            </div>
+        </div>
 
-                </div>
+        <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==4}" class="row mb40">
+            <div class="col-md-6 col-md-push-6 probootstrap-animate">
+                <p><img th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive"></p>
             </div>
-            <div class="clearfix visible-sm-block visible-xs-block"></div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_2.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Creativity is just connecting things. When you ask creative people
-                        how they did something, they feel a little guilty because they didn’t really do it, they just
-                        saw something. It seemed obvious to them after a while.&rdquo; <cite class="author">&mdash;
-                            Steve Jobs <br> <span>Co-Founder Square</span></cite></blockquote>
-                </div>
+            <div class="col-md-5 col-md-pull-6 news-entry probootstrap-animate">
+                <h2 class="mb0"><a href=""><th:block th:text="${notice.title}"/></a></h2>
+                <p class="probootstrap-news-date"><th:block th:text="${notice.gmtCreate}"/></p>
+                <p><th:block th:text="${notice.intro}"/></p>
+                <p><span class="probootstrap-meta-share"><a th:href="@{/home/article(id=${notice.id})}" class="btn btn-black">查看更多</a></span></p>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_3.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;I think design would be better if designers were much more
-                        skeptical about its applications. If you believe in the potency of your craft, where you choose
-                        to dole it out is not something to take lightly.&rdquo; <cite class="author">&mdash; Frank
-                            Chimero <br> <span>Creative Director at Twitter</span></cite></blockquote>
-                </div>
-            </div>
-            <div class="clearfix visible-sm-block visible-xs-block"></div>
-            <div class="clearfix visible-lg-block visible-md-block"></div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_1.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Design must be functional and functionality must be translated into
-                        visual aesthetics, without any reliance on gimmicks that have to be explained.&rdquo; <cite
-                                class="author">&mdash; Ferdinand A. Porsche <br>
-                            <span>Design Lead at AirBNB</span></cite></blockquote>
-
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_2.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;Creativity is just connecting things. When you ask creative people
-                        how they did something, they feel a little guilty because they didn’t really do it, they just
-                        saw something. It seemed obvious to them after a while.&rdquo; <cite class="author">&mdash;
-                            Steve Jobs <br> <span>Co-Founder Square</span></cite></blockquote>
-                </div>
-            </div>
-            <div class="clearfix visible-sm-block visible-xs-block"></div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate">
-                <div class="probootstrap-testimony-wrap text-center">
-                    <figure>
-                        <img src="/sports/img/person_3.jpg" alt="Free Bootstrap Template ">
-                    </figure>
-                    <blockquote class="quote">&ldquo;I think design would be better if designers were much more
-                        skeptical about its applications. If you believe in the potency of your craft, where you choose
-                        to dole it out is not something to take lightly.&rdquo; <cite class="author">&mdash; Frank
-                            Chimero <br> <span>Creative Director at Twitter</span></cite></blockquote>
-                </div>
-            </div>
-            <div class="clearfix visible-lg-block visible-md-block"></div>
         </div>
     </div>
-</section>
+    <div class="page">
+        <ul class="pager">
+            <li class="num"><a th:href="@{/home/testimonial(pageNum=1,id=${id})}">首页</a></li>
+            <li class="num"><a th:if="${nlist.pageNum} > '1'" id="previouspage" th:href="@{/home/testimonial(pageNum=${nlist.prePage})}" class="previous">
+                &lt;&lt;</a></li>
+            <th:block class="pagination" th:each="pagenum:${pagenums}">
+                <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
+                <li class="num"><a class="active" style="color: #ff2727"  th:if="${nlist.pageNum==pagenum}" th:href="@{/home/testimonial(pageNum=${pagenum})}">[[${pagenum}]]</a></li>
 
-<section class="probootstrap-half">
-    <div class="image">
-        <div class="image-bg">
-            <img src="/sports/img/img_sq_5_big.jpg" alt="Free Bootstrap Template ">
-        </div>
-    </div>
-    <div class="text">
-        <div class="probootstrap-animate">
-            <h3>Sucess Stories</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur sunt excepturi dicta ex, placeat
-                ab esse, iure harum eaque fuga asperiores distinctio amet temporibus enim illum molestiae neque ad
-                similique possimus repellendus velit! Quaerat nihil nemo, aliquam consectetur debitis illum. Excepturi
-                cum, quaerat minus odit dolorem recusandae, debitis reprehenderit voluptate?</p>
-            <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
-        </div>
+                <li class="num"><a class="num" th:if="${nlist.pageNum!=pagenum}"th:class="'pagenum'+${pagenum}" th:href="@{/home/testimonial(pageNum=${pagenum})}">[[${pagenum}]]</a></li>
+            </th:block>
+            <li class="num"><a class="next" th:if="${nlist.pageNum} < ${nlist.pages}" id="nextpage" th:href="@{/home/testimonial(pageNum=${nlist.nextPage})}" aria-label="Next">
+                &gt;&gt;</a></li>
+            <li class="num"><a id="endpage" th:href="@{/home/testimonial(pageNum=${nlist.pages})}">末页</a></li>
+            <li class="num"><span aria-label="Next">相关记录[[${nlist.total}]]条，共[[${nlist.pages}]]页。</span></li>
+        </ul>
     </div>
 </section>
 

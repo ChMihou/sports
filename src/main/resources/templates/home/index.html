@@ -42,9 +42,9 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
                     <ul class="dropdown-menu">
+                        <li><a href="/home/cause-single">社区公告</a></li>
                         <li><a href="/home/testimonial">篮球文章</a></li>
-                        <li><a href="/home/cause-single">足球文章</a></li>
-                        <li><a href="/home/gallerycauses">其他体育</a></li>
+                        <li><a href="/home/causes">其他体育</a></li>
                         <li><a href="/home/schoolteam">校园队伍</a></li>
                         <li><a href="/home/contact">联系我们</a></li>
                     </ul>
@@ -87,81 +87,41 @@
         </div>
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
-                <div class="probootstrap-image-text-block probootstrap-cause">
+                <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index<1}" class="probootstrap-image-text-block probootstrap-cause">
                     <figure>
-                        <img src="/sports/img/img_sm_1.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                        <img style="height: 174.23px;weight:293.33px" th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive">
                     </figure>
                     <div class="probootstrap-cause-inner">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-s2" data-percent="99"></div>
-                        </div>
-
-                        <div class="row mb30">
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Raised: <span class="money">$49,112</span>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Goal: <span
-                                    class="money">$50,000</span></div>
-                        </div>
-
-                        <h2><a href="#">Help Children To Get Food</a></h2>
-                        <div class="probootstrap-date"><i class="icon-calendar"></i> 2 hours remaining</div>
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro provident suscipit natus a
-                            cupiditate quaerat maxime inventore.</p>
-                        <p><a href="#" class="btn btn-primary btn-black">Donate Now!</a></p>
+                        <h2><a th:href="@{/home/article(id=${notice.id})}" th:text="${notice.title}"></a></h2>
+                        <div class="probootstrap-date"><i class="icon-calendar"></i><th:block th:text="${notice.gmtModified}"/></div>
+                        <p><th:block th:text="${notice.intro}"/></p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
+            <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==1}" class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
                 <div class="probootstrap-image-text-block  probootstrap-cause">
                     <figure>
-                        <img src="/sports/img/img_sm_2.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                        <img style="height: 174.23px;weight:293.33px" th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive">
                     </figure>
                     <div class="probootstrap-cause-inner">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-s2" data-percent="95"></div>
-                        </div>
 
-                        <div class="row mb30">
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Raised: <span class="money">$28,127</span>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Goal: <span
-                                    class="money">$30,000</span></div>
-                        </div>
-
-                        <h2><a href="#">Help Children To Get Health</a></h2>
-                        <div class="probootstrap-date"><i class="icon-calendar"></i> 7 days remaining</div>
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro provident suscipit natus a
-                            cupiditate quaerat maxime inventore.</p>
-                        <p><a href="#" class="btn btn-primary btn-black">Donate Now!</a></p>
+                        <h2><a th:href="@{/home/article(id=${notice.id})}" th:text="${notice.title}"></a></h2>
+                        <div class="probootstrap-date"><i class="icon-calendar"></i><th:block th:text="${notice.gmtModified}"/></div>
+                        <p><th:block th:text="${notice.intro}"/></p>
                     </div>
                 </div>
             </div>
             <div class="clearfix visible-sm-block visible-xs-block"></div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
+            <div th:each="notice,noticeStat:${nlist.list}" th:if="${noticeStat.index==2}" class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
                 <div class="probootstrap-image-text-block  probootstrap-cause">
                     <figure>
-                        <img src="/sports/img/img_sm_3.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                        <img style="height: 174.23px;weight:293.33px" th:src="${notice.nimage}" alt="Free Bootstrap Template " class="img-responsive">
                     </figure>
                     <div class="probootstrap-cause-inner">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-s2" data-percent="19"></div>
-                        </div>
 
-                        <div class="row mb30">
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Raised: <span class="money">$21,973</span>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Goal: <span
-                                    class="money">$100,000</span></div>
-                        </div>
-
-                        <h2><a href="#">Help Children To Get Education</a></h2>
-                        <div class="probootstrap-date"><i class="icon-calendar"></i> 15 days remaining</div>
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro provident suscipit natus a
-                            cupiditate quaerat maxime inventore.</p>
-                        <p><a href="#" class="btn btn-primary btn-black">Donate Now!</a></p>
+                        <h2><a th:href="@{/home/article(id=${notice.id})}" th:text="${notice.title}"></a></h2>
+                        <div class="probootstrap-date"><i class="icon-calendar"></i><th:block th:text="${notice.gmtModified}"/></div>
+                        <p><th:block th:text="${notice.intro}"/></p>
                     </div>
                 </div>
             </div>
@@ -193,7 +153,7 @@
                     </figure>
                     <div class="text">
                         <h3>Linda Reyez</h3>
-                        <p class="donated">Donated <span class="money">$500.00</span></p>
+                        <p class="donated"><span class="money" th:text="${sysuserCount}"></span></p>
                     </div>
                 </div>
             </div>
@@ -204,7 +164,7 @@
                     </figure>
                     <div class="text">
                         <h3>Chris Worth</h3>
-                        <p class="donated">Donated <span class="money">$1,500.00</span></p>
+                        <p class="donated"><span class="money" th:text="${advisoryCount}"></span></p>
                     </div>
                 </div>
             </div>
@@ -215,7 +175,7 @@
                     </figure>
                     <div class="text">
                         <h3>Janet Morris</h3>
-                        <p class="donated">Donated <span class="money">$250.00</span></p>
+                        <p class="donated"><span class="money" th:text="${messageCount}"></span></p>
                     </div>
                 </div>
             </div>
@@ -227,7 +187,7 @@
                     </figure>
                     <div class="text">
                         <h3>Jessa Sy</h3>
-                        <p class="donated">Donated <span class="money">$400.00</span></p>
+                        <p class="donated"><span class="money" th:text="${teamCount}"></span></p>
                     </div>
                 </div>
 
@@ -297,13 +257,11 @@
         </div>
     </div>
     <div class="text">
-        <div class="probootstrap-animate">
-            <h3>Sucess Stories</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur sunt excepturi dicta ex, placeat
-                ab esse, iure harum eaque fuga asperiores distinctio amet temporibus enim illum molestiae neque ad
-                similique possimus repellendus velit! Quaerat nihil nemo, aliquam consectetur debitis illum. Excepturi
-                cum, quaerat minus odit dolorem recusandae, debitis reprehenderit voluptate?</p>
-            <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
+        <div th:each="announced,announcedStat:${alist.list}" th:if="${announcedStat.index<1}" class="probootstrap-animate">
+            <h3>最新公告</h3>
+            <p th:utext="${announced.article}">
+            </p>
+            <p><a href="" class="btn btn-primary btn-lg">查看往期公告</a></p>
         </div>
     </div>
 </section>
@@ -312,24 +270,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 probootstrap-animate">
-                <h3>News</h3>
-                <ul class="probootstrap-news">
-                    <li>
-                        <span class="probootstrap-date">July 16, 2017</span>
-                        <h3><a href="#">Porro provident suscipit</a></h3>
-                        <p>Provident sequi assumenda quaerat minima mollitia at ducimus atque aliquam a ad dolore.</p>
-                        <p><span class="probootstrap-meta"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i
-                                class="icon-bubbles2"></i> 7</a></span></p>
-                    </li>
-                    <li>
-                        <span class="probootstrap-date">July 16, 2017</span>
-                        <h3><a href="#">Voluptatem dolor pariatur</a></h3>
-                        <p>Provident sequi assumenda quaerat minima mollitia at ducimus atque aliquam a ad dolore.</p>
-                        <p><span class="probootstrap-meta"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i
-                                class="icon-bubbles2"></i> 7</a></span></p>
+                <h3>运动校园</h3>
+                <ul th:each="alladvisory,advisoryStat:${slist.list}" th:if="${advisoryStat.index<2}" class="probootstrap-news">
+                    <li >
+                        <span class="probootstrap-date"><th:block th:text="${alladvisory.gmtCreate}"/></span>
+                        <h3><a th:href="@{/home/article(id=${alladvisory.id})}"><th:block th:text="${alladvisory.title}"/></a></h3>
+                        <div><img style="height: 138px;weight:138px" th:src="${alladvisory.nimage}"></div>
                     </li>
                 </ul>
-                <p><a href="#" class="btn btn-primary">View all news</a></p>
+                <p><a href="/home/causes" class="btn btn-primary">查看更多新闻</a></p>
             </div>
             <div class="col-md-6 probootstrap-animate">
                 <h3>About Us</h3>
@@ -337,50 +286,45 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem porro impedit, perferendis similique
                     voluptatum reiciendis laudantium iusto ad, eligendi non minus nemo tempora? Non velit ab quasi at
                     dignissimos fugiat.</p>
-                <p><a href="#" class="btn btn-primary">Learn More</a></p>
+                <p><a href="/home/about" class="btn btn-primary">了解一下我们</a></p>
             </div>
             <div class="col-md-3 probootstrap-animate">
-                <h3>Gallery</h3>
+                <h3>校园运动</h3>
 
                 <div class="owl-carousel owl-carousel-fullwidth">
-                    <div class="item">
-                        <a href="/sports/img/img_sq_1.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_1.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==0}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_2.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_2.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==1}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_3.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_3.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==2}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_4.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_4.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==3}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_5.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_5.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==4}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_6.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_6.jpg" alt="Free Bootstrap Template " class="img-responsive">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="/sports/img/img_sq_7.jpg" class="image-popup">
-                            <img src="/sports/img/img_sq_7.jpg" alt="Free Bootstrap Template " class="img-responsive">
+                    <div th:each="image,imageStat:${ilist.list}" th:if="${imageStat.index==5}" class="item">
+                        <a th:href="${image}" class="image-popup">
+                            <img th:src="${image}" alt="Free Bootstrap Template " class="img-responsive">
                         </a>
                     </div>
                 </div>
 
-                <p class="text-center"><a href="#" class="btn btn-primary">View all gallery</a></p>
+                <p class="text-center"><a href="/home/gallery" class="btn btn-primary">查看更多趣图</a></p>
 
             </div>
         </div>
