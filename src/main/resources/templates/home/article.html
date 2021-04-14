@@ -1,327 +1,276 @@
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <script src="/message/js/jquery-1.11.1.min.js"></script>
-    <link href="/message/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/message/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/sports/css/styles-merged.css">
     <link rel="stylesheet" href="/sports/css/custom.css">
-    <link href="/message/css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/css/style.min.css">
+    <link href="/message/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/sports/css/style.min.css">
     <!--[if lt IE 9]>
-    <script src="/js/vendor/html5shiv.min.js"></script>
-    <script src="/js/vendor/respond.min.js"></script>
+    <script src="/sports/js/vendor/html5shiv.min.js"></script>
+    <script src="/sports/js/vendor/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
+</head>
+<body>
 
 
-  <nav class="navbar navbar-default probootstrap-navbar">
+<nav class="navbar navbar-default probootstrap-navbar">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-      <div id="navbar-collapse" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/home/index">首页</a></li>
-          <li><a href="/home/news">精彩校园</a></li>
-          <li><a href="/home/gallery">体育趣图</a></li>
-          <li class="active"><a href="/home/about">关于我们</a></li>
-          <li><a href="/admin/index">个人中心</a></li>
-          <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
-            <ul class="dropdown-menu">
-              <li><a href="/home/testimonial">篮球文章</a></li>
-              <li><a href="/home/cause-single">足球文章</a></li>
-              <li><a href="/home/causes">其他体育</a></li>
-              <li><a href="/home/schoolteam">校园队伍</a></li>
-              <li><a href="/home/contact">联系我们</a></li>
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/home/index">首页</a></li>
+                <li><a href="/home/news">精彩校园</a></li>
+                <li><a href="/home/gallery">体育趣图</a></li>
+                <li class="active"><a href="/home/about">关于我们</a></li>
+                <li><a href="/admin/index">个人中心</a></li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">更多</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/home/testimonial">篮球文章</a></li>
+                        <li><a href="/home/cause-single">足球文章</a></li>
+                        <li><a href="/home/causes">其他体育</a></li>
+                        <li><a href="/home/schoolteam">校园队伍</a></li>
+                        <li><a href="/home/contact">联系我们</a></li>
+                    </ul>
+                </li>
+                <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"
+                                                                                             class="btn btn-primary">登录</a>
+                </li>
+                <li th:if="${session.username!=null}" class="probootstra-cta-button last"><a href="#"
+                                                                                             class="btn btn-primary">
+                    <th:block th:text="${session.username}"/>
+                </a></li>
+                <li th:if="${session.username!=null}"><a href="/login/logout">退出</a></li>
             </ul>
-          </li>
-          <li th:if="${session.username==null}" class="probootstra-cta-button last"><a href="/login/login"
-                                                                                       class="btn btn-primary">登录</a>
-          </li>
-          <li th:if="${session.username!=null}" class="probootstra-cta-button last"><a href="#"
-                                                                                       class="btn btn-primary">
-            <th:block th:text="${session.username}"/>
-          </a></li>
-          <li th:if="${session.username!=null}"><a href="/login/logout">退出</a></li>
-        </ul>
-      </div>
+        </div>
     </div>
-  </nav>
+</nav>
 
-      
-      <section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(/sports/img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
-        <div class="container">
-          <div class="row">
+
+<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(/sports/img/hero_bg_bw_1.jpg)"
+         data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12">
-              <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">运动有益<span>努力生活，健康运动</span></h1>
-              </div>
+                <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
+                    <h1 class="probootstrap-heading probootstrap-animate">运动有益<span>努力生活，健康运动</span></h1>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </div>
+</section>
 
-      <section class="probootstrap-section">
-        <div class="single">
-          <div class="container">
+<section class="probootstrap-section">
+    <div class="single">
+        <div class="container">
             <div class="single-info">
-              <h3><th:block th:text="${notice.ntitle}"></th:block></h3>
-              <div class="comments">
-                <ul>
-                  <li><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span><th:block th:text="${notice.nauthor}"></th:block></a> /</li>
-                  <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><th:block th:text="${notice.ntime}"></th:block></li>
-                </ul>
-              </div>
-              <div class="dummy-text">
-                <b><th:block th:utext="${notice.narticle}"></th:block></b>
-              </div>
-              <br><br><br><br><br>
-              <div class="recent-com">
-                <h4><span>历史留言</span></h4>
-                <div th:each="comment:${clist.list}" class="recent-com-grids">
-                  <div class="recent-com-grid">
-                    <div class="col-xs-2 recent-com-grid-left">
-                      <img th:src="${comment.uimage}" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="col-xs-10 recent-com-grid-right">
-                      <h5><a href=""><th:block th:text="${comment.username}"></th:block></a></h5>
-                      <p><th:block th:text="${comment.comment}"></th:block></p>
-                      <div class="reply">
-                        <a th:if="${session.permisssionlevel<4||session.Uid==comment.uid}" th:href="@{/deleteComment(cid=${comment.cid},nid=${notice.nid})}"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>删除</a>
-                       </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                  </div>
-                  <div th:if="${session.permisssionlevel!=null&&comment.cflag==0&&session.permisssionlevel<4}" class="recent-com-grid recent-com-grid1">
-                  <form  id="pro">
-                    <textarea name="apply" id="apply" cols="80" rows="5" required="required" placeholder="写下您的回复..."></textarea>
-                    <input type="hidden" name="aid" id="aid" th:value="${comment.cid}" >
-                    <input type="hidden" name="articleid" id="articleid" th:value="${notice.nid}" >
-                    <input type="submit" value="回复" onclick="submitapply()">
-                  </form>
-                  </div>
-                  <div th:if="${comment.cflag==1}" class="recent-com-grid recent-com-grid1">
-                    <div class="col-xs-10 recent-com-grid-right">
-                      <h5><a href=""><th:block th:text="${comment.caboy}"></th:block></a></h5>
-                      <p><th:block th:text="${comment.capply}"></th:block></p>
-                    </div>
-                    <div class="clearfix"> </div>
-                  </div>
+                <h3>
+                    <th:block th:text="${notice.ntitle}"/>
+                </h3>
+                <div class="comments">
+                    <ul>
+                        <li><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <th:block th:text="${notice.nauthor}"/>
+                        </a> /
+                        </li>
+                        <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <th:block th:text="${notice.ntime}"/>
+                        </li>
+                    </ul>
                 </div>
-                <div class="page">
-                <ul class="pager">
-                  <li class="num"><a th:href="@{/article(pageNum=1,id=${id})}">首页</a></li>
-                    <li class="num"><a th:if="${clist.pageNum} > '1'" id="previouspage" th:href="@{/article(pageNum=${clist.prePage},id=${id})}" class="previous">
-                      &lt;&lt;</a></li>
-                    <th:block class="pagination" th:each="pagenum:${pagenums}">
-                      <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                      <li class="num"><a class="active" style="color: #ff2727"  th:if="${clist.pageNum==pagenum}" th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a></li>
+                <div class="dummy-text">
+                    <b>
+                        <th:block th:utext="${notice.narticle}"/>
+                    </b>
+                </div>
+                <br><br><br><br><br>
+                <div class="recent-com">
+                    <h4><span>历史留言</span></h4>
+                    <div th:each="comment:${clist.list}" class="recent-com-grids">
+                        <div class="recent-com-grid">
+                            <div class="col-xs-2 recent-com-grid-left">
+                                <img th:src="${comment.uimage}" alt=" " class="img-responsive"/>
+                            </div>
+                            <div class="col-xs-10 recent-com-grid-right">
+                                <h5><a href="">
+                                    <th:block th:text="${comment.username}"/>
+                                </a></h5>
+                                <p>
+                                    <th:block th:text="${comment.comment}"/>
+                                </p>
+                                <div class="reply">
+                                    <a th:if="${session.permisssionlevel<4||session.Uid==comment.uid}"
+                                       th:href="@{/deleteComment(cid=${comment.cid},nid=${notice.nid})}"><span
+                                            class="glyphicon glyphicon-share" aria-hidden="true"></span>删除</a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div th:if="${session.permisssionlevel!=null&&comment.cflag==0&&session.permisssionlevel<4}"
+                             class="recent-com-grid recent-com-grid1">
+                            <form id="pro">
+                                <textarea name="apply" id="apply" cols="80" rows="5" required="required"
+                                          placeholder="写下您的回复..."></textarea>
+                                <input type="hidden" name="aid" id="aid" th:value="${comment.cid}">
+                                <input type="hidden" name="articleid" id="articleid" th:value="${notice.nid}">
+                                <input type="submit" value="回复" onclick="submitapply()">
+                            </form>
+                        </div>
+                        <div th:if="${comment.cflag==1}" class="recent-com-grid recent-com-grid1">
+                            <div class="col-xs-10 recent-com-grid-right">
+                                <h5><a href="">
+                                    <th:block th:text="${comment.caboy}"/>
+                                </a></h5>
+                                <p>
+                                    <th:block th:text="${comment.capply}"/>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <ul class="pager">
+                            <li class="num"><a th:href="@{/article(pageNum=1,id=${id})}">首页</a></li>
+                            <li class="num"><a th:if="${clist.pageNum} > '1'" id="previouspage"
+                                               th:href="@{/article(pageNum=${clist.prePage},id=${id})}"
+                                               class="previous">
+                                &lt;&lt;</a></li>
+                            <th:block class="pagination" th:each="pagenum:${pagenums}">
+                                <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
+                                <li class="num"><a class="active" style="color: #ff2727"
+                                                   th:if="${clist.pageNum==pagenum}"
+                                                   th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
+                                </li>
 
-                      <li class="num"><a class="num" th:if="${clist.pageNum!=pagenum}"th:class="'pagenum'+${pagenum}" th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a></li>
-                    </th:block>
-                    <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage" th:href="@{/article(pageNum=${clist.nextPage},id=${id})}" aria-label="Next">
-                      &gt;&gt;</a></li>
-                  <li class="num"><a id="endpage" th:href="@{/article(pageNum=${clist.pages},id=${id})}">末页</a></li>
-                  <li class="num"><span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span></li>
-                </ul>
-                </div>
-              </div>
-              <br><br><br>
-              <div class="leave-comm" th:if="${session.username!=null}">
-                <h4>留下<span>您的感触吧</span></h4>
-                <div class="leave-comm-grids">
-                  <form>
-                    <textarea required="required" name="coment" id="comment"  placeholder="写下您的留言..."></textarea>
-                    <input type="hidden" name="cid" id="cid" th:value="${notice.nid}" >
-                    <input type="submit" value="评论" onclick="sumbit()">
-                  </form>
-                </div>
-              </div>
-              <div class="leave-comm" th:if="${session.username==null}">
-                <h4>登陆后<span>才可以留言</span></h4>
-              </div>
-              <br><br><br>
-              <div class="leave-comm">
-                <div class="container">
-                  <div class="row">
-                    <h4><span>尽己所能，帮帮他们</span></h4><br><br><br>
-                    <div class="col-md-5 probootstrap-animate">
-                      <form action="goAlipay" method="post" id="form" class="probootstrap-form">
-                        <input type="hidden" name="id" id="id" th:value="${notice.nid}" >
-                        <div class="form-group">
-                          <label for="money">Amount</label>
-                          <input type="number" required="required" class="form-control" id="money" name="money" placeholder="">
-                          <label>登陆后捐赠会将记录登记在您的帐号，否则会以匿名捐赠</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" onclick="donate()" value="Donate">
-                        </div>
-                      </form>
+                                <li class="num"><a class="num" th:if="${clist.pageNum!=pagenum}"
+                                                   th:class="'pagenum'+${pagenum}"
+                                                   th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
+                                </li>
+                            </th:block>
+                            <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage"
+                                               th:href="@{/article(pageNum=${clist.nextPage},id=${id})}"
+                                               aria-label="Next">
+                                &gt;&gt;</a></li>
+                            <li class="num"><a id="endpage"
+                                               th:href="@{/article(pageNum=${clist.pages},id=${id})}">末页</a></li>
+                            <li class="num"><span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
+                            </li>
+                        </ul>
                     </div>
-                  </div>
                 </div>
-              </div>
+                <br><br><br>
+                <div class="leave-comm" th:if="${session.username!=null}">
+                    <h4>留下<span>您的感触吧</span></h4>
+                    <div class="leave-comm-grids">
+                        <form>
+                            <textarea required="required" name="coment" id="comment" placeholder="写下您的留言..."></textarea>
+                            <input type="hidden" name="cid" id="cid" th:value="${notice.nid}">
+                            <input type="submit" value="评论" onclick="sumbit()">
+                        </form>
+                    </div>
+                </div>
+                <div class="leave-comm" th:if="${session.username==null}">
+                    <h4>登陆后<span>才可以留言</span></h4>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-  <section class="probootstrap-section probootstrap-bg probootstrap-section-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center section-heading probootstrap-animate" data-animate-effect="fadeIn">
-          <h2>他们最近支持过这个项目</h2>
-          <p class="lead"></p>
-        </div>
-      </div>
-      <div  class="row">
-        <div  th:each="donation,donationStat:${dlist.list}" th:if="${donationStat.index==0}" class="col-md-3">
-          <div class="probootstrap-donors text-center probootstrap-animate">
-            <figure class="media">
-              <img th:src="${donation.uimage}" alt="Free Bootstrap Template " class="img-responsive">
-            </figure>
-            <div class="text">
-              <h3><th:block th:text="${donation.username}"></th:block></h3>
-              <p class="donated">Donated <span class="money">￥<th:block th:text="${donation.dmoney}"></th:block></span></p>
-            </div>
-          </div>
-        </div>
-        <div  th:each="donation,donationStat:${dlist.list}" th:if="${donationStat.index==1}" class="col-md-3">
-          <div class="probootstrap-donors text-center probootstrap-animate">
-            <figure class="media">
-              <img th:src="${donation.uimage}" alt="Free Bootstrap Template " class="img-responsive">
-            </figure>
-            <div class="text">
-              <h3><th:block th:text="${donation.username}"></th:block></h3>
-              <p class="donated">Donated <span class="money">￥<th:block th:text="${donation.dmoney}"></th:block></span></p>
-            </div>
-          </div>
-        </div>
-        <div  th:each="donation,donationStat:${dlist.list}" th:if="${donationStat.index==2}" class="col-md-3">
-          <div class="probootstrap-donors text-center probootstrap-animate">
-            <figure class="media">
-              <img th:src="${donation.uimage}" alt="Free Bootstrap Template " class="img-responsive">
-            </figure>
-            <div class="text">
-              <h3><th:block th:text="${donation.username}"></th:block></h3>
-              <p class="donated">Donated <span class="money">￥<th:block th:text="${donation.dmoney}"></th:block></span></p>
-            </div>
-          </div>
-        </div>
-        <div  th:each="donation,donationStat:${dlist.list}" th:if="${donationStat.index==3}" class="col-md-3">
-          <div class="probootstrap-donors text-center probootstrap-animate">
-            <figure class="media">
-              <img th:src="${donation.uimage}" alt="Free Bootstrap Template " class="img-responsive">
-            </figure>
-            <div class="text">
-              <h3><th:block th:text="${donation.username}"></th:block></h3>
-              <p class="donated">Donated <span class="money">￥<th:block th:text="${donation.dmoney}"></th:block></span></p>
-            </div>
-          </div>
-        </div>
-        <div  th:each="donation,donationStat:${dlist.list}" th:if="${donationStat.index==4}" class="col-md-3">
-          <div class="probootstrap-donors text-center probootstrap-animate">
-            <figure class="media">
-              <img th:src="${donation.uimage}" alt="Free Bootstrap Template " class="img-responsive">
-            </figure>
-            <div class="text">
-              <h3><th:block th:text="${donation.username}"></th:block></h3>
-              <p class="donated">Donated <span class="money">￥<th:block th:text="${donation.dmoney}"></th:block></span></p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
-  <footer class="probootstrap-footer probootstrap-bg">
+</section>
+<footer class="probootstrap-footer probootstrap-bg">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 probootstrap-animate">
-          <div class="probootstrap-footer-widget">
-            <h3>关于我们</h3>
-            <p>提高学生们对运动的积极性和营造良好的校园体育运动氛围。</p>
-          </div>
+        <div class="row">
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-footer-widget">
+                    <h3>关于我们</h3>
+                    <p>提高学生们对运动的积极性和营造良好的校园体育运动氛围。</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-footer-widget">
+                    <h3>联系我们</h3>
+                    <ul class="probootstrap-contact-info">
+                        <li><i class="icon-location2"></i> <span>广东省华南理工大学华软学院</span></li>
+                        <li><i class="icon-mail"></i><span>1538345680@qq.com</span></li>
+                        <li><i class="icon-phone2"></i><span>+15875874574</span></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-footer-widget">
+                    <h3>运动</h3>
+                    <p>
+                        体育运动作为消闲娱乐的一种手段，日益成为现代文明生活中的一项时尚享受。
+                    <p><a href="/home/contact" class="btn btn-primary">联系我们</a></p>
+                </div>
+            </div>
+
         </div>
-
-        <div class="col-md-4 probootstrap-animate">
-          <div class="probootstrap-footer-widget">
-            <h3>联系我们</h3>
-            <ul class="probootstrap-contact-info">
-              <li><i class="icon-location2"></i> <span>广东省华南理工大学华软学院</span></li>
-              <li><i class="icon-mail"></i><span>1538345680@qq.com</span></li>
-              <li><i class="icon-phone2"></i><span>+15875874574</span></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="col-md-4 probootstrap-animate">
-          <div class="probootstrap-footer-widget">
-            <h3>运动</h3>
-            <p>
-              体育运动作为消闲娱乐的一种手段，日益成为现代文明生活中的一项时尚享受。<p><a href="/home/contact" class="btn btn-primary">联系我们</a></p>
-          </div>
-        </div>
-
-      </div>
-      <!-- END row -->
+        <!-- END row -->
 
     </div>
 
-  </footer>
+</footer>
 
-      <script src="/js/scripts.min.js"></script>
-      <script src="/js/main.min.js"></script>
-      <script src="/js/custom.js"></script>
+<script src="/js/scripts.min.js"></script>
+<script src="/js/main.min.js"></script>
+<script src="/js/custom.js"></script>
 <script>
-  function sumbit() {
-      var cid = $("#cid").val();
-      var comment = $("#comment").val();
-      $.ajax(
-          {
-              url: "submitcomment",
-              type: "POST",
-              data: {cid:cid,comment:comment},
-              success: function (data) {
-                  if (data) {
-                      confirm("回复成功");
-                      location.href="article?id="+cid;
-                  }
-              }
+    function sumbit() {
+        var cid = $("#cid").val();
+        var comment = $("#comment").val();
+        $.ajax(
+            {
+                url: "submitcomment",
+                type: "POST",
+                data: {cid: cid, comment: comment},
+                success: function (data) {
+                    if (data) {
+                        confirm("回复成功");
+                        location.href = "article?id=" + cid;
+                    }
+                }
 
-          }
-      );
-  }
-  function submitapply() {
-      var aid = $("#aid").val();
-      var apply = $("#apply").val();
-      var nid = $("#articleid").val();
-      $.ajax(
-          {
-              url: "applycomment",
-              type: "POST",
-              data: {aid:aid,apply:apply,nid:nid},
-              success: function (data) {
-                  if (data) {
-                      confirm("回复成功");
-                      location.href="article?id="+nid;
-                  }
-              }
+            }
+        );
+    }
 
-          }
-      );
-  }
-  </script>
-  </body>
+    function submitapply() {
+        var aid = $("#aid").val();
+        var apply = $("#apply").val();
+        var nid = $("#articleid").val();
+        $.ajax(
+            {
+                url: "applycomment",
+                type: "POST",
+                data: {aid: aid, apply: apply, nid: nid},
+                success: function (data) {
+                    if (data) {
+                        confirm("回复成功");
+                        location.href = "article?id=" + nid;
+                    }
+                }
+
+            }
+        );
+    }
+</script>
+</body>
 </html>
