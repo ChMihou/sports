@@ -43,9 +43,38 @@ public class HomeController {
 
     @RequestMapping("/index")
 
-    public ModelAndView home(ModelAndView mv) {
+    public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, ModelAndView mv) {
         mv.addObject("/home/index");
+        //精彩文章
+        Advisory advisory = new Advisory();
+        advisory.setWonderful(1);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo wonderlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, wonderlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", wonderlist);
+
+        //体育汇总
+        Advisory advisoryAll = new Advisory();
+        advisory.setNselect(5);
+        List<Advisory> advisoriesAll = advisoryService.selectAll(advisoryAll, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisoriesAll);
+        List pagenumsAll = new ArrayList();
+        Paginator.page(pagenumsAll, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenumsAll);
+        mv.addObject("nlist", nlist);
+
+        //体育趣图
+        List<String> images = advisoryService.selectAllImage(pageNum, pageSize);
+
+        PageInfo ilist = new PageInfo(images);
+        List pagenumsImage = new ArrayList();
+        Paginator.page(pagenumsImage, ilist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenumsImage);
+        mv.addObject("ilist", ilist);
         return mv;
+
     }
 
     @RequestMapping("/about")
@@ -55,14 +84,51 @@ public class HomeController {
     }
 
     @RequestMapping("/cause-single")
-    public ModelAndView causesingle(ModelAndView mv) {
+    public ModelAndView causesingle(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
         mv.addObject("/home/cause-single");
+        Advisory advisory = new Advisory();
+        advisory.setNselect(2);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
         return mv;
     }
 
     @RequestMapping("/causes")
-    public ModelAndView causes(ModelAndView mv) {
+    public ModelAndView causes(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
         mv.addObject("/home/causes");
+        Advisory advisory = new Advisory();
+        advisory.setNselect(5);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
+        return mv;
+    }
+
+    @RequestMapping("article")
+    public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
+
+        ModelAndView mv = new ModelAndView();
+        Advisory advisory = new Advisory();
+        advisory.setId(id);
+        advisory = advisoryService.select(advisory);
+        mv.addObject("notice", advisory);
+        mv.addObject("id", id);
+        Comment comment = new Comment();
+        comment.setId(id);
+        List<Comment> userCommentVos = commentService.selectAll(comment, pageNum, pageSize);
+        PageInfo clist = new PageInfo(userCommentVos);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, clist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("clist", clist);
+        mv.setViewName("article");
         return mv;
     }
 
@@ -98,8 +164,16 @@ public class HomeController {
     }
 
     @RequestMapping("/testimonial")
-    public ModelAndView testimonial(ModelAndView mv) {
+    public ModelAndView testimonial(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
         mv.addObject("/home/testimonial");
+        Advisory advisory = new Advisory();
+        advisory.setNselect(1);
+        List<Advisory> advisories = advisoryService.selectAll(advisory, pageNum, pageSize);
+        PageInfo nlist = new PageInfo(advisories);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, nlist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("nlist", nlist);
         return mv;
     }
 
@@ -127,6 +201,7 @@ public class HomeController {
         mv.setViewName("/home/schoolteam");
         return mv;
     }
+
     @RequestMapping("/gallery")
     public ModelAndView gallery(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "16") int pageSize) {
 
@@ -136,33 +211,12 @@ public class HomeController {
 
         PageInfo ilist = new PageInfo(images);
         List pagenums = new ArrayList();
-        Paginator.page(pagenums,ilist,pageNum,pageSize);
+        Paginator.page(pagenums, ilist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
         mv.addObject("ilist", ilist);
 
         mv.setViewName("/home/gallery");
 
-        return mv;
-    }
-
-    @RequestMapping("article")
-    public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
-
-        ModelAndView mv = new ModelAndView();
-        Advisory advisory = new Advisory();
-        advisory.setId(id);
-        advisory = advisoryService.select(advisory);
-        mv.addObject("advisory", advisory);
-        mv.addObject("id", id);
-        Comment comment = new Comment();
-        comment.setId(id);
-        List<Comment> userCommentVos = commentService.selectAll(comment, pageNum, pageSize);
-        PageInfo clist = new PageInfo(userCommentVos);
-        List pagenums = new ArrayList();
-        Paginator.page(pagenums, clist, pageNum, pageSize);
-        mv.addObject("pagenums", pagenums);
-        mv.addObject("clist", clist);
-        mv.setViewName("article");
         return mv;
     }
 }
