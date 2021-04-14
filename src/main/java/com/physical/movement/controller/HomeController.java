@@ -1,10 +1,7 @@
 package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.physical.movement.entity.Advisory;
-import com.physical.movement.entity.Comment;
-import com.physical.movement.entity.Message;
-import com.physical.movement.entity.Team;
+import com.physical.movement.entity.*;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.model.ResultJson;
 import com.physical.movement.service.*;
@@ -41,6 +38,9 @@ public class HomeController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private AnnouncementService announcementService;
+
     @RequestMapping("/index")
 
     public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, ModelAndView mv) {
@@ -73,6 +73,15 @@ public class HomeController {
         Paginator.page(pagenumsImage, ilist, pageNum, pageSize);
         mv.addObject("pagenums", pagenumsImage);
         mv.addObject("ilist", ilist);
+        //公告
+        Announcement announcement = new Announcement();
+        List<Announcement> announcements = announcementService.selectAll(announcement, pageNum, pageSize);
+        PageInfo announcementsOne = new PageInfo(announcements);
+        List pagenumsAnnouncementOne = new ArrayList();
+        Paginator.page(pagenumsAnnouncementOne, announcementsOne, pageNum, pageSize);
+        mv.addObject("pagenums", pagenumsAnnouncementOne);
+        mv.addObject("nlist", announcementsOne);
+
         return mv;
 
     }
