@@ -45,7 +45,7 @@ public class HomeController {
     private GameService gameService;
     @RequestMapping("/index")
 
-    public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "2") int pageSize, ModelAndView mv) {
+    public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "3") int pageSize, ModelAndView mv) {
         mv.addObject("/home/index");
         //精彩文章
         Advisory advisory = new Advisory();
@@ -102,8 +102,15 @@ public class HomeController {
     }
 
     @RequestMapping("/about")
-    public ModelAndView about(ModelAndView mv) {
+    public ModelAndView about(ModelAndView mv,@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "4") int pageSize) {
         mv.addObject("/home/about");
+        SysUser sysUser = new SysUser();
+        List<SysUser> sysUsers = sysUserService.selectAll(sysUser, pageNum, pageSize);
+        PageInfo slist = new PageInfo(sysUsers);
+        List pagenums = new ArrayList();
+        Paginator.page(pagenums, slist, pageNum, pageSize);
+        mv.addObject("pagenums", pagenums);
+        mv.addObject("slist", slist);
         return mv;
     }
 
