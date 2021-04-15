@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/sports/css/styles-merged.css">
@@ -85,33 +84,6 @@
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
-                    <div class="layui-card-body ">
-                        <form class="layui-form layui-col-space5" action="/home/schoolteam" method="post">
-                            <div class="layui-input-inline layui-show-xs-block">
-                                <input type="text" class="layui-input" placeholder="请输入队伍关键字查询" name="key" id="key"
-                                       th:value="${key}"></div>
-                            队伍类型：
-                            <div class="layui-input-inline layui-show-xs-block">
-                                <select id="check" name="check">
-                                    <tr th:each="sports:${SportsType}">
-                                        <option th:value="${sports.key}"
-                                                th:selected="${sports.key==check?'selected':''}">
-                                            <th:block th:text="${sports.value.name}"/>
-                                        </option>
-                                </select>
-                            </div>
-                            <div class="layui-input-inline layui-show-xs-block">
-                                <input type="radio" name="flag" value="0" title="全部队伍"
-                                       th:text="${flag==0?'checked':''}">
-                                <input type="radio" name="flag" value="1" title="我的队伍"
-                                       th:text="${flag==1?'checked':''}">
-                            </div>
-                            <div class="layui-input-inline layui-show-xs-block">
-                                <button type="submit" class="layui-btn" lay-submit="" lay-filter="sreach">
-                                    <i class="layui-icon">&#xe615;</i></button>
-                            </div>
-                        </form>
-                    </div>
                     <div class="layui-card-body ">
                         <table class="layui-table layui-form">
                             <thead>

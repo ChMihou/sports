@@ -35,7 +35,6 @@
                             <th>评论编号</th>
                             <th>评论时间</th>
                             <th>内容</th>
-                            <th>回复</th>
                             <th th:if="${session.sysUser.usertype==1}">操作</th>
                         </thead>
                         <tbody>
@@ -47,8 +46,6 @@
                             <td th:text="${comment.id}"></td>
                             <td th:text="${comment.gmtCreate}"></td>
                             <td th:text="${comment.comment}"></td>
-                            <td th:if="${comment.apply==null}" ></td>
-                            <td th:if="${comment.apply!=null}" th:text="${comment.capply}"></td>
                             <td th:if="${session.sysUser.usertype==1}">
 <!--                                <button th:if="${session.sysUser.usertype==1}"-->
 <!--                                        class="layui-btn layui-btn-warm layui-btn-xs"-->

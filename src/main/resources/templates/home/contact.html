@@ -111,23 +111,6 @@
             <li class="num"><span aria-label="Next">相关记录[[${mlist.total}]]条，共[[${mlist.pages}]]页。</span></li>
         </ul>
     </div>
-    <div th:if="${session.username!=null}" class="container">
-        <div class="row">
-            <div class="col-md-5 probootstrap-animate">
-                <form action="" method="post" id="form" class="probootstrap-form">
-                    <div class="form-group">
-                        <label for="comment">评价内容</label>
-                        <textarea cols="30" rows="10" class="form-control"  id="comment" name="comment"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" onclick="sumbit()" value="评价">
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 col-md-push-1 probootstrap-animate">
-            </div>
-        </div>
-    </div>
 </section>
 <section class="probootstrap-section">
     <div class="container">

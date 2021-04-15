@@ -235,7 +235,7 @@ public class HomeController {
     }
 
     @RequestMapping("/schoolteam")
-    public ModelAndView schoolteam(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
+    public ModelAndView schoolteam(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, HttpServletRequest request, HttpSession session, ModelAndView mv) {
         String check = request.getParameter("check");
         mv.addObject("check", check);
         String flag = request.getParameter("flag");
@@ -281,6 +281,7 @@ public class HomeController {
     public ModelAndView deleteComment(Integer cid, Integer id) {
         ModelAndView mv = new ModelAndView();
         int i = commentService.deleteByPrimaryKey(cid);
+        mv.setViewName("redirect:/home/article?id=" + id);
         mv.setViewName("redirect:/home/article?id=" + id);
         return mv;
     }
