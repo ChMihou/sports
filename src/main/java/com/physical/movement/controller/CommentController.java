@@ -64,10 +64,10 @@ public class CommentController {
     public ResultJson submitApplycomment(String apply, Integer id, HttpSession session) {
         Comment comment = new Comment();
         SysUser sysUser = (SysUser) session.getAttribute("sysUser");
-        comment.setCaboy(sysUser.getUsername());
-        comment.setCflag(1);
-        comment.setCapply(apply);
-        comment.setCid(id);
+        comment.setAboy(sysUser.getUsername());
+        comment.setFlag(1);
+        comment.setApply(apply);
+        comment.setId(id);
         int a = commentService.updateByPrimaryKeySelective(comment);
         if (a > 0) {
             return ResultJson.success("回复成功");

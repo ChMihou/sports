@@ -42,23 +42,23 @@
 
                         <tr th:each="comment:${clist.list}">
                             <td>
-                                <input type="checkbox" name="id" th:value="${comment.cid}"   lay-skin="primary">
+                                <input type="checkbox" name="id" th:value="${comment.id}"   lay-skin="primary">
                             </td>
-                            <td th:text="${comment.cid}"></td>
+                            <td th:text="${comment.id}"></td>
                             <td th:text="${comment.gmtCreate}"></td>
                             <td th:text="${comment.comment}"></td>
-                            <td th:if="${comment.capply==null}" ></td>
-                            <td th:if="${comment.capply!=null}" th:text="${comment.capply}"></td>
+                            <td th:if="${comment.apply==null}" ></td>
+                            <td th:if="${comment.apply!=null}" th:text="${comment.capply}"></td>
                             <td th:if="${session.sysUser.usertype==1}">
-                                <button th:if="${session.sysUser.usertype==1}"
-                                        class="layui-btn layui-btn-warm layui-btn-xs"
-                                        th:onclick="xadmin.open('回复','/comment/apply-comment?id=[[${comment.cid}]]',600,300)">
-                                    <i class="layui-icon">&#xe642;</i>回复
-                                </button>
+<!--                                <button th:if="${session.sysUser.usertype==1}"-->
+<!--                                        class="layui-btn layui-btn-warm layui-btn-xs"-->
+<!--                                        th:onclick="xadmin.open('回复','/comment/apply-comment?id=[[${comment.id}]]',600,300)">-->
+<!--                                    <i class="layui-icon">&#xe642;</i>回复-->
+<!--                                </button>-->
 
-                                <button th:if="${session.sysUser.usertype==1}"
+                                <button th:if="${session.sysUser.usertype==1||session.sysUser.id == comment.cuid}"
                                         class="layui-btn-danger layui-btn layui-btn-xs"
-                                        th:onclick="member_del(this,'[[${comment.cid}]]')" href="javascript:;"><i
+                                        th:onclick="member_del(this,'[[${comment.id}]]')" href="javascript:;"><i
                                         class="layui-icon">&#xe640;</i>删除
                                 </button>
 
@@ -70,18 +70,18 @@
                 <div class="layui-card-body ">
                     <div class="page">
                         <div>
-                            <a aria-label="Previous" id="firstpage" th:href="@{/comment-list(pageNum=1)}">首页</a>
-                            <a th:if="${clist.pageNum} > '1'" id="previouspage" th:href="@{/comment-list(pageNum=${clist.prePage})}" aria-label="Previous">
+                            <a aria-label="Previous" id="firstpage" th:href="@{/comment/comment-list(pageNum=1)}">首页</a>
+                            <a th:if="${clist.pageNum} > '1'" id="previouspage" th:href="@{/comment/comment-list(pageNum=${clist.prePage})}" aria-label="Previous">
                                 &lt;&lt;</a>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
                                 <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
-                                <a class="num layui-btn layui-btn-warm" th:if="${clist.pageNum==pagenum}" th:href="@{/comment-list(pageNum=${pagenum})}">[[${pagenum}]]</a>
+                                <a class="num layui-btn layui-btn-warm" th:if="${clist.pageNum==pagenum}" th:href="@{/comment/comment-list(pageNum=${pagenum})}">[[${pagenum}]]</a>
 
-                                <a class="num" th:if="${clist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}" th:href="@{/comment-list(pageNum=${pagenum})}">[[${pagenum}]]</a>
+                                <a class="num" th:if="${clist.pageNum!=pagenum}" th:class="'pagenum'+${pagenum}" th:href="@{/comment/comment-list(pageNum=${pagenum})}">[[${pagenum}]]</a>
                             </th:block>
-                            <a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage" th:href="@{/comment-list(pageNum=${clist.nextPage})}" aria-label="Next">
+                            <a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage" th:href="@{/comment/comment-list(pageNum=${clist.nextPage})}" aria-label="Next">
                                 &gt;&gt;</a>
-                            <a id="endpage" th:href="@{/comment-list(pageNum=${clist.pages})}">末页</a>
+                            <a id="endpage" th:href="@{/comment/comment-list(pageNum=${clist.pages})}">末页</a>
                             <span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
                         </div>
                     </div>
