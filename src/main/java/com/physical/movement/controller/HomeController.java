@@ -147,11 +147,14 @@ public class HomeController {
     }
 
     @RequestMapping("/article")
-    public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
-
+    public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         Advisory advisory = new Advisory();
-        advisory.setId(id);
+        if (request.getAttribute("id") != null) {
+            advisory.setId((Integer) request.getAttribute("id"));
+        } else {
+            advisory.setId(id);
+        }
         advisory = advisoryService.select(advisory);
         mv.addObject("notice", advisory);
         mv.addObject("id", id);
@@ -284,7 +287,7 @@ public class HomeController {
 
     @RequestMapping("submitcomment")
     @ResponseBody
-    public Boolean submitComment(HttpServletRequest request, Integer cid, String comment) {
+    public Integer submitComment(HttpServletRequest request, Integer cid, String comment) {
 
         Comment com = new Comment();
         HttpSession session = request.getSession();
@@ -295,8 +298,8 @@ public class HomeController {
         com.setCuid(uid);
         int i = commentService.insertSelective(com);
         if (i > 0) {
-            return true;
+            return cid;
         } else
-            return false;
+            return cid;
     }
 }

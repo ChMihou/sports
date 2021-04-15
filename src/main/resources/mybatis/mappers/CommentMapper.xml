@@ -6,9 +6,9 @@
         <result column="Comment" jdbcType="VARCHAR" property="comment"/>
         <result column="cid" jdbcType="INTEGER" property="cid"/>
         <result column="cuid" jdbcType="INTEGER" property="cuid"/>
-        <result column="apply" jdbcType="VARCHAR" property="capply"/>
-        <result column="flag" jdbcType="INTEGER" property="cflag"/>
-        <result column="aboy" jdbcType="VARCHAR" property="caboy"/>
+        <result column="apply" jdbcType="VARCHAR" property="apply"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="aboy" jdbcType="VARCHAR" property="aboy"/>
         <result column="advisoryid" jdbcType="INTEGER" property="advisoryid"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -22,7 +22,7 @@
       #{flag,jdbcType=INTEGER}, #{aboy,jdbcType=VARCHAR}),now(),now())
     </insert>
     <sql id="Base_Column_List">
-    id,,cid, comment, advisoryid, cuid, apply, flag, aboy, gmt_create, gmt_modified
+    id,cid, comment, advisoryid, cuid, apply, flag, aboy, gmt_create, gmt_modified
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -149,4 +149,14 @@
     <select id="selectCount" resultType="INTEGER">
         SELECT COUNT(1) FROM comment;
     </select>
+
+    <delete id="deleteListId" parameterType="int[]">
+        <!-- forEach : 用来循环 collection : 用来指定循环的数据的类型 可以填的值有：array,list,map item
+            : 循环中为每个循环的数据指定一个别名 index : 循环中循环的下标 open : 开始 close : 结束 separator : 数组中元素之间的分隔符 -->
+        delete from comment where id in
+        <foreach collection="ids" item="id" index="no" open="("
+                 separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
