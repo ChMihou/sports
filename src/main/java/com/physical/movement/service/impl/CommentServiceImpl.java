@@ -2,6 +2,7 @@ package com.physical.movement.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.physical.movement.entity.Comment;
+import com.physical.movement.entity.vo.UserCommentVo;
 import com.physical.movement.mapper.CommentMapper;
 import com.physical.movement.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int selectCount() {
         return commentMapper.selectCount();
+    }
+
+    @Override
+    public List<UserCommentVo> selectAllCommentUser(Comment comment, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return commentMapper.selectAllCommentUser(comment);
     }
 }

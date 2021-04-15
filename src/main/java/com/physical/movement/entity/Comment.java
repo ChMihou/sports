@@ -13,17 +13,23 @@ public class Comment extends Id {
 
     private String comment;
 
-    private Integer cnid;
-
     private Integer cuid;
 
-    private String capply;
+    private String apply;
 
-    private Date ctime;
+    private Integer flag;
 
-    private Integer cflag;
+    private String aboy;
 
-    private String caboy;
+    private Integer advisoryid;
+
+    public Integer getAdvisoryid() {
+        return advisoryid;
+    }
+
+    public void setAdvisoryid(Integer advisoryid) {
+        this.advisoryid = advisoryid;
+    }
 
     public Integer getCid() {
         return cid;
@@ -41,14 +47,6 @@ public class Comment extends Id {
         this.comment = comment == null ? null : comment.trim();
     }
 
-    public Integer getCnid() {
-        return cnid;
-    }
-
-    public void setCnid(Integer cnid) {
-        this.cnid = cnid;
-    }
-
     public Integer getCuid() {
         return cuid;
     }
@@ -57,35 +55,27 @@ public class Comment extends Id {
         this.cuid = cuid;
     }
 
-    public String getCapply() {
-        return capply;
+    public String getApply() {
+        return apply;
     }
 
-    public void setCapply(String capply) {
-        this.capply = capply == null ? null : capply.trim();
+    public void setApply(String apply) {
+        this.apply = apply;
     }
 
-    public Date getCtime() {
-        return ctime;
+    public Integer getFlag() {
+        return flag;
     }
 
-    public void setCtime(Date ctime) {
-        this.ctime = ctime;
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 
-    public Integer getCflag() {
-        return cflag;
+    public String getAboy() {
+        return aboy;
     }
 
-    public void setCflag(Integer cflag) {
-        this.cflag = cflag;
-    }
-
-    public String getCaboy() {
-        return caboy;
-    }
-
-    public void setCaboy(String caboy) {
-        this.caboy = caboy == null ? null : caboy.trim();
+    public void setAboy(String aboy) {
+        this.aboy = aboy;
     }
 }

@@ -1,7 +1,10 @@
 package com.physical.movement.mapper;
 
 import com.physical.movement.entity.Comment;
+import com.physical.movement.entity.vo.UserCommentVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
@@ -17,4 +20,6 @@ public interface CommentMapper extends BaseMapper<Comment> {
     int updateByPrimaryKey(Comment record);
 
     int deleteListId(int[] ids);
+
+    List<UserCommentVo> selectAllCommentUser(Comment comment);
 }

@@ -2,6 +2,7 @@ package com.physical.movement.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.physical.movement.entity.*;
+import com.physical.movement.entity.vo.UserCommentVo;
 import com.physical.movement.model.Paginator;
 import com.physical.movement.model.ResultJson;
 import com.physical.movement.service.*;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.physical.movement.model.SportsType.STATUS_MAP;
@@ -43,6 +46,7 @@ public class HomeController {
 
     @Autowired
     private GameService gameService;
+
     @RequestMapping("/index")
 
     public ModelAndView home(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "3") int pageSize, ModelAndView mv) {
@@ -102,7 +106,7 @@ public class HomeController {
     }
 
     @RequestMapping("/about")
-    public ModelAndView about(ModelAndView mv,@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "4") int pageSize) {
+    public ModelAndView about(ModelAndView mv, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "4") int pageSize) {
         mv.addObject("/home/about");
         SysUser sysUser = new SysUser();
         List<SysUser> sysUsers = sysUserService.selectAll(sysUser, pageNum, pageSize);
@@ -153,7 +157,7 @@ public class HomeController {
         mv.addObject("id", id);
         Comment comment = new Comment();
         comment.setId(id);
-        List<Comment> userCommentVos = commentService.selectAll(comment, pageNum, pageSize);
+        List<UserCommentVo> userCommentVos = commentService.selectAllCommentUser(comment, pageNum, pageSize);
         PageInfo clist = new PageInfo(userCommentVos);
         List pagenums = new ArrayList();
         Paginator.page(pagenums, clist, pageNum, pageSize);
@@ -267,5 +271,31 @@ public class HomeController {
         mv.setViewName("/home/gallery");
 
         return mv;
+    }
+
+    @RequestMapping("deleteComment")
+    public ModelAndView deleteComment(Integer cid, Integer nid) {
+        ModelAndView mv = new ModelAndView();
+        int i = commentService.deleteByPrimaryKey(cid);
+        mv.setViewName("redirect:article?id=" + nid);
+        return mv;
+    }
+
+    @RequestMapping("submitcomment")
+    @ResponseBody
+    public Boolean submitComment(HttpServletRequest request, Integer cid, String comment) {
+
+        Comment com = new Comment();
+        HttpSession session = request.getSession();
+        Integer uid = (Integer) session.getAttribute("uid");
+        com.setFlag(2);
+        com.setAdvisoryid(cid);
+        com.setComment(comment);
+        com.setCuid(uid);
+        Boolean i = commentService.insert(com);
+        if (i) {
+            return true;
+        } else
+            return false;
     }
 }

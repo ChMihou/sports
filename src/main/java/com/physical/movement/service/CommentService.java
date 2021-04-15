@@ -1,6 +1,7 @@
 package com.physical.movement.service;
 
 import com.physical.movement.entity.Comment;
+import com.physical.movement.entity.vo.UserCommentVo;
 
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface CommentService {
     int deleteListId(int[] ids);
 
     int selectCount();
+
+    List<UserCommentVo> selectAllCommentUser(Comment comment, int pageNum, int pageSize);
 }
 

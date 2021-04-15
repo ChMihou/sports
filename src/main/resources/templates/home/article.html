@@ -80,22 +80,22 @@
         <div class="container">
             <div class="single-info">
                 <h3>
-                    <th:block th:text="${notice.ntitle}"/>
+                    <th:block th:text="${notice.title}"/>
                 </h3>
                 <div class="comments">
                     <ul>
                         <li><a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            <th:block th:text="${notice.nauthor}"/>
+                            <th:block th:text="${notice.author}"/>
                         </a> /
                         </li>
                         <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <th:block th:text="${notice.ntime}"/>
+                            <th:block th:text="${notice.gmtCreate}"/>
                         </li>
                     </ul>
                 </div>
                 <div class="dummy-text">
                     <b>
-                        <th:block th:utext="${notice.narticle}"/>
+                        <th:block th:utext="${notice.article}"/>
                     </b>
                 </div>
                 <br><br><br><br><br>
@@ -104,7 +104,7 @@
                     <div th:each="comment:${clist.list}" class="recent-com-grids">
                         <div class="recent-com-grid">
                             <div class="col-xs-2 recent-com-grid-left">
-                                <img th:src="${comment.uimage}" alt=" " class="img-responsive"/>
+                                <img th:src="${comment.image}" alt=" " class="img-responsive"/>
                             </div>
                             <div class="col-xs-10 recent-com-grid-right">
                                 <h5><a href="">
@@ -114,30 +114,30 @@
                                     <th:block th:text="${comment.comment}"/>
                                 </p>
                                 <div class="reply">
-                                    <a th:if="${session.permisssionlevel<4||session.Uid==comment.uid}"
-                                       th:href="@{/deleteComment(cid=${comment.cid},nid=${notice.nid})}"><span
+                                    <a th:if="${session.sysUser.usertype==1||session.uid==comment.cuid}"
+                                       th:href="@{/home/deleteComment(cid=${comment.id},id=${notice.id})}"><span
                                             class="glyphicon glyphicon-share" aria-hidden="true"></span>删除</a>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div th:if="${session.permisssionlevel!=null&&comment.cflag==0&&session.permisssionlevel<4}"
+                        <div th:if="${session.sysUser.usertype!=null&&comment.flag==0&&session.sysUser.usertype<2}"
                              class="recent-com-grid recent-com-grid1">
                             <form id="pro">
                                 <textarea name="apply" id="apply" cols="80" rows="5" required="required"
                                           placeholder="写下您的回复..."></textarea>
                                 <input type="hidden" name="aid" id="aid" th:value="${comment.cid}">
-                                <input type="hidden" name="articleid" id="articleid" th:value="${notice.nid}">
+                                <input type="hidden" name="articleid" id="articleid" th:value="${notice.id}">
                                 <input type="submit" value="回复" onclick="submitapply()">
                             </form>
                         </div>
-                        <div th:if="${comment.cflag==1}" class="recent-com-grid recent-com-grid1">
+                        <div th:if="${comment.flag==1}" class="recent-com-grid recent-com-grid1">
                             <div class="col-xs-10 recent-com-grid-right">
                                 <h5><a href="">
-                                    <th:block th:text="${comment.caboy}"/>
+                                    <th:block th:text="${comment.aboy}"/>
                                 </a></h5>
                                 <p>
-                                    <th:block th:text="${comment.capply}"/>
+                                    <th:block th:text="${comment.apply}"/>
                                 </p>
                             </div>
                             <div class="clearfix"></div>
@@ -145,47 +145,47 @@
                     </div>
                     <div class="page">
                         <ul class="pager">
-                            <li class="num"><a th:href="@{/article(pageNum=1,id=${id})}">首页</a></li>
+                            <li class="num"><a th:href="@{/home/article(pageNum=1,id=${id})}">首页</a></li>
                             <li class="num"><a th:if="${clist.pageNum} > '1'" id="previouspage"
-                                               th:href="@{/article(pageNum=${clist.prePage},id=${id})}"
+                                               th:href="@{/home/article(pageNum=${clist.prePage},id=${id})}"
                                                class="previous">
                                 &lt;&lt;</a></li>
                             <th:block class="pagination" th:each="pagenum:${pagenums}">
                                 <!--	${#httpServletRequest.getRequestURL()}表示当前url，href中也可以不写，如下直接加参数		 -->
                                 <li class="num"><a class="active" style="color: #ff2727"
                                                    th:if="${clist.pageNum==pagenum}"
-                                                   th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
+                                                   th:href="@{/home/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
                                 </li>
 
                                 <li class="num"><a class="num" th:if="${clist.pageNum!=pagenum}"
                                                    th:class="'pagenum'+${pagenum}"
-                                                   th:href="@{/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
+                                                   th:href="@{/home/article(pageNum=${pagenum},id=${id})}">[[${pagenum}]]</a>
                                 </li>
                             </th:block>
                             <li class="num"><a class="next" th:if="${clist.pageNum} < ${clist.pages}" id="nextpage"
-                                               th:href="@{/article(pageNum=${clist.nextPage},id=${id})}"
+                                               th:href="@{/home/article(pageNum=${clist.nextPage},id=${id})}"
                                                aria-label="Next">
                                 &gt;&gt;</a></li>
                             <li class="num"><a id="endpage"
-                                               th:href="@{/article(pageNum=${clist.pages},id=${id})}">末页</a></li>
+                                               th:href="@{/home/article(pageNum=${clist.pages},id=${id})}">末页</a></li>
                             <li class="num"><span aria-label="Next">相关记录[[${clist.total}]]条，共[[${clist.pages}]]页。</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <br><br><br>
-                <div class="leave-comm" th:if="${session.username!=null}">
+                <div class="leave-comm" th:if="${session.sysUser.username!=null}">
                     <h4>留下<span>您的感触吧</span></h4>
                     <div class="leave-comm-grids">
                         <form>
                             <textarea required="required" name="coment" id="comment" placeholder="写下您的留言..."></textarea>
-                            <input type="hidden" name="cid" id="cid" th:value="${notice.nid}">
+                            <input type="hidden" name="cid" id="cid" th:value="${notice.id}">
                             <input type="submit" value="评论" onclick="sumbit()">
                         </form>
                     </div>
                 </div>
                 <div class="leave-comm" th:if="${session.username==null}">
-                    <h4>登陆后<span>才可以留言</span></h4>
+                    <h4>登陆后<span>才可以评论</span></h4>
                 </div>
             </div>
         </div>
@@ -229,16 +229,16 @@
 
 </footer>
 
-<script src="/js/scripts.min.js"></script>
-<script src="/js/main.min.js"></script>
-<script src="/js/custom.js"></script>
+<script src="/sports/js/scripts.min.js"></script>
+<script src="/sports/js/main.min.js"></script>
+<script src="/sports/js/custom.js"></script>
 <script>
     function sumbit() {
         var cid = $("#cid").val();
         var comment = $("#comment").val();
         $.ajax(
             {
-                url: "submitcomment",
+                url: "/home/submitcomment",
                 type: "POST",
                 data: {cid: cid, comment: comment},
                 success: function (data) {
