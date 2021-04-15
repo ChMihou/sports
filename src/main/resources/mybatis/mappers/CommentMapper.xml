@@ -46,20 +46,20 @@
         <include refid="Base_Column_List"/>
         from comment
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by ctime desc,id desc
+        order by gmt_create desc,id desc
     </select>
     <select id="selectAllCommentUser" parameterType="com.physical.movement.entity.Comment" resultType="com.physical.movement.entity.vo.UserCommentVo">
-        select user.*,comment.*
-        from user a,comment b,advisory c
-        where b.cuid=a.id and c.advisoryid = c.id
-        order by ctime desc,id desc
+        select a.username,a.usertype,a.image,b.*
+        from sysuser a,comment b,advisory c
+        where b.cuid=a.id and b.advisoryid = c.id
+        order by gmt_create desc,id desc
     </select>
     <select id="select" parameterType="com.physical.movement.entity.Comment" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from comment
         <include refid="WHERE_SELECT_CONDIYION"/>
-        order by ctime desc
+        order by gmt_create desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment

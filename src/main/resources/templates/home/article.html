@@ -114,14 +114,14 @@
                                     <th:block th:text="${comment.comment}"/>
                                 </p>
                                 <div class="reply">
-                                    <a th:if="${session.sysUser.usertype==1||session.uid==comment.cuid}"
+                                    <a th:if="${session.sysUser!=null&&session.sysUser.usertype==1||session.uid==comment.cuid}"
                                        th:href="@{/home/deleteComment(cid=${comment.id},id=${notice.id})}"><span
                                             class="glyphicon glyphicon-share" aria-hidden="true"></span>删除</a>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div th:if="${session.sysUser.usertype!=null&&comment.flag==0&&session.sysUser.usertype<2}"
+                        <div th:if="${session.sysUser!=null&&session.sysUser.usertype!=null&&comment.flag==0&&session.sysUser.usertype<2}"
                              class="recent-com-grid recent-com-grid1">
                             <form id="pro">
                                 <textarea name="apply" id="apply" cols="80" rows="5" required="required"
@@ -174,7 +174,7 @@
                     </div>
                 </div>
                 <br><br><br>
-                <div class="leave-comm" th:if="${session.sysUser.username!=null}">
+                <div class="leave-comm" th:if="${session.sysUser!=null}">
                     <h4>留下<span>您的感触吧</span></h4>
                     <div class="leave-comm-grids">
                         <form>
@@ -184,7 +184,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="leave-comm" th:if="${session.username==null}">
+                <div class="leave-comm" th:if="${session.sysUser==null}">
                     <h4>登陆后<span>才可以评论</span></h4>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                 success: function (data) {
                     if (data) {
                         confirm("回复成功");
-                        location.href = "article?id=" + cid;
+                        location.href = "/home/article?id=" + cid;
                     }
                 }
 
@@ -258,13 +258,13 @@
         var nid = $("#articleid").val();
         $.ajax(
             {
-                url: "applycomment",
+                url: "/home/applycomment",
                 type: "POST",
                 data: {aid: aid, apply: apply, nid: nid},
                 success: function (data) {
                     if (data) {
                         confirm("回复成功");
-                        location.href = "article?id=" + nid;
+                        location.href = "/home/article?id=" + nid;
                     }
                 }
 

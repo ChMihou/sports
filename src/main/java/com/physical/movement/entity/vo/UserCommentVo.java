@@ -35,18 +35,55 @@ public class UserCommentVo extends Id {
 
     private String comment;
 
-    private Integer cnid;
-
     private Integer cuid;
 
-    private String capply;
+    private String apply;
 
-    private Date ctime;
+    private Integer flag;
 
-    private Integer cflag;
+    private String aboy;
 
-    private String caboy;
+    private Integer advisoryid;
 
+    public Integer getCuid() {
+        return cuid;
+    }
+
+    public void setCuid(Integer cuid) {
+        this.cuid = cuid;
+    }
+
+    public String getApply() {
+        return apply;
+    }
+
+    public void setApply(String apply) {
+        this.apply = apply;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
+    public String getAboy() {
+        return aboy;
+    }
+
+    public void setAboy(String aboy) {
+        this.aboy = aboy;
+    }
+
+    public Integer getAdvisoryid() {
+        return advisoryid;
+    }
+
+    public void setAdvisoryid(Integer advisoryid) {
+        this.advisoryid = advisoryid;
+    }
 
     public String getUsername() {
         return username;
@@ -152,76 +189,5 @@ public class UserCommentVo extends Id {
         this.comment = comment;
     }
 
-    public Integer getCnid() {
-        return cnid;
-    }
 
-    public void setCnid(Integer cnid) {
-        this.cnid = cnid;
-    }
-
-    public Integer getCuid() {
-        return cuid;
-    }
-
-    public void setCuid(Integer cuid) {
-        this.cuid = cuid;
-    }
-
-    public String getCapply() {
-        return capply;
-    }
-
-    public void setCapply(String capply) {
-        this.capply = capply;
-    }
-
-    public Date getCtime() {
-        return ctime;
-    }
-
-    public void setCtime(Date ctime) {
-        this.ctime = ctime;
-    }
-
-    public Integer getCflag() {
-        return cflag;
-    }
-
-    public void setCflag(Integer cflag) {
-        this.cflag = cflag;
-    }
-
-    public String getCaboy() {
-        return caboy;
-    }
-
-    public void setCaboy(String caboy) {
-        this.caboy = caboy;
-    }
-
-    @Override
-    public String toString() {
-        return "UserCommentVo{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", usertype=" + usertype +
-                ", phone='" + phone + '\'' +
-                ", status=" + status +
-                ", image='" + image + '\'' +
-                ", sex='" + sex + '\'' +
-                ", email='" + email + '\'' +
-                ", truename='" + truename + '\'' +
-                ", studentid='" + studentid + '\'' +
-                ", cid=" + cid +
-                ", comment='" + comment + '\'' +
-                ", cnid=" + cnid +
-                ", cuid=" + cuid +
-                ", capply='" + capply + '\'' +
-                ", ctime=" + ctime +
-                ", cflag=" + cflag +
-                ", caboy='" + caboy + '\'' +
-                '}';
-    }
 }

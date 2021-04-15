@@ -146,7 +146,7 @@ public class HomeController {
         return mv;
     }
 
-    @RequestMapping("article")
+    @RequestMapping("/article")
     public ModelAndView article(Integer id, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize) {
 
         ModelAndView mv = new ModelAndView();
@@ -163,7 +163,7 @@ public class HomeController {
         Paginator.page(pagenums, clist, pageNum, pageSize);
         mv.addObject("pagenums", pagenums);
         mv.addObject("clist", clist);
-        mv.setViewName("article");
+        mv.setViewName("/home/article");
         return mv;
     }
 
@@ -187,6 +187,7 @@ public class HomeController {
         Message messages = new Message();
         if (session.getAttribute("uid") != null) {
             messages.setUid((Integer) session.getAttribute("uid"));
+            messages.setName((String) session.getAttribute("username"));
         }
         messages.setMess(message);
         messages.setFlag(2);
@@ -274,10 +275,10 @@ public class HomeController {
     }
 
     @RequestMapping("deleteComment")
-    public ModelAndView deleteComment(Integer cid, Integer nid) {
+    public ModelAndView deleteComment(Integer cid, Integer id) {
         ModelAndView mv = new ModelAndView();
         int i = commentService.deleteByPrimaryKey(cid);
-        mv.setViewName("redirect:article?id=" + nid);
+        mv.setViewName("redirect:/home/article?id=" + id);
         return mv;
     }
 
@@ -292,8 +293,8 @@ public class HomeController {
         com.setAdvisoryid(cid);
         com.setComment(comment);
         com.setCuid(uid);
-        Boolean i = commentService.insert(com);
-        if (i) {
+        int i = commentService.insertSelective(com);
+        if (i > 0) {
             return true;
         } else
             return false;
