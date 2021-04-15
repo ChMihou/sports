@@ -8,6 +8,7 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="stylesheet" href="/css/font.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
@@ -29,7 +30,7 @@
                            name="name" required="" lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <input type="hidden" th:value="${team.id}" name="id" id="id">
+            <input type="hidden" th:value="${game.id}" name="id" id="id">
             <div class="layui-form-item">
                 <label for="email" class="layui-form-label">
                     <span class="x-red">*</span>邮箱地址</label>
@@ -97,6 +98,7 @@
             insertImg(url);
         }
     };
+    debugger
     editor.create();
     layui.use('form', function () {
         var form = layui.form;
@@ -109,6 +111,8 @@
             let email = $("#email").val();
             let time = $("#time").val();
             let subject = $("#subject").val();
+            var n_flag;
+            var radio = document.getElementsByName("n_flag");
             for (i = 0; i < radio.length; i++) {
                 if (radio[i].checked) {
                     n_flag = radio[i].value;

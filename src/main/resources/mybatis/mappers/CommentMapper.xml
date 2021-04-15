@@ -51,7 +51,7 @@
     <select id="selectAllCommentUser" parameterType="com.physical.movement.entity.Comment" resultType="com.physical.movement.entity.vo.UserCommentVo">
         select a.username,a.usertype,a.image,b.*
         from sysuser a,comment b,advisory c
-        where b.cuid=a.id and b.advisoryid = c.id
+        where b.cuid=a.id and b.advisoryid = c.id and b.advisoryid = advisoryid
         order by gmt_create desc,id desc
     </select>
     <select id="select" parameterType="com.physical.movement.entity.Comment" resultMap="BaseResultMap">

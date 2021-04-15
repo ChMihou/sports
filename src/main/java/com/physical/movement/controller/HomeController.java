@@ -159,7 +159,7 @@ public class HomeController {
         mv.addObject("notice", advisory);
         mv.addObject("id", id);
         Comment comment = new Comment();
-        comment.setId(id);
+        comment.setAdvisoryid(id);
         List<UserCommentVo> userCommentVos = commentService.selectAllCommentUser(comment, pageNum, pageSize);
         PageInfo clist = new PageInfo(userCommentVos);
         List pagenums = new ArrayList();
